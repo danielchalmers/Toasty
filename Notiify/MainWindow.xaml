@@ -12,14 +12,15 @@
         Title="{x:Static properties:Resources.AppName}"
         SizeToContent="WidthAndHeight"
         WindowStyle="None"
-        AllowsTransparency="True">
-    <Grid Background="Transparent">
+        AllowsTransparency="True"
+        Background="Transparent">
+    <Grid>
         <StackPanel>
             <Button Content="New" Command="{Binding GenerateNotification}" />
             <ItemsControl ItemsSource="{Binding Notifications}">
                 <ItemsControl.Resources>
                     <DataTemplate DataType="{x:Type notificationTypes:TextNotification}">
-                        <notificationViews:TextNotificationView />
+                        <notificationViews:TextNotificationView HorizontalAlignment="Center" VerticalAlignment="Center" />
                     </DataTemplate>
                 </ItemsControl.Resources>
             </ItemsControl>
