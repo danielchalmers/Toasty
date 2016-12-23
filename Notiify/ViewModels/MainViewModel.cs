@@ -9,40 +9,20 @@ using Notiify.NotificationTypes;
 using Notiify.NotificationViewModels;
 using Notiify.Properties;
 
-namespace Notiify.ViewModel
+namespace Notiify.ViewModels
 {
-    /// <summary>
-    ///     This class contains properties that the main View can data bind to.
-    ///     <para>
-    ///         Use the <strong>mvvminpc</strong> snippet to add bindable properties to this ViewModel.
-    ///     </para>
-    ///     <para>
-    ///         You can also use Blend to data bind with the tool's support.
-    ///     </para>
-    ///     <para>
-    ///         See http://www.galasoft.ch/mvvm
-    ///     </para>
-    /// </summary>
     public class MainViewModel : ViewModelBase
     {
         public MainViewModel()
         {
             Notifications = new ObservableCollection<NotificationViewModel>();
             Notifications.CollectionChanged += Notifications_OnCollectionChanged;
-            GenerateNotification =
-                new RelayCommand(
-                    () =>
-                    {
-                        AddNotification(new TextNotification
-                        {
-                            Title = "test",
-                            Content = new Random().NextDouble().ToString()
-                        });
-                    });
+            GenerateTestNotification =
+                new RelayCommand(GenerateTestNotificationExecute);
         }
 
         public ObservableCollection<NotificationViewModel> Notifications { get; }
-        public ICommand GenerateNotification { get; }
+        public ICommand GenerateTestNotification { get; }
 
         private async void Notifications_OnCollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
         {
@@ -53,24 +33,43 @@ namespace Notiify.ViewModel
             await Task.Delay(Settings.Default.NotificationDuration);
             foreach (var newItem in e.NewItems)
             {
-                RemoveNotification((NotificationViewModel) newItem);
+                CloseNotification((NotificationViewModel) newItem);
             }
         }
 
-        public void AddNotification(INotification notification)
+        private void AddNotification(INotification notification)
         {
             var notificationViewModel = new NotificationViewModel(notification);
             notificationViewModel.Remove = () => { RemoveNotification(notificationViewModel); };
             Notifications.Add(notificationViewModel);
         }
 
-        public void RemoveNotification(NotificationViewModel notificationViewModel)
+        private void RemoveNotification(NotificationViewModel notificationViewModel)
         {
             if (!Notifications.Contains(notificationViewModel))
             {
                 return;
             }
             Notifications.Remove(notificationViewModel);
+        }
+
+        private void CloseNotification(NotificationViewModel notificationViewModel)
+        {
+            if (!Notifications.Contains(notificationViewModel))
+            {
+                return;
+            }
+            notificationViewModel.Close?.Execute(null);
+            RemoveNotification(notificationViewModel);
+        }
+
+        private void GenerateTestNotificationExecute()
+        {
+            AddNotification(new TextNotification
+            {
+                Title = "Test",
+                Content = new Random().NextDouble().ToString()
+            });
         }
     }
 }

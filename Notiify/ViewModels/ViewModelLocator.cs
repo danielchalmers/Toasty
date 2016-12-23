@@ -15,7 +15,7 @@
 using GalaSoft.MvvmLight.Ioc;
 using Microsoft.Practices.ServiceLocation;
 
-namespace Notiify.ViewModel
+namespace Notiify.ViewModels
 {
     /// <summary>
     ///     This class contains static references to all the view models in the
@@ -44,10 +44,7 @@ namespace Notiify.ViewModel
             SimpleIoc.Default.Register<MainViewModel>();
         }
 
-        public MainViewModel Main
-        {
-            get { return ServiceLocator.Current.GetInstance<MainViewModel>(); }
-        }
+        public MainViewModel Main => ServiceLocator.Current.GetInstance<MainViewModel>();
 
         public static void Cleanup()
         {
