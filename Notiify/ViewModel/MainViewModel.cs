@@ -33,11 +33,11 @@ namespace Notiify.ViewModel
                 new RelayCommand(
                     () =>
                     {
-                        Notifications.Add(new NotificationViewModel(new TextNotification
+                        AddNotification(new TextNotification
                         {
                             Title = "test",
                             Content = new Random().NextDouble().ToString()
-                        }));
+                        });
                     });
         }
 
@@ -53,8 +53,24 @@ namespace Notiify.ViewModel
             await Task.Delay(Settings.Default.NotificationDuration);
             foreach (var newItem in e.NewItems)
             {
-                Notifications.Remove((NotificationViewModel) newItem);
+                RemoveNotification((NotificationViewModel) newItem);
             }
+        }
+
+        public void AddNotification(INotification notification)
+        {
+            var notificationViewModel = new NotificationViewModel(notification);
+            notificationViewModel.Remove = () => { RemoveNotification(notificationViewModel); };
+            Notifications.Add(notificationViewModel);
+        }
+
+        public void RemoveNotification(NotificationViewModel notificationViewModel)
+        {
+            if (!Notifications.Contains(notificationViewModel))
+            {
+                return;
+            }
+            Notifications.Remove(notificationViewModel);
         }
     }
 }

@@ -34,6 +34,18 @@
             </Grid.RowDefinitions>
             <TextBlock Grid.Row="0" Text="{Binding Notification.Title}"
                        FontSize="16" />
+            <Button Grid.Row="0"
+                    HorizontalAlignment="Right"
+                    Content="x"
+                    ToolTip="Close"
+                    Width="16"
+                    Height="16"
+                    Background="Transparent"
+                    HorizontalContentAlignment="Center"
+                    VerticalContentAlignment="Center"
+                    Padding="0"
+                    BorderThickness="0"
+                    Command="{Binding Close}" />
             <TextBlock Grid.Row="2" Text="{Binding Notification.Content}" />
         </Grid>
     </Border>
