@@ -3,11 +3,11 @@
 namespace Notiify.NotificationViews
 {
     /// <summary>
-    ///     Interaction logic for TextNotificationView.xaml
+    ///     Interaction logic for NotificationView.xaml
     /// </summary>
-    public partial class TextNotificationView : UserControl
+    public partial class NotificationView : UserControl
     {
-        public TextNotificationView()
+        public NotificationView()
         {
             InitializeComponent();
         }

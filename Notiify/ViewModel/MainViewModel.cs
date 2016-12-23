@@ -6,6 +6,7 @@ using System.Windows.Input;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.CommandWpf;
 using Notiify.NotificationTypes;
+using Notiify.NotificationViewModels;
 using Notiify.Properties;
 
 namespace Notiify.ViewModel
@@ -26,21 +27,21 @@ namespace Notiify.ViewModel
     {
         public MainViewModel()
         {
-            Notifications = new ObservableCollection<INotification>();
+            Notifications = new ObservableCollection<NotificationViewModel>();
             Notifications.CollectionChanged += Notifications_OnCollectionChanged;
             GenerateNotification =
                 new RelayCommand(
                     () =>
                     {
-                        Notifications.Add(new TextNotification
+                        Notifications.Add(new NotificationViewModel(new TextNotification
                         {
                             Title = "test",
                             Content = new Random().NextDouble().ToString()
-                        });
+                        }));
                     });
         }
 
-        public ObservableCollection<INotification> Notifications { get; }
+        public ObservableCollection<NotificationViewModel> Notifications { get; }
         public ICommand GenerateNotification { get; }
 
         private async void Notifications_OnCollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
@@ -52,7 +53,7 @@ namespace Notiify.ViewModel
             await Task.Delay(Settings.Default.NotificationDuration);
             foreach (var newItem in e.NewItems)
             {
-                Notifications.Remove((INotification) newItem);
+                Notifications.Remove((NotificationViewModel) newItem);
             }
         }
     }
