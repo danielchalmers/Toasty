@@ -10,8 +10,10 @@
         mc:Ignorable="d"
         DataContext="{Binding Main, Source={StaticResource ViewModelLocator}}"
         Title="{x:Static properties:Resources.AppName}"
-        Height="350" Width="525">
-    <Grid>
+        SizeToContent="WidthAndHeight"
+        WindowStyle="None"
+        AllowsTransparency="True">
+    <Grid Background="Transparent">
         <StackPanel>
             <Button Content="New" Command="{Binding GenerateNotification}" />
             <ItemsControl ItemsSource="{Binding Notifications}">
