@@ -1,9 +1,12 @@
 using System;
 using System.Collections.ObjectModel;
+using System.Collections.Specialized;
+using System.Threading.Tasks;
 using System.Windows.Input;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.CommandWpf;
 using Notiify.NotificationTypes;
+using Notiify.Properties;
 
 namespace Notiify.ViewModel
 {
@@ -24,6 +27,7 @@ namespace Notiify.ViewModel
         public MainViewModel()
         {
             Notifications = new ObservableCollection<INotification>();
+            Notifications.CollectionChanged += Notifications_OnCollectionChanged;
             GenerateNotification =
                 new RelayCommand(
                     () =>
@@ -38,5 +42,18 @@ namespace Notiify.ViewModel
 
         public ObservableCollection<INotification> Notifications { get; }
         public ICommand GenerateNotification { get; }
+
+        private async void Notifications_OnCollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
+        {
+            if (e.NewItems == null || e.NewItems.Count == 0)
+            {
+                return;
+            }
+            await Task.Delay(Settings.Default.NotificationDuration);
+            foreach (var newItem in e.NewItems)
+            {
+                Notifications.Remove((INotification) newItem);
+            }
+        }
     }
 }
