@@ -5,9 +5,22 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Notiify"
         xmlns:properties="clr-namespace:Notiify.Properties"
+        xmlns:notificationTypes="clr-namespace:Notiify.NotificationTypes"
+        xmlns:notificationViews="clr-namespace:Notiify.NotificationViews"
         mc:Ignorable="d"
         DataContext="{Binding Main, Source={StaticResource ViewModelLocator}}"
         Title="{x:Static properties:Resources.AppName}"
         Height="350" Width="525">
-    <Grid />
+    <Grid>
+        <StackPanel>
+            <Button Content="New" Command="{Binding GenerateNotification}" />
+            <ItemsControl ItemsSource="{Binding Notifications}">
+                <ItemsControl.Resources>
+                    <DataTemplate DataType="{x:Type notificationTypes:TextNotification}">
+                        <notificationViews:TextNotificationView />
+                    </DataTemplate>
+                </ItemsControl.Resources>
+            </ItemsControl>
+        </StackPanel>
+    </Grid>
 </Window>

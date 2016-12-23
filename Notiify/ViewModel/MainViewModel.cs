@@ -1,4 +1,9 @@
+using System;
+using System.Collections.ObjectModel;
+using System.Windows.Input;
 using GalaSoft.MvvmLight;
+using GalaSoft.MvvmLight.CommandWpf;
+using Notiify.NotificationTypes;
 
 namespace Notiify.ViewModel
 {
@@ -16,5 +21,22 @@ namespace Notiify.ViewModel
     /// </summary>
     public class MainViewModel : ViewModelBase
     {
+        public MainViewModel()
+        {
+            Notifications = new ObservableCollection<INotification>();
+            GenerateNotification =
+                new RelayCommand(
+                    () =>
+                    {
+                        Notifications.Add(new TextNotification
+                        {
+                            Title = "test",
+                            Content = new Random().NextDouble().ToString()
+                        });
+                    });
+        }
+
+        public ObservableCollection<INotification> Notifications { get; }
+        public ICommand GenerateNotification { get; }
     }
 }

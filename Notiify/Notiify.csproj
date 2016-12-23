@@ -104,6 +104,11 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Classes\Popup.cs" />
+    <Compile Include="NotificationTypes\INotification.cs" />
+    <Compile Include="NotificationTypes\TextNotification.cs" />
+    <Compile Include="NotificationViews\TextNotificationView.xaml.cs">
+      <DependentUpon>TextNotificationView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="TrayIconResources.xaml.cs">
       <DependentUpon>TrayIconResources.xaml</DependentUpon>
     </Compile>
@@ -121,6 +126,10 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="NotificationViews\TextNotificationView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="TrayIconResources.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
