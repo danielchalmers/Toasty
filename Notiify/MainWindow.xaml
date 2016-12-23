@@ -16,7 +16,9 @@
         Background="Transparent">
     <Grid>
         <StackPanel>
-            <Button Content="New" Command="{Binding GenerateTestNotification}" />
+            <Button Content="New"
+                    Command="{Binding GenerateTestNotification}"
+                    Width="250" />
             <ItemsControl ItemsSource="{Binding Notifications}">
                 <ItemsControl.ItemTemplate>
                     <DataTemplate>
