@@ -6,6 +6,7 @@
         xmlns:local="clr-namespace:Notiify"
         xmlns:properties="clr-namespace:Notiify.Properties"
         mc:Ignorable="d"
+        DataContext="{Binding Main, Source={StaticResource ViewModelLocator}}"
         Title="{x:Static properties:Resources.AppName}"
         Height="350" Width="525">
     <Grid />
