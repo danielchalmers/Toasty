@@ -34,5 +34,17 @@ namespace Notiify.Properties {
                 this["NotificationDuration"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("Right")]
+        public global::Notiify.Enumerations.DockPosition DockPosition {
+            get {
+                return ((global::Notiify.Enumerations.DockPosition)(this["DockPosition"]));
+            }
+            set {
+                this["DockPosition"] = value;
+            }
+        }
     }
 }

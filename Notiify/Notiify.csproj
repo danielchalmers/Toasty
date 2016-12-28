@@ -104,6 +104,8 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Classes\Popup.cs" />
+    <Compile Include="Classes\SizeObserver.cs" />
+    <Compile Include="Enumerations\DockPosition.cs" />
     <Compile Include="NotificationTypes\INotification.cs" />
     <Compile Include="NotificationTypes\TextNotification.cs" />
     <Compile Include="NotificationViewModels\NotificationViewModel.cs" />
@@ -158,6 +160,7 @@
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
     </None>
     <AppDesigner Include="Properties\" />
   </ItemGroup>

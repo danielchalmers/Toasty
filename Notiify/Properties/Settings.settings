@@ -7,5 +7,8 @@
     <Setting Name="NotificationDuration" Type="System.TimeSpan" Scope="User">
       <Value Profile="(Default)">00:00:05</Value>
     </Setting>
+    <Setting Name="DockPosition" Type="Notiify.Enumerations.DockPosition" Scope="User">
+      <Value Profile="(Default)">Right</Value>
+    </Setting>
   </Settings>
 </SettingsFile>

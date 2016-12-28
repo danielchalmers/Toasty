@@ -2,9 +2,11 @@ using System;
 using System.Collections.ObjectModel;
 using System.Collections.Specialized;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Input;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.CommandWpf;
+using Notiify.Enumerations;
 using Notiify.NotificationTypes;
 using Notiify.NotificationViewModels;
 using Notiify.Properties;
@@ -13,6 +15,13 @@ namespace Notiify.ViewModels
 {
     public class MainViewModel : ViewModelBase
     {
+        private double _actualHeight;
+
+        private double _actualWidth;
+
+        private double _left;
+        private double _top;
+
         public MainViewModel()
         {
             Notifications = new ObservableCollection<NotificationViewModel>();
@@ -23,6 +32,42 @@ namespace Notiify.ViewModels
 
         public ObservableCollection<NotificationViewModel> Notifications { get; }
         public ICommand GenerateTestNotification { get; }
+
+        public double ActualWidth
+        {
+            get { return _actualWidth; }
+            set
+            {
+                if (Set(ref _actualWidth, value))
+                {
+                    UpdateLocation();
+                }
+            }
+        }
+
+        public double ActualHeight
+        {
+            get { return _actualHeight; }
+            set
+            {
+                if (Set(ref _actualHeight, value))
+                {
+                    UpdateLocation();
+                }
+            }
+        }
+
+        public double Left
+        {
+            get { return _left; }
+            set { Set(ref _left, value); }
+        }
+
+        public double Top
+        {
+            get { return _top; }
+            set { Set(ref _top, value); }
+        }
 
         private async void Notifications_OnCollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
         {
@@ -70,6 +115,28 @@ namespace Notiify.ViewModels
                 Title = "Test",
                 Content = new Random().NextDouble().ToString()
             });
+        }
+
+        private double GetLeft()
+        {
+            switch (Settings.Default.DockPosition)
+            {
+                case DockPosition.Right:
+                    return SystemParameters.WorkArea.Right - ActualWidth;
+                default:
+                    return 0;
+            }
+        }
+
+        private double GetTop()
+        {
+            return SystemParameters.WorkArea.Bottom - ActualHeight;
+        }
+
+        private void UpdateLocation()
+        {
+            Left = GetLeft();
+            Top = GetTop();
         }
     }
 }
