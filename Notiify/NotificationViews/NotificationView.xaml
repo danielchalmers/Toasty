@@ -5,7 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:local="clr-namespace:Notiify.NotificationViews"
              mc:Ignorable="d">
-    <Border Margin="0,15,0,0"
+    <Border Margin="0,0,0,15"
             Background="White"
             RenderTransformOrigin="0.5,0.5"
             CornerRadius="5">

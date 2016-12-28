@@ -25,9 +25,6 @@
         ShowInTaskbar="False">
     <Grid>
         <StackPanel>
-            <Button Content="New"
-                    Command="{Binding GenerateTestNotification}"
-                    Width="250" />
             <ItemsControl ItemsSource="{Binding Notifications}">
                 <ItemsControl.ItemTemplate>
                     <DataTemplate>
@@ -38,6 +35,9 @@
                     </DataTemplate>
                 </ItemsControl.ItemTemplate>
             </ItemsControl>
+            <Button Content="New"
+                    Command="{Binding GenerateTestNotification}"
+                    Width="250" />
         </StackPanel>
     </Grid>
 </Window>
