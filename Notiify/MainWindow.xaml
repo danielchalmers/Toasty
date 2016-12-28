@@ -21,7 +21,8 @@
         AllowsTransparency="True"
         Background="Transparent"
         ResizeMode="NoResize"
-        Topmost="True">
+        Topmost="True"
+        ShowInTaskbar="False">
     <Grid>
         <StackPanel>
             <Button Content="New"
