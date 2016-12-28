@@ -10,5 +10,8 @@
     <Setting Name="DockPosition" Type="Notiify.Enumerations.DockPosition" Scope="User">
       <Value Profile="(Default)">Right</Value>
     </Setting>
+    <Setting Name="DirectoryWatcherResetInterval" Type="System.Double" Scope="User">
+      <Value Profile="(Default)">15000</Value>
+    </Setting>
   </Settings>
 </SettingsFile>

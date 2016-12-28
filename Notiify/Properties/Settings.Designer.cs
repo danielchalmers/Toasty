@@ -46,5 +46,17 @@ namespace Notiify.Properties {
                 this["DockPosition"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("15000")]
+        public double DirectoryWatcherResetInterval {
+            get {
+                return ((double)(this["DirectoryWatcherResetInterval"]));
+            }
+            set {
+                this["DirectoryWatcherResetInterval"] = value;
+            }
+        }
     }
 }

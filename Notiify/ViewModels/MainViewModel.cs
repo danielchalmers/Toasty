@@ -1,11 +1,14 @@
 using System;
 using System.Collections.ObjectModel;
 using System.Collections.Specialized;
+using System.IO;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
+using System.Windows.Threading;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.CommandWpf;
+using Notiify.Classes;
 using Notiify.Enumerations;
 using Notiify.NotificationTypes;
 using Notiify.NotificationViewModels;
@@ -15,6 +18,7 @@ namespace Notiify.ViewModels
 {
     public class MainViewModel : ViewModelBase
     {
+        private readonly DirectoryWatcher _directoryWatcher;
         private double _actualHeight;
 
         private double _actualWidth;
@@ -28,6 +32,15 @@ namespace Notiify.ViewModels
             Notifications.CollectionChanged += Notifications_OnCollectionChanged;
             GenerateTestNotification =
                 new RelayCommand(GenerateTestNotificationExecute);
+
+            _directoryWatcher = new DirectoryWatcher(new DirectoryWatcherSettings {Path = "Test"}, (path, type) =>
+            {
+                // Events can be running in another thread.
+                Application.Current.Dispatcher.BeginInvoke(
+                    DispatcherPriority.Background,
+                    new Action(() => DirectoryWatcher_OnEvent(path, type)));
+            });
+            _directoryWatcher.Start();
         }
 
         public ObservableCollection<NotificationViewModel> Notifications { get; }
@@ -67,6 +80,15 @@ namespace Notiify.ViewModels
         {
             get { return _top; }
             set { Set(ref _top, value); }
+        }
+
+        private void DirectoryWatcher_OnEvent(string path, WatcherChangeTypes watcherChangeTypes)
+        {
+            AddNotification(new TextNotification
+            {
+                Title = Path.GetFileNameWithoutExtension(path),
+                Content = watcherChangeTypes.ToString()
+            });
         }
 
         private async void Notifications_OnCollectionChanged(object sender, NotifyCollectionChangedEventArgs e)

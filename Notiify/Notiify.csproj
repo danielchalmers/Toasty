@@ -103,6 +103,8 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Classes\DirectoryWatcher.cs" />
+    <Compile Include="Classes\DirectoryWatcherSettings.cs" />
     <Compile Include="Classes\Popup.cs" />
     <Compile Include="Classes\SizeObserver.cs" />
     <Compile Include="Enumerations\DockPosition.cs" />
