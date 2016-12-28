@@ -19,7 +19,8 @@
         SizeToContent="WidthAndHeight"
         WindowStyle="None"
         AllowsTransparency="True"
-        Background="Transparent">
+        Background="Transparent"
+        ResizeMode="NoResize">
     <Grid>
         <StackPanel>
             <Button Content="New"
