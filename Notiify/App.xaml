@@ -8,6 +8,7 @@
         <ResourceDictionary>
             <viewModels:ViewModelLocator x:Key="ViewModelLocator" d:IsDataSource="True" />
             <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="Styles/PropertyGridStyles.xaml" />
                 <ResourceDictionary Source="TrayIconResources.xaml" />
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>

@@ -1,0 +1,30 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:local="clr-namespace:Notiify.Styles"
+                    xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
+                    xmlns:p="clr-namespace:Notiify.Properties">
+
+    <Style TargetType="{x:Type xctk:PropertyGrid}" x:Key="PropertyGridBaseStyle">
+        <Setter Property="Background" Value="{x:Static SystemColors.WindowBrush}" />
+        <Setter Property="NameColumnWidth"
+                Value="{Binding Source={x:Static p:Settings.Default}, Path=PropertyGridNameColumnWidth}" />
+        <Setter Property="ShowAdvancedOptions" Value="False" />
+        <Setter Property="ShowSummary" Value="False" />
+        <Setter Property="ShowTitle" Value="False" />
+    </Style>
+    <Style TargetType="{x:Type xctk:PropertyGrid}" x:Key="PropertyGridNonCategorizedStyle"
+           BasedOn="{StaticResource PropertyGridBaseStyle}">
+        <Setter Property="IsCategorized" Value="False" />
+        <Setter Property="ShowSortOptions" Value="False" />
+        <Setter Property="IsMiscCategoryLabelHidden" Value="True" />
+        <Setter Property="ShowSearchBox" Value="False" />
+    </Style>
+    <Style TargetType="{x:Type xctk:PropertyGrid}" x:Key="PropertyGridCategorizedStyle"
+           BasedOn="{StaticResource PropertyGridBaseStyle}">
+        <Setter Property="IsCategorized"
+                Value="{Binding PropertyGridIsCategorized, Source={x:Static p:Settings.Default}, Mode=TwoWay}" />
+        <Setter Property="ShowSortOptions" Value="True" />
+        <Setter Property="IsMiscCategoryLabelHidden" Value="False" />
+        <Setter Property="ShowSearchBox" Value="True" />
+    </Style>
+</ResourceDictionary>

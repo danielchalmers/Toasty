@@ -58,5 +58,65 @@ namespace Notiify.Properties {
                 this["DirectoryWatcherResetInterval"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("500")]
+        public double OptionsWidth {
+            get {
+                return ((double)(this["OptionsWidth"]));
+            }
+            set {
+                this["OptionsWidth"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("600")]
+        public string OptionsHeight {
+            get {
+                return ((string)(this["OptionsHeight"]));
+            }
+            set {
+                this["OptionsHeight"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool PropertyGridIsCategorized {
+            get {
+                return ((bool)(this["PropertyGridIsCategorized"]));
+            }
+            set {
+                this["PropertyGridIsCategorized"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("200")]
+        public double PropertyGridNameColumnWidth {
+            get {
+                return ((double)(this["PropertyGridNameColumnWidth"]));
+            }
+            set {
+                this["PropertyGridNameColumnWidth"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string OptionsFilter {
+            get {
+                return ((string)(this["OptionsFilter"]));
+            }
+            set {
+                this["OptionsFilter"] = value;
+            }
+        }
     }
 }
