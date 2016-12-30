@@ -118,5 +118,65 @@ namespace Notiify.Properties {
                 this["OptionsFilter"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool MustUpgrade {
+            get {
+                return ((bool)(this["MustUpgrade"]));
+            }
+            set {
+                this["MustUpgrade"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string SourceData {
+            get {
+                return ((string)(this["SourceData"]));
+            }
+            set {
+                this["SourceData"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("800")]
+        public double ManageSourcesWidth {
+            get {
+                return ((double)(this["ManageSourcesWidth"]));
+            }
+            set {
+                this["ManageSourcesWidth"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("600")]
+        public double ManageSourcesHeight {
+            get {
+                return ((double)(this["ManageSourcesHeight"]));
+            }
+            set {
+                this["ManageSourcesHeight"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("0")]
+        public double ManageSourcesSelectedIndex {
+            get {
+                return ((double)(this["ManageSourcesSelectedIndex"]));
+            }
+            set {
+                this["ManageSourcesSelectedIndex"] = value;
+            }
+        }
     }
 }

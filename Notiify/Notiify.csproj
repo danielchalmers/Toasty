@@ -79,6 +79,10 @@
       <HintPath>..\packages\CommonServiceLocator.1.3\lib\portable-net4+sl5+netcore45+wpa81+wp8\Microsoft.Practices.ServiceLocation.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="Newtonsoft.Json, Version=9.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.9.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Windows.Interactivity, Version=4.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
@@ -127,11 +131,20 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="Classes\DirectoryWatcher.cs" />
-    <Compile Include="Classes\DirectoryWatcherSettings.cs" />
+    <Compile Include="Classes\DirectoryScanner.cs" />
+    <Compile Include="Classes\FolderScanSettings.cs" />
+    <Compile Include="Interfaces\IScanner.cs" />
+    <Compile Include="Classes\SourceScanSettingsBase.cs" />
+    <Compile Include="Classes\Source.cs" />
     <Compile Include="Classes\Popup.cs" />
     <Compile Include="Classes\SizeObserver.cs" />
+    <Compile Include="Converters\IsNotNullToBooleanConverter.cs" />
     <Compile Include="Enumerations\DockPosition.cs" />
+    <Compile Include="Helpers\ListHelper.cs" />
+    <Compile Include="Helpers\SourceDataHelper.cs" />
+    <Compile Include="Helpers\SourceHelper.cs" />
+    <Compile Include="Helpers\ObjectHelper.cs" />
+    <Compile Include="Helpers\SettingsHelper.cs" />
     <Compile Include="NotificationTypes\INotification.cs" />
     <Compile Include="NotificationTypes\TextNotification.cs" />
     <Compile Include="NotificationViewModels\NotificationViewModel.cs" />
@@ -142,7 +155,11 @@
       <DependentUpon>TrayIconResources.xaml</DependentUpon>
     </Compile>
     <Compile Include="ViewModels\MainViewModel.cs" />
+    <Compile Include="ViewModels\ManageSourcesViewModel.cs" />
     <Compile Include="ViewModels\ViewModelLocator.cs" />
+    <Compile Include="Windows\ManageSources.xaml.cs">
+      <DependentUpon>ManageSources.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Windows\Options.xaml.cs">
       <DependentUpon>Options.xaml</DependentUpon>
     </Compile>
@@ -167,6 +184,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="TrayIconResources.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Windows\ManageSources.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

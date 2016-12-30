@@ -1,0 +1,66 @@
+﻿<Window x:Class="Notiify.Windows.ManageSources"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Notiify.Windows"
+        xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+        xmlns:notiify="clr-namespace:Notiify"
+        xmlns:command="http://www.galasoft.ch/mvvmlight"
+        xmlns:p="clr-namespace:Notiify.Properties"
+        xmlns:viewModels="clr-namespace:Notiify.ViewModels"
+        xmlns:converters="clr-namespace:Notiify.Converters"
+        xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
+        mc:Ignorable="d"
+        Title="Manage Sources"
+        Width="{Binding ManageSourcesWidth, Source={x:Static p:Settings.Default}, Mode=TwoWay}"
+        Height="{Binding ManageSourcesHeight, Source={x:Static p:Settings.Default}, Mode=TwoWay}"
+        MinHeight="400" MinWidth="500"
+        ResizeMode="CanResize" WindowStartupLocation="CenterScreen">
+    <Window.DataContext>
+        <viewModels:ManageSourcesViewModel />
+    </Window.DataContext>
+    <Window.Resources>
+        <converters:IsNotNullToBooleanConverter x:Key="IsNotNullToBooleanConverter" />
+    </Window.Resources>
+    <Grid Margin="15">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto" MinWidth="150" />
+            <ColumnDefinition Width="15" />
+            <ColumnDefinition Width="Auto" />
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+        <ListBox Grid.Column="0" Grid.Row="0"
+                 ItemsSource="{x:Static notiify:App.Sources}"
+                 SelectedItem="{Binding SelectedSource}"
+                 SelectedIndex="{Binding ManageSourcesSelectedIndex, Source={x:Static p:Settings.Default}, Mode=TwoWay}"
+                 DisplayMemberPath="Name">
+            <i:Interaction.Triggers>
+                <i:EventTrigger EventName="MouseDown">
+                    <command:EventToCommand Command="{Binding CollectionMouseDown}" />
+                </i:EventTrigger>
+            </i:Interaction.Triggers>
+        </ListBox>
+        <StackPanel Grid.Column="2" VerticalAlignment="Center" Margin="0,0,15,-5">
+            <StackPanel.Resources>
+                <Style TargetType="Button">
+                    <Setter Property="Height" Value="30" />
+                    <Setter Property="Margin" Value="0,0,0,5" />
+                    <Setter Property="Padding" Value="15,0,15,0" />
+                    <Setter Property="HorizontalAlignment" Value="Stretch" />
+                    <Setter Property="VerticalAlignment" Value="Stretch" />
+                    <Setter Property="IsEnabled"
+                            Value="{Binding SelectedSource, Converter={StaticResource IsNotNullToBooleanConverter}}" />
+                </Style>
+            </StackPanel.Resources>
+            <Button Content="New Folder" Command="{Binding NewFolder}" IsEnabled="True" />
+            <Button Content="Clone" Command="{Binding Clone}" />
+            <Button Content="Up" Command="{Binding MoveUp}" />
+            <Button Content="Down" Command="{Binding MoveDown}" />
+            <Button Content="Delete" Command="{Binding Delete}" />
+        </StackPanel>
+        <xctk:PropertyGrid Grid.Column="3"
+                           SelectedObject="{Binding SelectedSource}"
+                           Style="{StaticResource PropertyGridNonCategorizedStyle}" />
+    </Grid>
+</Window>

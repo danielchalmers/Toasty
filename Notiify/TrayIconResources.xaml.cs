@@ -20,5 +20,11 @@ namespace Notiify
             var optionsDialog = new Options();
             optionsDialog.ShowDialog();
         }
+
+        private void MenuItemManageSources_OnClick(object sender, RoutedEventArgs e)
+        {
+            var manageSourcesDialog = new ManageSources();
+            manageSourcesDialog.ShowDialog();
+        }
     }
 }

@@ -1,21 +1,22 @@
 ﻿using System;
 using System.IO;
 using System.Timers;
+using Notiify.Interfaces;
 using Notiify.Properties;
 
 namespace Notiify.Classes
 {
-    public class DirectoryWatcher
+    public class DirectoryScanner : IScanner
     {
-        private readonly DirectoryWatcherSettings _directoryWatcherSettings;
+        private readonly FolderScanSettings _folderScanSettings;
         private readonly Action<string, WatcherChangeTypes> _onEvent;
         private readonly Timer _timer;
         private FileSystemWatcher _fileSystemWatcher;
 
-        public DirectoryWatcher(DirectoryWatcherSettings directoryWatcherSettings,
+        public DirectoryScanner(FolderScanSettings folderScanSettings,
             Action<string, WatcherChangeTypes> onEvent)
         {
-            _directoryWatcherSettings = directoryWatcherSettings;
+            _folderScanSettings = folderScanSettings;
             _onEvent = onEvent;
             _timer = new Timer {Interval = Settings.Default.DirectoryWatcherResetInterval};
             _timer.Elapsed += Timer_OnElapsed;
@@ -28,17 +29,17 @@ namespace Notiify.Classes
             _fileSystemWatcher.EnableRaisingEvents = true;
         }
 
-        public void SetSettings(DirectoryWatcherSettings directoryWatcherSettings)
+        public void SetSettings(FolderScanSettings folderScanSettings)
         {
-            _fileSystemWatcher.Path = directoryWatcherSettings.Path;
-            _fileSystemWatcher.IncludeSubdirectories = directoryWatcherSettings.Recursive;
-            _fileSystemWatcher.Filter = "*.*";
+            _fileSystemWatcher.Path = folderScanSettings.Path;
+            _fileSystemWatcher.IncludeSubdirectories = folderScanSettings.Recursive;
+            _fileSystemWatcher.Filter = folderScanSettings.IncludeFilter;
         }
 
         private void InitialiseFileSystemWatcher()
         {
             _fileSystemWatcher = new FileSystemWatcher();
-            SetSettings(_directoryWatcherSettings);
+            SetSettings(_folderScanSettings);
             _fileSystemWatcher.Created += OnFileSystemWatcherEvent;
             _fileSystemWatcher.Changed += OnFileSystemWatcherEvent;
             _fileSystemWatcher.Deleted += OnFileSystemWatcherEvent;

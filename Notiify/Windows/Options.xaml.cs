@@ -1,5 +1,5 @@
 ﻿using System.Windows;
-using Notiify.Properties;
+using Notiify.Helpers;
 
 namespace Notiify.Windows
 {
@@ -11,18 +11,18 @@ namespace Notiify.Windows
         public Options()
         {
             InitializeComponent();
-            Settings.Default.Save();
+            SettingsHelper.SaveSettings();
         }
 
         private void btnOK_OnClick(object sender, RoutedEventArgs e)
         {
-            Settings.Default.Save();
+            SettingsHelper.SaveSettings();
             DialogResult = true;
         }
 
         private void btnCancel_OnClick(object sender, RoutedEventArgs e)
         {
-            Settings.Default.Reload();
+            SettingsHelper.LoadSettings();
             DialogResult = true;
         }
     }

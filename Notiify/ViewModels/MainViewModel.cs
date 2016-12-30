@@ -1,7 +1,9 @@
 using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Collections.Specialized;
 using System.IO;
+using System.Linq;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
@@ -10,6 +12,7 @@ using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.CommandWpf;
 using Notiify.Classes;
 using Notiify.Enumerations;
+using Notiify.Helpers;
 using Notiify.NotificationTypes;
 using Notiify.NotificationViewModels;
 using Notiify.Properties;
@@ -18,29 +21,33 @@ namespace Notiify.ViewModels
 {
     public class MainViewModel : ViewModelBase
     {
-        private readonly DirectoryWatcher _directoryWatcher;
+        private readonly List<DirectoryScanner> _directoryWatchers;
         private double _actualHeight;
-
         private double _actualWidth;
-
         private double _left;
         private double _top;
 
         public MainViewModel()
         {
+            SettingsHelper.UpgradeSettings();
             Notifications = new ObservableCollection<NotificationViewModel>();
             Notifications.CollectionChanged += Notifications_OnCollectionChanged;
+            _directoryWatchers = new List<DirectoryScanner>();
             GenerateTestNotification =
                 new RelayCommand(GenerateTestNotificationExecute);
 
-            _directoryWatcher = new DirectoryWatcher(new DirectoryWatcherSettings {Path = "Test"}, (path, type) =>
+            foreach (var scanSettings in App.Sources.Select(source => source.ScanSettings).OfType<FolderScanSettings>())
             {
-                // Events can be running in another thread.
-                Application.Current.Dispatcher.BeginInvoke(
-                    DispatcherPriority.Background,
-                    new Action(() => DirectoryWatcher_OnEvent(path, type)));
-            });
-            _directoryWatcher.Start();
+                var directoryWatcher = new DirectoryScanner(scanSettings, (path, type) =>
+                {
+                    // Events can be running in another thread.
+                    Application.Current.Dispatcher.BeginInvoke(
+                        DispatcherPriority.Background,
+                        new Action(() => DirectoryWatcher_OnEvent(path, type)));
+                });
+                _directoryWatchers.Add(directoryWatcher);
+                directoryWatcher.Start();
+            }
         }
 
         public ObservableCollection<NotificationViewModel> Notifications { get; }

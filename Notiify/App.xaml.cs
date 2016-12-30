@@ -1,7 +1,9 @@
-﻿using System.Windows;
+﻿using System.Collections.ObjectModel;
+using System.Windows;
 using System.Windows.Threading;
 using Hardcodet.Wpf.TaskbarNotification;
 using Notiify.Classes;
+using Notiify.Helpers;
 
 namespace Notiify
 {
@@ -15,12 +17,21 @@ namespace Notiify
             Dispatcher.UnhandledException += OnDispatcherUnhandledException;
         }
 
+        public static ObservableCollection<Source> Sources { get; set; }
+
         public static TaskbarIcon TrayIcon { get; private set; }
 
         protected override void OnStartup(StartupEventArgs e)
         {
             base.OnStartup(e);
+            SettingsHelper.LoadSettings();
             TrayIcon = (TaskbarIcon) Current.FindResource("TrayIcon");
+        }
+
+        protected override void OnExit(ExitEventArgs e)
+        {
+            base.OnExit(e);
+            SettingsHelper.SaveSettings();
         }
 
         private static void OnDispatcherUnhandledException(object sender, DispatcherUnhandledExceptionEventArgs e)
