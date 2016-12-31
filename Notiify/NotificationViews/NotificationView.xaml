@@ -8,7 +8,9 @@
     <Border Margin="0,0,0,15"
             Background="White"
             RenderTransformOrigin="0.5,0.5"
-            CornerRadius="5">
+            CornerRadius="5"
+            Width="200"
+            Opacity="0">
         <Border.Style>
             <Style>
                 <Style.Triggers>
@@ -16,9 +18,9 @@
                         <EventTrigger.Actions>
                             <BeginStoryboard>
                                 <Storyboard>
-                                    <DoubleAnimation Duration="0:0:0.1"
-                                                     Storyboard.TargetProperty="(FrameworkElement.Width)"
-                                                     From="0" To="200" />
+                                    <DoubleAnimation Duration="0:0:0.250"
+                                                     Storyboard.TargetProperty="(FrameworkElement.Opacity)"
+                                                     To="1" />
                                 </Storyboard>
                             </BeginStoryboard>
                         </EventTrigger.Actions>
