@@ -1,10 +1,8 @@
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Collections.Specialized;
 using System.IO;
 using System.Linq;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
 using System.Windows.Threading;
@@ -31,7 +29,6 @@ namespace Notiify.ViewModels
         {
             SettingsHelper.UpgradeSettings();
             Notifications = new ObservableCollection<NotificationViewModel>();
-            Notifications.CollectionChanged += Notifications_OnCollectionChanged;
             _directoryWatchers = new List<DirectoryScanner>();
             GenerateTestNotification =
                 new RelayCommand(GenerateTestNotificationExecute);
@@ -98,19 +95,6 @@ namespace Notiify.ViewModels
             });
         }
 
-        private async void Notifications_OnCollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
-        {
-            if (e.NewItems == null || e.NewItems.Count == 0)
-            {
-                return;
-            }
-            await Task.Delay(Settings.Default.NotificationDuration);
-            foreach (var newItem in e.NewItems)
-            {
-                CloseNotification((NotificationViewModel) newItem);
-            }
-        }
-
         private void AddNotification(INotification notification)
         {
             var notificationViewModel = new NotificationViewModel(notification);
@@ -125,16 +109,6 @@ namespace Notiify.ViewModels
                 return;
             }
             notificationViewModel.Hide();
-        }
-
-        private void CloseNotification(NotificationViewModel notificationViewModel)
-        {
-            if (!Notifications.Contains(notificationViewModel))
-            {
-                return;
-            }
-            notificationViewModel.Close?.Execute(null);
-            HideNotification(notificationViewModel);
         }
 
         private void GenerateTestNotificationExecute()

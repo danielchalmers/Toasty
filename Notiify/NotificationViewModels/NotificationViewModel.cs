@@ -1,8 +1,10 @@
 ﻿using System;
+using System.Threading.Tasks;
 using System.Windows.Input;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.CommandWpf;
 using Notiify.NotificationTypes;
+using Notiify.Properties;
 
 namespace Notiify.NotificationViewModels
 {
@@ -16,6 +18,7 @@ namespace Notiify.NotificationViewModels
             Close = new RelayCommand(CloseExcecute);
 
             _isVisible = true;
+            DelayHide();
         }
 
         public INotification Notification { get; }
@@ -34,7 +37,12 @@ namespace Notiify.NotificationViewModels
             Notification.Hidden = true;
         }
 
-        public void CloseExcecute()
+        public void DelayHide()
+        {
+            Task.Delay(Settings.Default.NotificationDuration).ContinueWith(t => Hide());
+        }
+
+        private void CloseExcecute()
         {
             Remove?.Invoke();
         }
