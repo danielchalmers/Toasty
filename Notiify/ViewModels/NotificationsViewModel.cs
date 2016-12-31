@@ -11,7 +11,6 @@ using Notiify.Classes;
 using Notiify.Enumerations;
 using Notiify.Helpers;
 using Notiify.NotificationTypes;
-using Notiify.NotificationViewModels;
 using Notiify.Properties;
 
 namespace Notiify.ViewModels
@@ -85,36 +84,20 @@ namespace Notiify.ViewModels
 
         private void DirectoryWatcher_OnEvent(string path, WatcherChangeTypes watcherChangeTypes)
         {
-            AddNotification(new TextNotification
+            new TextNotification
             {
                 Title = Path.GetFileNameWithoutExtension(path),
                 Content = watcherChangeTypes.ToString()
-            });
-        }
-
-        private void AddNotification(INotification notification)
-        {
-            var notificationViewModel = new NotificationViewModel(notification);
-            notificationViewModel.Remove = () => { HideNotification(notificationViewModel); };
-            App.Notifications.Add(notificationViewModel);
-        }
-
-        private void HideNotification(NotificationViewModel notificationViewModel)
-        {
-            if (!App.Notifications.Contains(notificationViewModel))
-            {
-                return;
-            }
-            notificationViewModel.Hide();
+            }.Add();
         }
 
         private void GenerateTestNotificationExecute()
         {
-            AddNotification(new TextNotification
+            new TextNotification
             {
                 Title = "Test",
                 Content = new Random().NextDouble().ToString()
-            });
+            }.Add();
         }
 
         private double GetLeft()

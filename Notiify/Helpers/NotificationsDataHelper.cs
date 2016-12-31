@@ -1,5 +1,7 @@
 ﻿using System.Collections.ObjectModel;
+using System.Linq;
 using Newtonsoft.Json;
+using Notiify.NotificationTypes;
 using Notiify.NotificationViewModels;
 using Notiify.Properties;
 
@@ -16,16 +18,24 @@ namespace Notiify.Helpers
 
         public static void SaveNotificationsData()
         {
-            Settings.Default.NotificationsData = JsonConvert.SerializeObject(App.Notifications, JsonSerializerSettings);
+            Settings.Default.NotificationsData =
+                JsonConvert.SerializeObject(App.Notifications.Select(x => x.Notification), JsonSerializerSettings);
         }
 
         public static void LoadNotificationsData()
         {
-            App.Notifications =
-                JsonConvert.DeserializeObject<ObservableCollection<NotificationViewModel>>(
-                    Settings.Default.NotificationsData,
-                    JsonSerializerSettings) ??
-                new ObservableCollection<NotificationViewModel>();
+            App.Notifications = new ObservableCollection<NotificationViewModel>();
+            var notifications = JsonConvert.DeserializeObject<ObservableCollection<INotification>>(
+                Settings.Default.NotificationsData,
+                JsonSerializerSettings);
+            if (notifications == null)
+            {
+                return;
+            }
+            foreach (var notification in notifications)
+            {
+                notification.Add();
+            }
         }
     }
 }
