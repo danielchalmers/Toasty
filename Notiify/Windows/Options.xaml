@@ -35,6 +35,10 @@
                                          TargetProperties="NotificationDuration"
                                          DisplayName="Stay Duration"
                                          DisplayOrder="0" />
+                <xctk:PropertyDefinition Category=" Notifications"
+                                         TargetProperties="MaxNotifications"
+                                         DisplayName="Maximum Count"
+                                         DisplayOrder="1" />
                 <xctk:PropertyDefinition Category="Advanced"
                                          TargetProperties="DirectoryWatcherResetInterval"
                                          DisplayName="Directory Scan Interval (ms)"

@@ -190,5 +190,17 @@ namespace Notiify.Properties {
                 this["NotificationsData"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("20")]
+        public int MaxNotifications {
+            get {
+                return ((int)(this["MaxNotifications"]));
+            }
+            set {
+                this["MaxNotifications"] = value;
+            }
+        }
     }
 }

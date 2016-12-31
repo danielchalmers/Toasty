@@ -1,5 +1,6 @@
 ﻿using Notiify.NotificationTypes;
 using Notiify.NotificationViewModels;
+using Notiify.Properties;
 
 namespace Notiify.Helpers
 {
@@ -11,6 +12,10 @@ namespace Notiify.Helpers
             notificationViewModel.Remove =
                 () => { NotificationViewModelHelper.HideNotification(notificationViewModel); };
             App.Notifications.Add(notificationViewModel);
+            while (Settings.Default.MaxNotifications > 0 && App.Notifications.Count > Settings.Default.MaxNotifications)
+            {
+                App.Notifications.RemoveAt(0);
+            }
         }
     }
 }
