@@ -114,17 +114,17 @@ namespace Notiify.ViewModels
         private void AddNotification(INotification notification)
         {
             var notificationViewModel = new NotificationViewModel(notification);
-            notificationViewModel.Remove = () => { RemoveNotification(notificationViewModel); };
+            notificationViewModel.Remove = () => { HideNotification(notificationViewModel); };
             Notifications.Add(notificationViewModel);
         }
 
-        private void RemoveNotification(NotificationViewModel notificationViewModel)
+        private void HideNotification(NotificationViewModel notificationViewModel)
         {
             if (!Notifications.Contains(notificationViewModel))
             {
                 return;
             }
-            Notifications.Remove(notificationViewModel);
+            notificationViewModel.Hide();
         }
 
         private void CloseNotification(NotificationViewModel notificationViewModel)
@@ -134,7 +134,7 @@ namespace Notiify.ViewModels
                 return;
             }
             notificationViewModel.Close?.Execute(null);
-            RemoveNotification(notificationViewModel);
+            HideNotification(notificationViewModel);
         }
 
         private void GenerateTestNotificationExecute()
