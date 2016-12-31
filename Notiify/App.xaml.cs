@@ -4,6 +4,7 @@ using System.Windows.Threading;
 using Hardcodet.Wpf.TaskbarNotification;
 using Notiify.Classes;
 using Notiify.Helpers;
+using Notiify.NotificationViewModels;
 
 namespace Notiify
 {
@@ -18,6 +19,7 @@ namespace Notiify
         }
 
         public static ObservableCollection<Source> Sources { get; set; }
+        public static ObservableCollection<NotificationViewModel> Notifications { get; set; }
 
         public static TaskbarIcon TrayIcon { get; private set; }
 

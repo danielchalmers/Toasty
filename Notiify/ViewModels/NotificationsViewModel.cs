@@ -1,6 +1,5 @@
 using System;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
 using System.IO;
 using System.Linq;
 using System.Windows;
@@ -28,7 +27,6 @@ namespace Notiify.ViewModels
         public NotificationsViewModel()
         {
             SettingsHelper.UpgradeSettings();
-            Notifications = new ObservableCollection<NotificationViewModel>();
             _directoryWatchers = new List<DirectoryScanner>();
             GenerateTestNotification =
                 new RelayCommand(GenerateTestNotificationExecute);
@@ -47,7 +45,6 @@ namespace Notiify.ViewModels
             }
         }
 
-        public ObservableCollection<NotificationViewModel> Notifications { get; }
         public ICommand GenerateTestNotification { get; }
 
         public double ActualWidth
@@ -99,12 +96,12 @@ namespace Notiify.ViewModels
         {
             var notificationViewModel = new NotificationViewModel(notification);
             notificationViewModel.Remove = () => { HideNotification(notificationViewModel); };
-            Notifications.Add(notificationViewModel);
+            App.Notifications.Add(notificationViewModel);
         }
 
         private void HideNotification(NotificationViewModel notificationViewModel)
         {
-            if (!Notifications.Contains(notificationViewModel))
+            if (!App.Notifications.Contains(notificationViewModel))
             {
                 return;
             }

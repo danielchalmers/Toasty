@@ -178,5 +178,17 @@ namespace Notiify.Properties {
                 this["ManageSourcesSelectedIndex"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string NotificationsData {
+            get {
+                return ((string)(this["NotificationsData"]));
+            }
+            set {
+                this["NotificationsData"] = value;
+            }
+        }
     }
 }

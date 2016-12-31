@@ -28,7 +28,7 @@
     </Window.Resources>
     <Grid>
         <StackPanel>
-            <ItemsControl ItemsSource="{Binding Notifications}">
+            <ItemsControl ItemsSource="{x:Static local:App.Notifications}">
                 <ItemsControl.ItemTemplate>
                     <DataTemplate>
                         <notificationViews:NotificationView

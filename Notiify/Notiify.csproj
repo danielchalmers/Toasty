@@ -133,6 +133,7 @@
     </ApplicationDefinition>
     <Compile Include="Classes\DirectoryScanner.cs" />
     <Compile Include="Classes\FolderScanSettings.cs" />
+    <Compile Include="Helpers\NotificationsDataHelper.cs" />
     <Compile Include="Interfaces\IScanner.cs" />
     <Compile Include="Classes\SourceScanSettingsBase.cs" />
     <Compile Include="Classes\Source.cs" />

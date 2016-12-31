@@ -25,6 +25,7 @@ namespace Notiify.Helpers
         public static void SaveSettings()
         {
             SourceDataHelper.SaveSourceData();
+            NotificationsDataHelper.SaveNotificationsData();
             Settings.Default.Save();
         }
 
@@ -33,6 +34,7 @@ namespace Notiify.Helpers
             Settings.Default.Reload();
             UpgradeSettings();
             SourceDataHelper.LoadSourceData();
+            NotificationsDataHelper.LoadNotificationsData();
         }
     }
 }
