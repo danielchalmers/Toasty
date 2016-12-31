@@ -19,7 +19,7 @@ using Notiify.Properties;
 
 namespace Notiify.ViewModels
 {
-    public class MainViewModel : ViewModelBase
+    public class NotificationsViewModel : ViewModelBase
     {
         private readonly List<DirectoryScanner> _directoryWatchers;
         private double _actualHeight;
@@ -27,7 +27,7 @@ namespace Notiify.ViewModels
         private double _left;
         private double _top;
 
-        public MainViewModel()
+        public NotificationsViewModel()
         {
             SettingsHelper.UpgradeSettings();
             Notifications = new ObservableCollection<NotificationViewModel>();

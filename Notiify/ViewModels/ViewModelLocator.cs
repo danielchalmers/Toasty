@@ -41,10 +41,10 @@ namespace Notiify.ViewModels
             ////    SimpleIoc.Default.Register<IDataService, DataService>();
             ////}
 
-            SimpleIoc.Default.Register<MainViewModel>();
+            SimpleIoc.Default.Register<NotificationsViewModel>();
         }
 
-        public MainViewModel Main => ServiceLocator.Current.GetInstance<MainViewModel>();
+        public NotificationsViewModel Notifications => ServiceLocator.Current.GetInstance<NotificationsViewModel>();
 
         public static void Cleanup()
         {
