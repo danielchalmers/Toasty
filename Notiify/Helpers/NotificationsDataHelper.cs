@@ -34,7 +34,7 @@ namespace Notiify.Helpers
             }
             foreach (var notification in notifications)
             {
-                notification.Add();
+                notification.Add(false);
             }
         }
     }

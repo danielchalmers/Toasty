@@ -6,9 +6,9 @@ namespace Notiify.Helpers
 {
     public static class NotificationHelper
     {
-        public static void Add(this INotification notification)
+        public static void Add(this INotification notification, bool visible = true)
         {
-            var notificationViewModel = new NotificationViewModel(notification);
+            var notificationViewModel = new NotificationViewModel(notification) {IsVisible = visible};
             notificationViewModel.Remove =
                 () => { NotificationViewModelHelper.HideNotification(notificationViewModel); };
             App.Notifications.Add(notificationViewModel);
