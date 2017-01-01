@@ -34,12 +34,12 @@ namespace Notiify.ViewModels
 
             foreach (var scanSettings in App.Sources.Select(source => source.ScanSettings).OfType<FolderScanSettings>())
             {
-                var directoryWatcher = new DirectoryScanner(scanSettings, (path, type) =>
+                var directoryWatcher = new DirectoryScanner(scanSettings, (fileInfo, type) =>
                 {
                     // Events can be running in another thread.
                     Application.Current.Dispatcher.BeginInvoke(
                         DispatcherPriority.Background,
-                        new Action(() => DirectoryWatcher_OnEvent(path, type)));
+                        new Action(() => DirectoryWatcher_OnEvent(fileInfo, type)));
                 });
                 _directoryWatchers.Add(directoryWatcher);
                 directoryWatcher.Start();
@@ -86,11 +86,11 @@ namespace Notiify.ViewModels
             set { Set(ref _top, value); }
         }
 
-        private void DirectoryWatcher_OnEvent(string path, WatcherChangeTypes watcherChangeTypes)
+        private void DirectoryWatcher_OnEvent(FileInfo fileInfo, WatcherChangeTypes watcherChangeTypes)
         {
             new TextNotification
             {
-                Title = Path.GetFileNameWithoutExtension(path),
+                Title = fileInfo.Name,
                 Content = watcherChangeTypes.ToString()
             }.Add();
         }

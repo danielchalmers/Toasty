@@ -9,12 +9,12 @@ namespace Notiify.Classes
     public class DirectoryScanner : IScanner
     {
         private readonly FolderScanSettings _folderScanSettings;
-        private readonly Action<string, WatcherChangeTypes> _onEvent;
+        private readonly Action<FileInfo, WatcherChangeTypes> _onEvent;
         private readonly Timer _timer;
         private FileSystemWatcher _fileSystemWatcher;
 
         public DirectoryScanner(FolderScanSettings folderScanSettings,
-            Action<string, WatcherChangeTypes> onEvent)
+            Action<FileInfo, WatcherChangeTypes> onEvent)
         {
             _folderScanSettings = folderScanSettings;
             _onEvent = onEvent;
@@ -62,12 +62,12 @@ namespace Notiify.Classes
 
         private void OnFileSystemWatcherEvent(object sender, FileSystemEventArgs e)
         {
-            OnDirectoryEvent(e.FullPath, e.ChangeType);
+            OnDirectoryEvent(new FileInfo(e.FullPath), e.ChangeType);
         }
 
-        private void OnDirectoryEvent(string path, WatcherChangeTypes watcherChangeTypes)
+        private void OnDirectoryEvent(FileInfo fileInfo, WatcherChangeTypes watcherChangeTypes)
         {
-            _onEvent?.Invoke(path, watcherChangeTypes);
+            _onEvent?.Invoke(fileInfo, watcherChangeTypes);
         }
 
         private void Timer_OnElapsed(object sender, ElapsedEventArgs e)
