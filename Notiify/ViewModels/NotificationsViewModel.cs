@@ -29,6 +29,8 @@ namespace Notiify.ViewModels
             _directoryWatchers = new List<DirectoryScanner>();
             GenerateTestNotification =
                 new RelayCommand(GenerateTestNotificationExecute);
+            OnMouseEnter = new RelayCommand<MouseEventArgs>(OnMouseEnterExecute);
+            OnMouseLeave = new RelayCommand<MouseEventArgs>(OnMouseLeaveExecute);
 
             foreach (var scanSettings in App.Sources.Select(source => source.ScanSettings).OfType<FolderScanSettings>())
             {
@@ -45,6 +47,8 @@ namespace Notiify.ViewModels
         }
 
         public ICommand GenerateTestNotification { get; }
+        public ICommand OnMouseEnter { get; }
+        public ICommand OnMouseLeave { get; }
 
         public double ActualWidth
         {
@@ -120,6 +124,22 @@ namespace Notiify.ViewModels
         {
             Left = GetLeft();
             Top = GetTop();
+        }
+
+        private void OnMouseEnterExecute(MouseEventArgs e)
+        {
+            foreach (var notificationViewModel in App.Notifications.Where(x => x.IsVisible))
+            {
+                notificationViewModel.CancelDelayHide();
+            }
+        }
+
+        private void OnMouseLeaveExecute(MouseEventArgs e)
+        {
+            foreach (var notificationViewModel in App.Notifications)
+            {
+                notificationViewModel.DelayHide();
+            }
         }
     }
 }

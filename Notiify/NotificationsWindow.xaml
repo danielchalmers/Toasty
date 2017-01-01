@@ -8,6 +8,8 @@
         xmlns:notificationTypes="clr-namespace:Notiify.NotificationTypes"
         xmlns:notificationViews="clr-namespace:Notiify.NotificationViews"
         xmlns:classes="clr-namespace:Notiify.Classes"
+        xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+        xmlns:command="http://www.galasoft.ch/mvvmlight"
         mc:Ignorable="d"
         DataContext="{Binding Notifications, Source={StaticResource ViewModelLocator}}"
         Title="{x:Static properties:Resources.AppName}"
@@ -29,6 +31,14 @@
         <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" />
     </Window.Resources>
     <Border CornerRadius="5">
+        <i:Interaction.Triggers>
+            <i:EventTrigger EventName="MouseEnter">
+                <command:EventToCommand Command="{Binding OnMouseEnter}" />
+            </i:EventTrigger>
+            <i:EventTrigger EventName="MouseLeave">
+                <command:EventToCommand Command="{Binding OnMouseLeave}" />
+            </i:EventTrigger>
+        </i:Interaction.Triggers>
         <Border.Background>
             <SolidColorBrush Opacity="0.1" Color="DimGray" />
         </Border.Background>
