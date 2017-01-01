@@ -91,7 +91,8 @@ namespace Notiify.ViewModels
             new TextNotification
             {
                 Title = fileInfo.Name,
-                Content = watcherChangeTypes.ToString()
+                Content = watcherChangeTypes.ToString(),
+                EventDateTime = fileInfo.LastWriteTime
             }.Add();
         }
 
@@ -100,7 +101,8 @@ namespace Notiify.ViewModels
             new TextNotification
             {
                 Title = "Test",
-                Content = new Random().NextDouble().ToString()
+                Content = new Random().NextDouble().ToString(),
+                EventDateTime = DateTime.Now
             }.Add();
         }
 
