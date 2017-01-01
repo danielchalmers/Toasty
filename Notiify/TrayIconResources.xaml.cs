@@ -35,5 +35,13 @@ namespace Notiify
                 notificationViewModel.Show();
             }
         }
+
+        private void MenuItemHideNotifications_OnClick(object sender, RoutedEventArgs e)
+        {
+            foreach (var notificationViewModel in App.Notifications)
+            {
+                notificationViewModel.Hide();
+            }
+        }
     }
 }

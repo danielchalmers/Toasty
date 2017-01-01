@@ -9,6 +9,7 @@
         <tb:TaskbarIcon.ContextMenu>
             <ContextMenu>
                 <MenuItem Header="_Show Notifications" Click="MenuItemShowNotifications_OnClick" />
+                <MenuItem Header="_Hide Notifications" Click="MenuItemHideNotifications_OnClick" />
                 <Separator />
                 <MenuItem Header="_Manage Sources" Click="MenuItemManageSources_OnClick" />
                 <MenuItem Header="_Options" Click="MenuItemOptions_OnClick" />

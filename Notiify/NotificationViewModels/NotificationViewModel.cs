@@ -37,6 +37,10 @@ namespace Notiify.NotificationViewModels
                 {
                     DelayHide();
                 }
+                else
+                {
+                    CancelDelayHide();
+                }
             }
         }
 
