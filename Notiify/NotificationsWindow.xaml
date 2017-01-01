@@ -16,6 +16,8 @@
         classes:SizeObserver.ObservedHeight="{Binding ActualHeight, Mode=OneWayToSource}"
         Left="{Binding Left, Mode=TwoWay}"
         Top="{Binding Top, Mode=TwoWay}"
+        MaxWidth="{Binding Width, Source={x:Static SystemParameters.WorkArea}}"
+        MaxHeight="{Binding Height, Source={x:Static SystemParameters.WorkArea}}"
         SizeToContent="WidthAndHeight"
         WindowStyle="None"
         AllowsTransparency="True"
@@ -26,22 +28,24 @@
     <Window.Resources>
         <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" />
     </Window.Resources>
-    <Grid>
-        <StackPanel>
-            <ItemsControl ItemsSource="{x:Static local:App.Notifications}">
-                <ItemsControl.ItemTemplate>
-                    <DataTemplate>
-                        <notificationViews:NotificationView
-                            DataContext="{Binding}"
-                            Visibility="{Binding IsVisible, Converter={StaticResource BooleanToVisibilityConverter}}"
-                            HorizontalAlignment="Center"
-                            VerticalAlignment="Center" />
-                    </DataTemplate>
-                </ItemsControl.ItemTemplate>
-            </ItemsControl>
-            <Button Content="New"
-                    Command="{Binding GenerateTestNotification}"
-                    Width="250" />
-        </StackPanel>
-    </Grid>
+    <Border CornerRadius="5">
+        <Border.Background>
+            <SolidColorBrush Opacity="0.1" Color="DimGray" />
+        </Border.Background>
+        <ScrollViewer VerticalScrollBarVisibility="Auto">
+            <StackPanel Width="300">
+                <ItemsControl ItemsSource="{x:Static local:App.Notifications}">
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate>
+                            <notificationViews:NotificationView
+                                DataContext="{Binding}"
+                                Visibility="{Binding IsVisible, Converter={StaticResource BooleanToVisibilityConverter}}" />
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+                </ItemsControl>
+                <Button Content="Generate Test Notification"
+                        Command="{Binding GenerateTestNotification}" />
+            </StackPanel>
+        </ScrollViewer>
+    </Border>
 </Window>

@@ -5,11 +5,10 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:local="clr-namespace:Notiify.NotificationViews"
              mc:Ignorable="d">
-    <Border Margin="0,0,0,15"
+    <Border Margin="15"
             Background="White"
             RenderTransformOrigin="0.5,0.5"
             CornerRadius="5"
-            Width="200"
             Opacity="0">
         <Border.Style>
             <Style>
@@ -38,16 +37,22 @@
                        FontSize="16" />
             <Button Grid.Row="0"
                     HorizontalAlignment="Right"
-                    Content="x"
+                    Content="×"
                     ToolTip="Close"
-                    Width="16"
-                    Height="16"
-                    Background="Transparent"
-                    HorizontalContentAlignment="Center"
-                    VerticalContentAlignment="Center"
-                    Padding="0"
-                    BorderThickness="0"
-                    Command="{Binding Close}" />
+                    Command="{Binding Close}">
+                <Button.Style>
+                    <Style TargetType="{x:Type Button}"
+                           BasedOn="{StaticResource {x:Static ToolBar.ButtonStyleKey}}">
+                        <Setter Property="Width" Value="16" />
+                        <Setter Property="Height" Value="16" />
+                        <Setter Property="Background" Value="Transparent" />
+                        <Setter Property="HorizontalContentAlignment" Value="Center" />
+                        <Setter Property="VerticalContentAlignment" Value="Center" />
+                        <Setter Property="BorderThickness" Value="0" />
+                        <Setter Property="Padding" Value="0" />
+                    </Style>
+                </Button.Style>
+            </Button>
             <TextBlock Grid.Row="2" Text="{Binding Notification.Content}" />
         </Grid>
     </Border>
