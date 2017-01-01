@@ -7,6 +7,8 @@
     <tb:TaskbarIcon x:Key="TrayIcon" IconSource="icon.ico" ToolTipText="{x:Static p:Resources.AppName}">
         <tb:TaskbarIcon.ContextMenu>
             <ContextMenu>
+                <MenuItem Header="_Show Notifications" Click="MenuItemShowNotifications_OnClick" />
+                <Separator />
                 <MenuItem Header="_Manage Sources" Click="MenuItemManageSources_OnClick" />
                 <MenuItem Header="_Options" Click="MenuItemOptions_OnClick" />
                 <Separator />

@@ -26,5 +26,14 @@ namespace Notiify
             var manageSourcesDialog = new ManageSources();
             manageSourcesDialog.ShowDialog();
         }
+
+        private void MenuItemShowNotifications_OnClick(object sender, RoutedEventArgs e)
+        {
+            foreach (var notificationViewModel in App.Notifications)
+            {
+                notificationViewModel.CancelDelayHide();
+                notificationViewModel.Show();
+            }
+        }
     }
 }
