@@ -49,7 +49,6 @@ namespace Notiify.NotificationViewModels
         public void Hide()
         {
             IsVisible = false;
-            Notification.Hidden = true;
         }
 
         public void DelayHide()
