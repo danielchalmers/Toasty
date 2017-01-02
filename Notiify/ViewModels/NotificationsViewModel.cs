@@ -84,10 +84,10 @@ namespace Notiify.ViewModels
             set { Set(ref _top, value); }
         }
 
-        private void DirectoryWatcher_OnEvent(DirectoryScannerEventData eventData)
+        private void DirectoryWatcher_OnEvent(DirectoryScannerEventArgs eventArgs)
         {
-            new TextNotification(eventData.FileInfo.Name, eventData.ChangeTypes.ToString(),
-                eventData.FileInfo.LastWriteTime, eventData).Add();
+            new TextNotification(eventArgs.FileInfo.Name, eventArgs.ChangeTypes.ToString(),
+                eventArgs.FileInfo.LastWriteTime, eventArgs).Add();
         }
 
         private void GenerateTestNotificationExecute()

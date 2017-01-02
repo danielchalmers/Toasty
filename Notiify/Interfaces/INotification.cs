@@ -6,6 +6,6 @@ namespace Notiify.Interfaces
     {
         string Title { get; }
         DateTime EventDateTime { get; }
-        IScannerEventData OriginData { get; }
+        IScannerEventArgs ScannerArgs { get; }
     }
 }
