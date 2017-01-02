@@ -2,10 +2,17 @@
 
 namespace Notiify.NotificationTypes
 {
-    public class TextNotification : INotification
+    public struct TextNotification : INotification
     {
-        public string Content { get; set; }
-        public string Title { get; set; }
-        public DateTime EventDateTime { get; set; }
+        public TextNotification(string title, string content, DateTime eventDateTime)
+        {
+            Title = title;
+            Content = content;
+            EventDateTime = eventDateTime;
+        }
+
+        public string Content { get; }
+        public string Title { get; }
+        public DateTime EventDateTime { get; }
     }
 }

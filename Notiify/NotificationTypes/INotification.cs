@@ -4,7 +4,7 @@ namespace Notiify.NotificationTypes
 {
     public interface INotification
     {
-        string Title { get; set; }
-        DateTime EventDateTime { get; set; }
+        string Title { get; }
+        DateTime EventDateTime { get; }
     }
 }

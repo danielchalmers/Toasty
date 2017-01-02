@@ -88,22 +88,12 @@ namespace Notiify.ViewModels
 
         private void DirectoryWatcher_OnEvent(FileInfo fileInfo, WatcherChangeTypes watcherChangeTypes)
         {
-            new TextNotification
-            {
-                Title = fileInfo.Name,
-                Content = watcherChangeTypes.ToString(),
-                EventDateTime = fileInfo.LastWriteTime
-            }.Add();
+            new TextNotification(fileInfo.Name, watcherChangeTypes.ToString(), fileInfo.LastWriteTime).Add();
         }
 
         private void GenerateTestNotificationExecute()
         {
-            new TextNotification
-            {
-                Title = "Test",
-                Content = new Random().NextDouble().ToString(),
-                EventDateTime = DateTime.Now
-            }.Add();
+            new TextNotification("Test", new Random().NextDouble().ToString(), DateTime.Now).Add();
         }
 
         private double GetLeft()
