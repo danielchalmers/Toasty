@@ -1,6 +1,5 @@
 using System;
 using System.Collections.Generic;
-using System.IO;
 using System.Linq;
 using System.Windows;
 using System.Windows.Input;
@@ -33,12 +32,12 @@ namespace Notiify.ViewModels
 
             foreach (var scanSettings in App.Sources.Select(source => source.ScanSettings).OfType<FolderScanSettings>())
             {
-                var directoryWatcher = new DirectoryScanner(scanSettings, (fileInfo, type) =>
+                var directoryWatcher = new DirectoryScanner(scanSettings, eventData =>
                 {
                     // Events can be running in another thread.
                     Application.Current.Dispatcher.BeginInvoke(
                         DispatcherPriority.Background,
-                        new Action(() => DirectoryWatcher_OnEvent(fileInfo, type)));
+                        new Action(() => DirectoryWatcher_OnEvent(eventData)));
                 });
                 _directoryWatchers.Add(directoryWatcher);
                 directoryWatcher.Start();
@@ -85,14 +84,15 @@ namespace Notiify.ViewModels
             set { Set(ref _top, value); }
         }
 
-        private void DirectoryWatcher_OnEvent(FileInfo fileInfo, WatcherChangeTypes watcherChangeTypes)
+        private void DirectoryWatcher_OnEvent(DirectoryScannerEventData eventData)
         {
-            new TextNotification(fileInfo.Name, watcherChangeTypes.ToString(), fileInfo.LastWriteTime).Add();
+            new TextNotification(eventData.FileInfo.Name, eventData.ChangeTypes.ToString(),
+                eventData.FileInfo.LastWriteTime, eventData).Add();
         }
 
         private void GenerateTestNotificationExecute()
         {
-            new TextNotification("Test", new Random().NextDouble().ToString(), DateTime.Now).Add();
+            new TextNotification("Test", new Random().NextDouble().ToString(), DateTime.Now, null).Add();
         }
 
         private double GetLeft()
