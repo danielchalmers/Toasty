@@ -32,10 +32,18 @@
                 <RowDefinition Height="5" />
                 <RowDefinition Height="Auto" />
             </Grid.RowDefinitions>
-            <TextBlock Grid.Row="0" Text="{Binding Notification.Title}"
-                       FontSize="16" />
-            <Button Grid.Row="0"
-                    HorizontalAlignment="Right"
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="5" />
+                <ColumnDefinition Width="Auto" />
+            </Grid.ColumnDefinitions>
+            <TextBlock Grid.Column="0"
+                       Grid.Row="0"
+                       Text="{Binding Notification.Title}"
+                       FontSize="16"
+                       TextTrimming="CharacterEllipsis" />
+            <Button Grid.Column="2"
+                    Grid.Row="0"
                     Content="×"
                     ToolTip="Close"
                     Command="{Binding Close}">
@@ -52,7 +60,10 @@
                     </Style>
                 </Button.Style>
             </Button>
-            <TextBlock Grid.Row="2" Text="{Binding Notification.Content}" />
+            <TextBlock Grid.Column="0"
+                       Grid.ColumnSpan="3"
+                       Grid.Row="2"
+                       Text="{Binding Notification.Content}" />
         </Grid>
     </Border>
 </UserControl>
