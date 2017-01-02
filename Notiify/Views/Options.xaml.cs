@@ -1,7 +1,7 @@
 ﻿using System.Windows;
 using Notiify.Helpers;
 
-namespace Notiify.Windows
+namespace Notiify.Views
 {
     /// <summary>
     ///     Interaction logic for Options.xaml

@@ -148,25 +148,25 @@
     <Compile Include="Helpers\SourceHelper.cs" />
     <Compile Include="Helpers\ObjectHelper.cs" />
     <Compile Include="Helpers\SettingsHelper.cs" />
-    <Compile Include="NotificationTypes\INotification.cs" />
-    <Compile Include="NotificationTypes\TextNotification.cs" />
-    <Compile Include="NotificationViewModels\NotificationViewModel.cs" />
-    <Compile Include="NotificationViews\NotificationView.xaml.cs">
+    <Compile Include="Interfaces\INotification.cs" />
+    <Compile Include="Classes\TextNotification.cs" />
+    <Compile Include="ViewModels\NotificationViewModel.cs" />
+    <Compile Include="Views\NotificationView.xaml.cs">
       <DependentUpon>NotificationView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="TrayIconResources.xaml.cs">
+    <Compile Include="Resources\TrayIconResources.xaml.cs">
       <DependentUpon>TrayIconResources.xaml</DependentUpon>
     </Compile>
     <Compile Include="ViewModels\NotificationsViewModel.cs" />
     <Compile Include="ViewModels\ManageSourcesViewModel.cs" />
     <Compile Include="ViewModels\ViewModelLocator.cs" />
-    <Compile Include="Windows\ManageSources.xaml.cs">
+    <Compile Include="Views\ManageSources.xaml.cs">
       <DependentUpon>ManageSources.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Windows\Options.xaml.cs">
+    <Compile Include="Views\Options.xaml.cs">
       <DependentUpon>Options.xaml</DependentUpon>
     </Compile>
-    <Page Include="NotificationsWindow.xaml">
+    <Page Include="Views\NotificationsWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -174,11 +174,11 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="NotificationsWindow.xaml.cs">
+    <Compile Include="Views\NotificationsWindow.xaml.cs">
       <DependentUpon>NotificationsWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Page Include="NotificationViews\NotificationView.xaml">
+    <Page Include="Views\NotificationView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -186,15 +186,15 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="TrayIconResources.xaml">
+    <Page Include="Resources\TrayIconResources.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Windows\ManageSources.xaml">
+    <Page Include="Views\ManageSources.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Windows\Options.xaml">
+    <Page Include="Views\Options.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -243,6 +243,7 @@
   <ItemGroup>
     <Resource Include="icon.ico" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

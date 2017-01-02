@@ -10,7 +10,6 @@ using GalaSoft.MvvmLight.CommandWpf;
 using Notiify.Classes;
 using Notiify.Enumerations;
 using Notiify.Helpers;
-using Notiify.NotificationTypes;
 using Notiify.Properties;
 
 namespace Notiify.ViewModels

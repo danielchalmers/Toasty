@@ -1,7 +1,7 @@
 ﻿using System.Windows;
-using Notiify.Windows;
+using Notiify.Views;
 
-namespace Notiify
+namespace Notiify.Resources
 {
     partial class TrayIconResources : ResourceDictionary
     {

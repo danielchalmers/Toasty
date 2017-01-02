@@ -1,5 +1,4 @@
 ﻿using System.Windows;
-using Notiify.Properties;
 
 namespace Notiify.Classes
 {
@@ -10,7 +9,7 @@ namespace Notiify.Classes
         {
             try
             {
-                return MessageBox.Show(text, Resources.AppName, button, image, defaultButton);
+                return MessageBox.Show(text, Properties.Resources.AppName, button, image, defaultButton);
             }
             catch
             {

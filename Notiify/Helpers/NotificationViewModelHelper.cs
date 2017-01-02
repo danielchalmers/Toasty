@@ -1,4 +1,4 @@
-﻿using Notiify.NotificationViewModels;
+﻿using Notiify.ViewModels;
 
 namespace Notiify.Helpers
 {

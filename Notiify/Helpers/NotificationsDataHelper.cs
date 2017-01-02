@@ -1,9 +1,9 @@
 ﻿using System.Collections.ObjectModel;
 using System.Linq;
 using Newtonsoft.Json;
-using Notiify.NotificationTypes;
-using Notiify.NotificationViewModels;
+using Notiify.Interfaces;
 using Notiify.Properties;
+using Notiify.ViewModels;
 
 namespace Notiify.Helpers
 {

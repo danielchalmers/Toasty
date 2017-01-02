@@ -3,10 +3,10 @@ using System.Windows.Input;
 using System.Windows.Threading;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.CommandWpf;
-using Notiify.NotificationTypes;
+using Notiify.Interfaces;
 using Notiify.Properties;
 
-namespace Notiify.NotificationViewModels
+namespace Notiify.ViewModels
 {
     public class NotificationViewModel : ViewModelBase
     {

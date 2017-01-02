@@ -1,6 +1,6 @@
 ﻿using System.Windows;
 
-namespace Notiify.Windows
+namespace Notiify.Views
 {
     /// <summary>
     ///     Interaction logic for ManageSources.xaml

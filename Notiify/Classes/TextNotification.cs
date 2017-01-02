@@ -1,6 +1,7 @@
 ﻿using System;
+using Notiify.Interfaces;
 
-namespace Notiify.NotificationTypes
+namespace Notiify.Classes
 {
     public struct TextNotification : INotification
     {

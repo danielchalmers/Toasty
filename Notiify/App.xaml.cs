@@ -4,7 +4,7 @@ using System.Windows.Threading;
 using Hardcodet.Wpf.TaskbarNotification;
 using Notiify.Classes;
 using Notiify.Helpers;
-using Notiify.NotificationViewModels;
+using Notiify.ViewModels;
 
 namespace Notiify
 {

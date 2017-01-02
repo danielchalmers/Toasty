@@ -1,6 +1,6 @@
 ﻿using System.Windows;
 
-namespace Notiify
+namespace Notiify.Views
 {
     /// <summary>
     ///     Interaction logic for NotificationsWindow.xaml

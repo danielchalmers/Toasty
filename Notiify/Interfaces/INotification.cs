@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Notiify.NotificationTypes
+namespace Notiify.Interfaces
 {
     public interface INotification
     {

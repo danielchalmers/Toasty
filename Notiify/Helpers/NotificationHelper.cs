@@ -1,6 +1,6 @@
-﻿using Notiify.NotificationTypes;
-using Notiify.NotificationViewModels;
+﻿using Notiify.Interfaces;
 using Notiify.Properties;
+using Notiify.ViewModels;
 
 namespace Notiify.Helpers
 {
