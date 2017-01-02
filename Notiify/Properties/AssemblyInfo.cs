@@ -11,7 +11,7 @@ using System.Windows;
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("Daniel Chalmers Software")]
 [assembly: AssemblyProduct("Notiify")]
-[assembly: AssemblyCopyright("© Daniel Chalmers 2016")]
+[assembly: AssemblyCopyright("© Daniel Chalmers 2017")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
