@@ -11,5 +11,10 @@ namespace Notiify.Views
         {
             InitializeComponent();
         }
+
+        private void btnOK_OnClick(object sender, RoutedEventArgs e)
+        {
+            DialogResult = true;
+        }
     }
 }

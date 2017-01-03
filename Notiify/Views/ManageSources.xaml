@@ -23,43 +23,64 @@
         <converters:IsNotNullToBooleanConverter x:Key="IsNotNullToBooleanConverter" />
     </Window.Resources>
     <Grid Margin="15">
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="Auto" MinWidth="150" />
-            <ColumnDefinition Width="15" />
-            <ColumnDefinition Width="Auto" />
-            <ColumnDefinition Width="*" />
-        </Grid.ColumnDefinitions>
-        <ListBox Grid.Column="0" Grid.Row="0"
-                 ItemsSource="{x:Static notiify:App.Sources}"
-                 SelectedItem="{Binding SelectedSource}"
-                 SelectedIndex="{Binding ManageSourcesSelectedIndex, Source={x:Static p:Settings.Default}, Mode=TwoWay}"
-                 DisplayMemberPath="Name">
-            <i:Interaction.Triggers>
-                <i:EventTrigger EventName="MouseDown">
-                    <command:EventToCommand Command="{Binding CollectionMouseDown}" />
-                </i:EventTrigger>
-            </i:Interaction.Triggers>
-        </ListBox>
-        <StackPanel Grid.Column="2" VerticalAlignment="Center" Margin="0,0,15,-5">
-            <StackPanel.Resources>
-                <Style TargetType="Button">
-                    <Setter Property="Height" Value="30" />
-                    <Setter Property="Margin" Value="0,0,0,5" />
-                    <Setter Property="Padding" Value="15,0,15,0" />
-                    <Setter Property="HorizontalAlignment" Value="Stretch" />
-                    <Setter Property="VerticalAlignment" Value="Stretch" />
-                    <Setter Property="IsEnabled"
-                            Value="{Binding SelectedSource, Converter={StaticResource IsNotNullToBooleanConverter}}" />
-                </Style>
-            </StackPanel.Resources>
-            <Button Content="New Folder" Command="{Binding NewFolder}" IsEnabled="True" />
-            <Button Content="Clone" Command="{Binding Clone}" />
-            <Button Content="Up" Command="{Binding MoveUp}" />
-            <Button Content="Down" Command="{Binding MoveDown}" />
-            <Button Content="Delete" Command="{Binding Delete}" />
-        </StackPanel>
-        <xctk:PropertyGrid Grid.Column="3"
-                           SelectedObject="{Binding SelectedSource}"
-                           Style="{StaticResource PropertyGridNonCategorizedStyle}" />
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*" />
+            <RowDefinition Height="15" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+        <Grid Grid.Row="0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto" MinWidth="150" />
+                <ColumnDefinition Width="15" />
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+            <ListBox Grid.Column="0" Grid.Row="0"
+                     ItemsSource="{x:Static notiify:App.Sources}"
+                     SelectedItem="{Binding SelectedSource}"
+                     SelectedIndex="{Binding ManageSourcesSelectedIndex, Source={x:Static p:Settings.Default}, Mode=TwoWay}"
+                     DisplayMemberPath="Name">
+                <i:Interaction.Triggers>
+                    <i:EventTrigger EventName="MouseDown">
+                        <command:EventToCommand Command="{Binding CollectionMouseDown}" />
+                    </i:EventTrigger>
+                </i:Interaction.Triggers>
+            </ListBox>
+            <StackPanel Grid.Column="2" VerticalAlignment="Center" Margin="0,0,15,-5">
+                <StackPanel.Resources>
+                    <Style TargetType="Button">
+                        <Setter Property="Height" Value="30" />
+                        <Setter Property="Margin" Value="0,0,0,5" />
+                        <Setter Property="Padding" Value="15,0,15,0" />
+                        <Setter Property="HorizontalAlignment" Value="Stretch" />
+                        <Setter Property="VerticalAlignment" Value="Stretch" />
+                        <Setter Property="IsEnabled"
+                                Value="{Binding SelectedSource, Converter={StaticResource IsNotNullToBooleanConverter}}" />
+                    </Style>
+                </StackPanel.Resources>
+                <Button Content="New Folder" Command="{Binding NewFolder}" IsEnabled="True" />
+                <Button Content="Clone" Command="{Binding Clone}" />
+                <Button Content="Up" Command="{Binding MoveUp}" />
+                <Button Content="Down" Command="{Binding MoveDown}" />
+                <Button Content="Delete" Command="{Binding Delete}" />
+            </StackPanel>
+            <xctk:PropertyGrid Grid.Column="3"
+                               SelectedObject="{Binding SelectedSource}"
+                               Style="{StaticResource PropertyGridNonCategorizedStyle}" />
+        </Grid>
+        <Grid Row="2">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="75" />
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="23" />
+            </Grid.RowDefinitions>
+            <Button Grid.Column="1"
+                    Content="_OK"
+                    IsDefault="True"
+                    IsCancel="True"
+                    Click="btnOK_OnClick" />
+        </Grid>
     </Grid>
 </Window>
