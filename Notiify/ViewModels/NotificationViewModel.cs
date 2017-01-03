@@ -3,6 +3,7 @@ using System.Windows.Input;
 using System.Windows.Threading;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.CommandWpf;
+using Notiify.Helpers;
 using Notiify.Interfaces;
 using Notiify.Properties;
 
@@ -17,6 +18,7 @@ namespace Notiify.ViewModels
         {
             Notification = notification;
             Close = new RelayCommand(CloseExcecute);
+            OnMouseUp = new RelayCommand<MouseEventArgs>(OnMouseUpExecute);
             _hideTimer = new DispatcherTimer {Interval = Settings.Default.NotificationDuration};
             _hideTimer.Tick += HideTimer_OnTick;
 
@@ -26,6 +28,7 @@ namespace Notiify.ViewModels
         public INotification Notification { get; }
         public Action Remove { get; set; }
         public ICommand Close { get; }
+        public ICommand OnMouseUp { get; }
 
         public bool IsVisible
         {
@@ -70,9 +73,20 @@ namespace Notiify.ViewModels
             IsVisible = true;
         }
 
-        private void CloseExcecute()
+        private void Dismiss()
         {
             Remove?.Invoke();
+        }
+
+        private void CloseExcecute()
+        {
+            Dismiss();
+        }
+
+        private void OnMouseUpExecute(MouseEventArgs e)
+        {
+            Dismiss();
+            Notification.Launch();
         }
     }
 }

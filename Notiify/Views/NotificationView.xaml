@@ -3,12 +3,19 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+             xmlns:command="http://www.galasoft.ch/mvvmlight"
              mc:Ignorable="d">
     <Border Margin="15"
             Background="White"
             RenderTransformOrigin="0.5,0.5"
             CornerRadius="5"
             Opacity="0">
+        <i:Interaction.Triggers>
+            <i:EventTrigger EventName="MouseUp">
+                <command:EventToCommand Command="{Binding OnMouseUp}" />
+            </i:EventTrigger>
+        </i:Interaction.Triggers>
         <Border.Style>
             <Style>
                 <Style.Triggers>
