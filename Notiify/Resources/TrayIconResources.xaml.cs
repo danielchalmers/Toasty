@@ -23,7 +23,7 @@ namespace Notiify.Resources
 
         private void MenuItemManageSources_OnClick(object sender, RoutedEventArgs e)
         {
-            var manageSourcesDialog = new ManageSources();
+            var manageSourcesDialog = new ManageSourcesWindow();
             manageSourcesDialog.ShowDialog();
         }
 

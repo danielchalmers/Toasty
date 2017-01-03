@@ -162,8 +162,8 @@
     <Compile Include="ViewModels\NotificationsViewModel.cs" />
     <Compile Include="ViewModels\ManageSourcesViewModel.cs" />
     <Compile Include="ViewModels\ViewModelLocator.cs" />
-    <Compile Include="Views\ManageSources.xaml.cs">
-      <DependentUpon>ManageSources.xaml</DependentUpon>
+    <Compile Include="Views\ManageSourcesWindow.xaml.cs">
+      <DependentUpon>ManageSourcesWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Options.xaml.cs">
       <DependentUpon>Options.xaml</DependentUpon>
@@ -192,7 +192,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\ManageSources.xaml">
+    <Page Include="Views\ManageSourcesWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

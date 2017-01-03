@@ -3,11 +3,11 @@
 namespace Notiify.Views
 {
     /// <summary>
-    ///     Interaction logic for ManageSources.xaml
+    ///     Interaction logic for ManageSourcesWindow.xaml
     /// </summary>
-    public partial class ManageSources : Window
+    public partial class ManageSourcesWindow : Window
     {
-        public ManageSources()
+        public ManageSourcesWindow()
         {
             InitializeComponent();
         }
