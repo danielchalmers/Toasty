@@ -32,13 +32,14 @@ namespace Notiify.ViewModels
 
             foreach (var scanSettings in App.Sources.Select(source => source.ScanSettings).OfType<FolderScanSettings>())
             {
-                var directoryWatcher = new DirectoryScanner(scanSettings, eventData =>
+                var directoryWatcher = new DirectoryScanner(scanSettings);
+                directoryWatcher.FileEvent += (sender, args) =>
                 {
                     // Events can be running in another thread.
                     Application.Current.Dispatcher.BeginInvoke(
                         DispatcherPriority.Background,
-                        new Action(() => DirectoryWatcher_OnEvent(eventData)));
-                });
+                        new Action(() => DirectoryWatcher_OnEvent(args)));
+                };
                 _directoryWatchers.Add(directoryWatcher);
                 directoryWatcher.Start();
             }
