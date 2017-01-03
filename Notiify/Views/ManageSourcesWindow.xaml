@@ -62,7 +62,7 @@
                 <Button Content="Clone" Command="{Binding Clone}" />
                 <Button Content="Up" Command="{Binding MoveUp}" />
                 <Button Content="Down" Command="{Binding MoveDown}" />
-                <Button Content="Delete" Command="{Binding Delete}" />
+                <Button Content="Remove" Command="{Binding Rename}" />
             </StackPanel>
             <xctk:PropertyGrid Grid.Column="3"
                                SelectedObject="{Binding SelectedSource}"

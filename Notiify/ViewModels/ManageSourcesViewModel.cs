@@ -17,7 +17,7 @@ namespace Notiify.ViewModels
             Clone = new RelayCommand(CloneExecute);
             MoveUp = new RelayCommand(MoveUpExecute);
             MoveDown = new RelayCommand(MoveDownExecute);
-            Delete = new RelayCommand(DeleteExecute);
+            Rename = new RelayCommand(RemoveExecute);
         }
 
         public Source SelectedSource
@@ -31,7 +31,7 @@ namespace Notiify.ViewModels
         public ICommand Clone { get; }
         public ICommand MoveUp { get; }
         public ICommand MoveDown { get; }
-        public ICommand Delete { get; }
+        public ICommand Rename { get; }
 
         private void NewFolderExecute()
         {
@@ -53,7 +53,7 @@ namespace Notiify.ViewModels
             SelectedSource = SelectedSource.MoveDown();
         }
 
-        private void DeleteExecute()
+        private void RemoveExecute()
         {
             SelectedSource.Remove();
             ResetSelection();
