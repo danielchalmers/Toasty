@@ -97,8 +97,8 @@ namespace Notiify.Classes
 
         private bool DidFileChangeTooQuickly(FileInfo originalFileInfo, FileInfo newFileInfo)
         {
-            return originalFileInfo.LastWriteTimeUtc - newFileInfo.LastWriteTimeUtc <
-                   Settings.Default.DuplicateFileChangeTimeout;
+            var timeSpan = newFileInfo.LastWriteTimeUtc - originalFileInfo.LastWriteTimeUtc;
+            return timeSpan < Settings.Default.DuplicateFileChangeTimeout;
         }
 
         private void Timer_OnElapsed(object sender, ElapsedEventArgs e)
