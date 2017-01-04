@@ -1,5 +1,6 @@
 ﻿using System;
 using System.IO;
+using System.Linq;
 using System.Timers;
 using Notiify.Interfaces;
 using Notiify.Properties;
@@ -70,8 +71,34 @@ namespace Notiify.Classes
         {
             lock (eventLock)
             {
+                if (IsArgsDuplicatedInNotifications(e))
+                {
+                    return;
+                }
                 FileEvent?.Invoke(this, e);
             }
+        }
+
+        private bool IsArgsDuplicatedInNotifications(DirectoryScannerEventArgs args)
+        {
+            if (args.ChangeTypes != WatcherChangeTypes.Changed)
+            {
+                return false;
+            }
+            return
+                App.Notifications.ToList().Select(x => x.Notification.ScannerArgs)
+                    .OfType<DirectoryScannerEventArgs>()
+                    .Select(x => x.FileInfo)
+                    .Where(x => x.FullName == args.FileInfo.FullName)
+                    .Any(
+                        x =>
+                            DidFileChangeTooQuickly(x, args.FileInfo));
+        }
+
+        private bool DidFileChangeTooQuickly(FileInfo originalFileInfo, FileInfo newFileInfo)
+        {
+            return originalFileInfo.LastWriteTimeUtc - newFileInfo.LastWriteTimeUtc <
+                   Settings.Default.DuplicateFileChangeTimeout;
         }
 
         private void Timer_OnElapsed(object sender, ElapsedEventArgs e)

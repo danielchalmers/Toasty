@@ -49,5 +49,8 @@
     <Setting Name="MaxNotifications" Type="System.Int32" Scope="User">
       <Value Profile="(Default)">20</Value>
     </Setting>
+    <Setting Name="DuplicateFileChangeTimeout" Type="System.TimeSpan" Scope="User">
+      <Value Profile="(Default)">00:00:00.0500000</Value>
+    </Setting>
   </Settings>
 </SettingsFile>

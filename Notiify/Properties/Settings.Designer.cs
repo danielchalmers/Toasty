@@ -202,5 +202,17 @@ namespace Notiify.Properties {
                 this["MaxNotifications"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("00:00:00.0500000")]
+        public global::System.TimeSpan DuplicateFileChangeTimeout {
+            get {
+                return ((global::System.TimeSpan)(this["DuplicateFileChangeTimeout"]));
+            }
+            set {
+                this["DuplicateFileChangeTimeout"] = value;
+            }
+        }
     }
 }
