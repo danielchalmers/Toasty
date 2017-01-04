@@ -10,6 +10,7 @@ namespace Notiify.Classes
     {
         private readonly FolderScanSettings _folderScanSettings;
         private readonly Timer _timer;
+        private readonly object eventLock = new object();
         private FileSystemWatcher _fileSystemWatcher;
 
         public DirectoryScanner(FolderScanSettings folderScanSettings)
@@ -67,7 +68,10 @@ namespace Notiify.Classes
 
         private void OnDirectoryEvent(DirectoryScannerEventArgs e)
         {
-            FileEvent?.Invoke(this, e);
+            lock (eventLock)
+            {
+                FileEvent?.Invoke(this, e);
+            }
         }
 
         private void Timer_OnElapsed(object sender, ElapsedEventArgs e)
