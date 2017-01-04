@@ -133,7 +133,9 @@
     </ApplicationDefinition>
     <Compile Include="Classes\DirectoryScanner.cs" />
     <Compile Include="Classes\DirectoryScannerEventArgs.cs" />
+    <Compile Include="Classes\FileInfo.cs" />
     <Compile Include="Classes\FolderScanSettings.cs" />
+    <Compile Include="Helpers\FileInfoHelper.cs" />
     <Compile Include="Helpers\NotificationHelper.cs" />
     <Compile Include="Helpers\NotificationsDataHelper.cs" />
     <Compile Include="Helpers\NotificationViewModelHelper.cs" />

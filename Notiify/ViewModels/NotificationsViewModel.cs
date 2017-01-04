@@ -84,8 +84,8 @@ namespace Notiify.ViewModels
 
         private void DirectoryWatcher_OnEvent(DirectoryScannerEventArgs eventArgs)
         {
-            new TextNotification(eventArgs.FileInfo.Name, eventArgs.ChangeTypes.ToString(),
-                eventArgs.FileInfo.LastWriteTime, eventArgs).Add();
+            new TextNotification(eventArgs.FileInfo.GetName(), eventArgs.ChangeTypes.ToString(),
+                eventArgs.FileInfo.LastWriteTimeUtc.ToLocalTime(), eventArgs).Add();
         }
 
         private void GenerateTestNotificationExecute()
