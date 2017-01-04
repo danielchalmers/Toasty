@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Windows;
 using System.Windows.Input;
-using System.Windows.Threading;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.CommandWpf;
 using Notiify.Classes;
@@ -36,9 +35,7 @@ namespace Notiify.ViewModels
                 directoryWatcher.FileEvent += (sender, args) =>
                 {
                     // Events can be running in another thread.
-                    Application.Current.Dispatcher.BeginInvoke(
-                        DispatcherPriority.Background,
-                        new Action(() => DirectoryWatcher_OnEvent(args)));
+                    Application.Current.Dispatcher.Invoke(() => DirectoryWatcher_OnEvent(args));
                 };
                 _directoryWatchers.Add(directoryWatcher);
                 directoryWatcher.Start();
