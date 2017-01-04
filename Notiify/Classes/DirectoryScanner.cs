@@ -9,6 +9,7 @@ namespace Notiify.Classes
 {
     public class DirectoryScanner : IScanner
     {
+        private readonly object _fileCheckLock = new object();
         private readonly FolderScanSettings _folderScanSettings;
         private readonly Timer _timer;
         private readonly object eventLock = new object();
@@ -109,7 +110,40 @@ namespace Notiify.Classes
             InitialiseFileSystemWatcher();
             _fileSystemWatcher.EnableRaisingEvents = fileSystemWatcherEnableRaisingEvents;
 
-            //TODO: Should manually check for files that file system watcher missed.
+            CheckForFiles();
+        }
+
+        private void CheckForFiles()
+        {
+            lock (_fileCheckLock)
+            {
+                var files = Directory.EnumerateFiles(_folderScanSettings.Path, _folderScanSettings.IncludeFilter,
+                    _folderScanSettings.Recursive ? SearchOption.AllDirectories : SearchOption.TopDirectoryOnly);
+                var notificationFileInfos = App.Notifications.ToList().Select(x => x.Notification.ScannerArgs)
+                    .OfType<DirectoryScannerEventArgs>()
+                    .Select(x => x.FileInfo).ToList();
+                foreach (var file in files.Select(path => new FileInfo(path)))
+                {
+                    var fileExists = false;
+                    var fileChanged = true;
+                    foreach (var x in notificationFileInfos.Where(x => x.FullName == file.FullName))
+                    {
+                        fileExists = true;
+                        if (x.LastWriteTimeUtc == file.LastWriteTimeUtc)
+                        {
+                            fileChanged = false;
+                        }
+                    }
+                    if (fileExists && fileChanged)
+                    {
+                        OnDirectoryEvent(new DirectoryScannerEventArgs(file, WatcherChangeTypes.Changed));
+                    }
+                    if (!fileExists)
+                    {
+                        OnDirectoryEvent(new DirectoryScannerEventArgs(file, WatcherChangeTypes.Created));
+                    }
+                }
+            }
         }
     }
 }
