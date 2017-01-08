@@ -25,10 +25,10 @@ namespace Notiify.Classes
 
         public void Dispose()
         {
-            _timer.Stop();
-            _timer.Dispose();
+            _timer?.Stop();
+            _timer?.Dispose();
             DeinitialiseFileSystemWatcher();
-            _fileSystemWatcher.Dispose();
+            _fileSystemWatcher?.Dispose();
         }
 
         public void Start()
