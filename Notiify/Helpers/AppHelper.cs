@@ -11,5 +11,15 @@ namespace Notiify.Helpers
             Application.Current.MainWindow = mainWindow;
             mainWindow.Show();
         }
+
+        public static void OpenManageSourcesIfEmpty()
+        {
+            if (App.Sources.Count > 0)
+            {
+                return;
+            }
+            var manageSourcesDialog = new ManageSourcesWindow();
+            manageSourcesDialog.ShowDialog();
+        }
     }
 }

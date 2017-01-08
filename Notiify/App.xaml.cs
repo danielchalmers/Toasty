@@ -29,6 +29,7 @@ namespace Notiify
             SettingsHelper.LoadSettings();
             TrayIcon = (TaskbarIcon) Current.FindResource("TrayIcon");
             AppHelper.LoadMainWindow();
+            AppHelper.OpenManageSourcesIfEmpty();
         }
 
         protected override void OnExit(ExitEventArgs e)
