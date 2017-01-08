@@ -30,5 +30,10 @@ namespace Notiify.Helpers
         {
             return File.ReadAllLines(fileInfo.FullName);
         }
+
+        public static string GetExtension(this FileInfo fileInfo)
+        {
+            return Path.GetExtension(fileInfo.FullName);
+        }
     }
 }

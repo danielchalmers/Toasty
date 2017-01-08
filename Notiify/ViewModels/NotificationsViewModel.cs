@@ -8,6 +8,7 @@ using GalaSoft.MvvmLight.CommandWpf;
 using Notiify.Classes;
 using Notiify.Enumerations;
 using Notiify.Helpers;
+using Notiify.Interfaces;
 using Notiify.Properties;
 
 namespace Notiify.ViewModels
@@ -89,26 +90,32 @@ namespace Notiify.ViewModels
 
         private void AddNotificationFromEventArgs(DirectoryScannerEventArgs e)
         {
+            INotification notification = null;
             var isContentAcceptable = e.FileInfo.Exists() && e.FileInfo.GetSize() <= Settings.Default.MaxFileContentSize;
             if (isContentAcceptable)
             {
                 if (e.FileInfo.IsImage())
                 {
-                    new ImageNotification(e.FileInfo.GetName(), e.FileInfo.GetBitmap().ToByteArray(),
-                        e.FileInfo.LastWriteTimeUtc.ToLocalTime(), e).Add();
+                    notification = new ImageNotification(e.FileInfo.GetName(), e.FileInfo.GetBitmap().ToByteArray(),
+                        e.FileInfo.LastWriteTimeUtc.ToLocalTime(), e);
                 }
                 else
                 {
-                    var lines = e.FileInfo.GetLinesContent().Take(Settings.Default.MaxFileContentLines);
-                    new TextNotification(e.FileInfo.GetName(), string.Join(Environment.NewLine, lines),
-                        e.FileInfo.LastWriteTimeUtc.ToLocalTime(), e).Add();
+                    if (Settings.Default.FileContentExtensions.Split('|').Contains(e.FileInfo.GetExtension()))
+                    {
+                        var lines = e.FileInfo.GetLinesContent().Take(Settings.Default.MaxFileContentLines);
+                        notification = new TextNotification(e.FileInfo.GetName(),
+                            string.Join(Environment.NewLine, lines),
+                            e.FileInfo.LastWriteTimeUtc.ToLocalTime(), e);
+                    }
                 }
             }
-            else
+            if (notification == null)
             {
-                new TextNotification(e.FileInfo.GetName(), e.ChangeTypes.ToString(),
-                    e.FileInfo.LastWriteTimeUtc.ToLocalTime(), e).Add();
+                notification = new TextNotification(e.FileInfo.GetName(), e.ChangeTypes.ToString(),
+                    e.FileInfo.LastWriteTimeUtc.ToLocalTime(), e);
             }
+            notification.Add();
         }
 
         private void GenerateTestNotificationExecute()

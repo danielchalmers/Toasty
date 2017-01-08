@@ -26,7 +26,7 @@ namespace Notiify.Helpers
 
         public static bool IsImage(this FileInfo fileInfo)
         {
-            return IsImage(Path.GetExtension(fileInfo.FullName));
+            return IsImage(fileInfo.GetExtension());
         }
 
         public static BitmapImage GetBitmap(this FileInfo fileInfo)

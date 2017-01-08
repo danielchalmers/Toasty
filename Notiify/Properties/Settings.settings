@@ -61,5 +61,8 @@
     <Setting Name="MaxFileContentLines" Type="System.Int32" Scope="User">
       <Value Profile="(Default)">10</Value>
     </Setting>
+    <Setting Name="FileContentExtensions" Type="System.String" Scope="User">
+      <Value Profile="(Default)">.txt|.text|.log|.cfg|.json|.xml|.ini|.inf|.properties</Value>
+    </Setting>
   </Settings>
 </SettingsFile>

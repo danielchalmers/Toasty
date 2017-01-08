@@ -250,5 +250,17 @@ namespace Notiify.Properties {
                 this["MaxFileContentLines"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute(".txt|.text|.log|.cfg|.json|.xml|.ini|.inf|.properties")]
+        public string FileContentExtensions {
+            get {
+                return ((string)(this["FileContentExtensions"]));
+            }
+            set {
+                this["FileContentExtensions"] = value;
+            }
+        }
     }
 }
