@@ -135,7 +135,9 @@
     <Compile Include="Classes\DirectoryScannerEventArgs.cs" />
     <Compile Include="Classes\FileInfo.cs" />
     <Compile Include="Classes\FolderScanSettings.cs" />
+    <Compile Include="Classes\ImageNotification.cs" />
     <Compile Include="Helpers\FileInfoHelper.cs" />
+    <Compile Include="Helpers\ImageHelper.cs" />
     <Compile Include="Helpers\NotificationHelper.cs" />
     <Compile Include="Helpers\NotificationsDataHelper.cs" />
     <Compile Include="Helpers\NotificationViewModelHelper.cs" />
@@ -155,6 +157,7 @@
     <Compile Include="Interfaces\INotification.cs" />
     <Compile Include="Classes\TextNotification.cs" />
     <Compile Include="ViewModels\NotificationViewModelBase.cs" />
+    <Compile Include="ViewModels\ImageNotificationViewModel.cs" />
     <Compile Include="ViewModels\TextNotificationViewModel.cs" />
     <Compile Include="Views\NotificationShellView.xaml.cs">
       <DependentUpon>NotificationShellView.xaml</DependentUpon>
@@ -170,6 +173,9 @@
     </Compile>
     <Compile Include="Views\Options.xaml.cs">
       <DependentUpon>Options.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\ImageNotificationView.xaml.cs">
+      <DependentUpon>ImageNotificationView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\TextNotificationView.xaml.cs">
       <DependentUpon>TextNotificationView.xaml</DependentUpon>
@@ -205,6 +211,10 @@
     <Page Include="Views\Options.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\ImageNotificationView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
     <Page Include="Views\TextNotificationView.xaml">
       <SubType>Designer</SubType>

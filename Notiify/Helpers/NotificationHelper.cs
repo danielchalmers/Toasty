@@ -50,6 +50,10 @@ namespace Notiify.Helpers
             {
                 return new TextNotificationViewModel((TextNotification) notification);
             }
+            if (notification is ImageNotification)
+            {
+                return new ImageNotificationViewModel((ImageNotification) notification);
+            }
             return null;
         }
     }

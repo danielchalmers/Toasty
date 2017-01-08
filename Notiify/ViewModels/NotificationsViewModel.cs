@@ -82,10 +82,23 @@ namespace Notiify.ViewModels
             set { Set(ref _top, value); }
         }
 
-        private void DirectoryWatcher_OnEvent(DirectoryScannerEventArgs eventArgs)
+        private void DirectoryWatcher_OnEvent(DirectoryScannerEventArgs e)
         {
-            new TextNotification(eventArgs.FileInfo.GetName(), eventArgs.ChangeTypes.ToString(),
-                eventArgs.FileInfo.LastWriteTimeUtc.ToLocalTime(), eventArgs).Add();
+            AddNotificationFromEventArgs(e);
+        }
+
+        private void AddNotificationFromEventArgs(DirectoryScannerEventArgs e)
+        {
+            if (e.FileInfo.IsImage())
+            {
+                new ImageNotification(e.FileInfo.GetName(), e.FileInfo.GetBitmap().ToByteArray(),
+                    e.FileInfo.LastWriteTimeUtc.ToLocalTime(), e).Add();
+            }
+            else
+            {
+                new TextNotification(e.FileInfo.GetName(), e.ChangeTypes.ToString(),
+                    e.FileInfo.LastWriteTimeUtc.ToLocalTime(), e).Add();
+            }
         }
 
         private void GenerateTestNotificationExecute()

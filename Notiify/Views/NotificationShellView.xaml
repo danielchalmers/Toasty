@@ -85,6 +85,9 @@
                         <DataTemplate DataType="{x:Type viewModels:TextNotificationViewModel}">
                             <views:TextNotificationView />
                         </DataTemplate>
+                        <DataTemplate DataType="{x:Type viewModels:ImageNotificationViewModel}">
+                            <views:ImageNotificationView />
+                        </DataTemplate>
                     </ContentControl.Resources>
                 </ContentControl>
             </Grid>
