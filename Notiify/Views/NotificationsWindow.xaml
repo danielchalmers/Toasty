@@ -42,19 +42,16 @@
             <SolidColorBrush Opacity="0.1" Color="DimGray" />
         </Border.Background>
         <ScrollViewer VerticalScrollBarVisibility="Auto">
-            <StackPanel Width="{Binding Width, Source={x:Static properties:Settings.Default}, Mode=TwoWay}">
-                <ItemsControl ItemsSource="{x:Static local:App.Notifications}">
-                    <ItemsControl.ItemTemplate>
-                        <DataTemplate>
-                            <views:NotificationView
-                                DataContext="{Binding}"
-                                Visibility="{Binding IsVisible, Converter={StaticResource BooleanToVisibilityConverter}}" />
-                        </DataTemplate>
-                    </ItemsControl.ItemTemplate>
-                </ItemsControl>
-                <Button Content="Generate Test Notification"
-                        Command="{Binding GenerateTestNotification}" />
-            </StackPanel>
+            <ItemsControl ItemsSource="{x:Static local:App.Notifications}"
+                          Width="{Binding Width, Mode=TwoWay, Source={x:Static properties:Settings.Default}}">
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate>
+                        <views:NotificationView
+                            DataContext="{Binding}"
+                            Visibility="{Binding IsVisible, Converter={StaticResource BooleanToVisibilityConverter}}" />
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+            </ItemsControl>
         </ScrollViewer>
     </Border>
 </Window>
