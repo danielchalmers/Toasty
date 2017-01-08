@@ -24,6 +24,7 @@ namespace Notiify.Classes
             _folderScanSettings = folderScanSettings;
             _timer = new Timer {Interval = Settings.Default.DirectoryWatcherResetInterval};
             _timer.Elapsed += Timer_OnElapsed;
+            InitializeFileInfoCache();
             InitialiseFileSystemWatcher();
         }
 
@@ -38,7 +39,7 @@ namespace Notiify.Classes
         public void Start()
         {
             _timer.Start();
-            _fileSystemWatcher.EnableRaisingEvents = true;
+            _fileSystemWatcher.EnableRaisingEvents = false;
         }
 
         public event EventHandler<DirectoryScannerEventArgs> FileEvent;
@@ -131,6 +132,28 @@ namespace Notiify.Classes
             InitialiseFileSystemWatcher();
             _fileSystemWatcher.EnableRaisingEvents = fileSystemWatcherEnableRaisingEvents;
 
+            CheckFiles();
+        }
+
+        private IEnumerable<FileInfo> GetFiles()
+        {
+            return Directory.EnumerateFiles(_folderScanSettings.Path, _folderScanSettings.IncludeFilter,
+                _folderScanSettings.Recursive ? SearchOption.AllDirectories : SearchOption.TopDirectoryOnly)
+                .Select(path => new FileInfo(path));
+        }
+
+        private void InitializeFileInfoCache()
+        {
+            var files = GetFiles();
+            _fileInfoCache.Clear();
+            foreach (var file in files)
+            {
+                UpdateFileInfoCache(file.FullName, file.LastWriteTimeUtc);
+            }
+        }
+
+        private void CheckFiles()
+        {
             var canEnter = Monitor.TryEnter(_fileCheckLock);
             try
             {
@@ -138,9 +161,7 @@ namespace Notiify.Classes
                 {
                     return;
                 }
-                var files = GetFiles().ToList();
-                InitializeFileInfoCache(files);
-                CheckForFiles(files);
+                CheckFilesInternal();
             }
             finally
             {
@@ -151,24 +172,9 @@ namespace Notiify.Classes
             }
         }
 
-        private IEnumerable<FileInfo> GetFiles()
+        private void CheckFilesInternal()
         {
-            return Directory.EnumerateFiles(_folderScanSettings.Path, _folderScanSettings.IncludeFilter,
-                _folderScanSettings.Recursive ? SearchOption.AllDirectories : SearchOption.TopDirectoryOnly)
-                .Select(path => new FileInfo(path));
-        }
-
-        private void InitializeFileInfoCache(IEnumerable<FileInfo> files)
-        {
-            _fileInfoCache.Clear();
-            foreach (var file in files)
-            {
-                UpdateFileInfoCache(file.FullName, file.LastWriteTimeUtc);
-            }
-        }
-
-        private void CheckForFiles(IEnumerable<FileInfo> files)
-        {
+            var files = GetFiles();
             foreach (var file in files)
             {
                 var fileExists = false;
