@@ -23,13 +23,13 @@ namespace Notiify.Classes
             InitialiseFileSystemWatcher();
         }
 
-        public event EventHandler<DirectoryScannerEventArgs> FileEvent;
-
         public void Start()
         {
             _timer.Start();
             _fileSystemWatcher.EnableRaisingEvents = true;
         }
+
+        public event EventHandler<DirectoryScannerEventArgs> FileEvent;
 
         public void SetSettings(FolderScanSettings folderScanSettings)
         {

@@ -1,5 +1,4 @@
 using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Windows;
 using System.Windows.Input;
@@ -15,7 +14,6 @@ namespace Notiify.ViewModels
 {
     public class NotificationsViewModel : ViewModelBase
     {
-        private readonly List<DirectoryScanner> _directoryWatchers;
         private double _actualHeight;
         private double _actualWidth;
         private double _left;
@@ -24,23 +22,12 @@ namespace Notiify.ViewModels
         public NotificationsViewModel()
         {
             SettingsHelper.UpgradeSettings();
-            _directoryWatchers = new List<DirectoryScanner>();
             GenerateTestNotification =
                 new RelayCommand(GenerateTestNotificationExecute);
             OnMouseEnter = new RelayCommand<MouseEventArgs>(OnMouseEnterExecute);
             OnMouseLeave = new RelayCommand<MouseEventArgs>(OnMouseLeaveExecute);
 
-            foreach (var scanSettings in App.Sources.Select(source => source.ScanSettings).OfType<FolderScanSettings>())
-            {
-                var directoryWatcher = new DirectoryScanner(scanSettings);
-                directoryWatcher.FileEvent += (sender, args) =>
-                {
-                    // Events can be running in another thread.
-                    Application.Current.Dispatcher.Invoke(() => DirectoryWatcher_OnEvent(args));
-                };
-                _directoryWatchers.Add(directoryWatcher);
-                directoryWatcher.Start();
-            }
+            App.ScannerEvent += OnScannerEvent;
         }
 
         public ICommand GenerateTestNotification { get; }
@@ -81,6 +68,14 @@ namespace Notiify.ViewModels
         {
             get { return _top; }
             set { Set(ref _top, value); }
+        }
+
+        private void OnScannerEvent(object sender, IScannerEventArgs e)
+        {
+            if (e is DirectoryScannerEventArgs)
+            {
+                DirectoryWatcher_OnEvent((DirectoryScannerEventArgs) e);
+            }
         }
 
         private void DirectoryWatcher_OnEvent(DirectoryScannerEventArgs e)

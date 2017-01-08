@@ -1,9 +1,12 @@
-﻿using System.Collections.ObjectModel;
+﻿using System;
+using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Windows;
 using System.Windows.Threading;
 using Hardcodet.Wpf.TaskbarNotification;
 using Notiify.Classes;
 using Notiify.Helpers;
+using Notiify.Interfaces;
 using Notiify.ViewModels;
 
 namespace Notiify
@@ -20,14 +23,17 @@ namespace Notiify
 
         public static ObservableCollection<Source> Sources { get; set; }
         public static ObservableCollection<NotificationViewModelBase> Notifications { get; set; }
+        public static List<IScanner> Scanners { get; set; }
 
         public static TaskbarIcon TrayIcon { get; private set; }
+        public static event EventHandler<IScannerEventArgs> ScannerEvent;
 
         protected override void OnStartup(StartupEventArgs e)
         {
             base.OnStartup(e);
             SettingsHelper.LoadSettings();
             TrayIcon = (TaskbarIcon) Current.FindResource("TrayIcon");
+            ScannerHelper.ReloadScanners();
             AppHelper.LoadMainWindow();
             AppHelper.OpenManageSourcesIfEmpty();
         }
@@ -43,6 +49,11 @@ namespace Notiify
             Popup.Show($"An unhandled exception occurred:\n\n{e.Exception}",
                 MessageBoxButton.OK, MessageBoxImage.Error);
             e.Handled = true;
+        }
+
+        public static void OnScannerEvent(object sender, IScannerEventArgs e)
+        {
+            ScannerEvent?.Invoke(sender, e);
         }
     }
 }

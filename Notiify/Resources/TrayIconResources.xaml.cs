@@ -1,4 +1,5 @@
 ﻿using System.Windows;
+using Notiify.Helpers;
 using Notiify.Views;
 
 namespace Notiify.Resources
@@ -23,8 +24,7 @@ namespace Notiify.Resources
 
         private void MenuItemManageSources_OnClick(object sender, RoutedEventArgs e)
         {
-            var manageSourcesDialog = new ManageSourcesWindow();
-            manageSourcesDialog.ShowDialog();
+            SourceHelper.Manage();
         }
 
         private void MenuItemShowNotifications_OnClick(object sender, RoutedEventArgs e)

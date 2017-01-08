@@ -1,5 +1,6 @@
 ﻿using System.Windows;
 using Notiify.Classes;
+using Notiify.Views;
 
 namespace Notiify.Helpers
 {
@@ -48,6 +49,12 @@ namespace Notiify.Helpers
         public static Source MoveDown(this Source source)
         {
             return App.Sources.MoveDown(source);
+        }
+
+        public static void Manage()
+        {
+            var manageSourcesDialog = new ManageSourcesWindow();
+            manageSourcesDialog.ShowDialog();
         }
     }
 }

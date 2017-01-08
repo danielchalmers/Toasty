@@ -1,6 +1,7 @@
 ﻿namespace Notiify.Interfaces
 {
-    internal interface IScanner
+    public interface IScanner
     {
+        void Start();
     }
 }

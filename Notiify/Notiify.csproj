@@ -142,6 +142,7 @@
     <Compile Include="Helpers\NotificationHelper.cs" />
     <Compile Include="Helpers\NotificationsDataHelper.cs" />
     <Compile Include="Helpers\NotificationViewModelHelper.cs" />
+    <Compile Include="Helpers\ScannerHelper.cs" />
     <Compile Include="Interfaces\IScannerEventArgs.cs" />
     <Compile Include="Interfaces\IScanner.cs" />
     <Compile Include="Classes\SourceScanSettingsBase.cs" />

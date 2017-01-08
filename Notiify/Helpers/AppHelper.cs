@@ -18,8 +18,7 @@ namespace Notiify.Helpers
             {
                 return;
             }
-            var manageSourcesDialog = new ManageSourcesWindow();
-            manageSourcesDialog.ShowDialog();
+            SourceHelper.Manage();
         }
     }
 }
