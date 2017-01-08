@@ -13,11 +13,12 @@ namespace Notiify.Classes
         private readonly object _fileCheckLock = new object();
         private readonly FolderScanSettings _folderScanSettings;
         private readonly Timer _timer;
-        private Dictionary<string, DateTime> _fileInfoCache;
+        private readonly Dictionary<string, DateTime> _fileInfoCache;
         private FileSystemWatcher _fileSystemWatcher;
 
         public DirectoryScanner(FolderScanSettings folderScanSettings)
         {
+            _fileInfoCache = new Dictionary<string, DateTime>();
             _folderScanSettings = folderScanSettings;
             _timer = new Timer {Interval = Settings.Default.DirectoryWatcherResetInterval};
             _timer.Elapsed += Timer_OnElapsed;
@@ -128,25 +129,31 @@ namespace Notiify.Classes
             InitialiseFileSystemWatcher();
             _fileSystemWatcher.EnableRaisingEvents = fileSystemWatcherEnableRaisingEvents;
 
-            CheckForFiles();
+            var files = GetFiles().ToList();
+            InitializeFileInfoCache(files);
+            CheckForFiles(files);
         }
 
-        private void CheckForFiles()
+        private IEnumerable<FileInfo> GetFiles()
+        {
+            return Directory.EnumerateFiles(_folderScanSettings.Path, _folderScanSettings.IncludeFilter,
+                _folderScanSettings.Recursive ? SearchOption.AllDirectories : SearchOption.TopDirectoryOnly)
+                .Select(path => new FileInfo(path));
+        }
+
+        private void InitializeFileInfoCache(IEnumerable<FileInfo> files)
+        {
+            _fileInfoCache.Clear();
+            foreach (var file in files)
+            {
+                UpdateFileInfoCache(file.FullName, file.LastWriteTimeUtc);
+            }
+        }
+
+        private void CheckForFiles(IEnumerable<FileInfo> files)
         {
             lock (_fileCheckLock)
             {
-                var files = Directory.EnumerateFiles(_folderScanSettings.Path, _folderScanSettings.IncludeFilter,
-                    _folderScanSettings.Recursive ? SearchOption.AllDirectories : SearchOption.TopDirectoryOnly)
-                    .Select(path => new FileInfo(path));
-                if (_fileInfoCache == null)
-                {
-                    _fileInfoCache = new Dictionary<string, DateTime>();
-                    foreach (var file in files)
-                    {
-                        UpdateFileInfoCache(file.FullName, file.LastWriteTimeUtc);
-                    }
-                    return;
-                }
                 foreach (var file in files)
                 {
                     var fileExists = false;
