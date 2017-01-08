@@ -7,7 +7,7 @@ using Notiify.Properties;
 
 namespace Notiify.Classes
 {
-    public class DirectoryScanner : IScanner
+    public class DirectoryScanner : IScanner, IDisposable
     {
         private readonly object _fileCheckLock = new object();
         private readonly FolderScanSettings _folderScanSettings;
@@ -21,6 +21,14 @@ namespace Notiify.Classes
             _timer = new Timer {Interval = Settings.Default.DirectoryWatcherResetInterval};
             _timer.Elapsed += Timer_OnElapsed;
             InitialiseFileSystemWatcher();
+        }
+
+        public void Dispose()
+        {
+            _timer.Stop();
+            _timer.Dispose();
+            DeinitialiseFileSystemWatcher();
+            _fileSystemWatcher.Dispose();
         }
 
         public void Start()

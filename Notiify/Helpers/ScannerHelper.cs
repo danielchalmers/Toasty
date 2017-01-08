@@ -1,6 +1,5 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using System.Windows;
 using Notiify.Classes;
 using Notiify.Interfaces;
 
@@ -16,7 +15,7 @@ namespace Notiify.Helpers
             }
             else
             {
-                App.Scanners.Clear();
+                DisposeScanners();
             }
             foreach (var scanSettings in App.Sources.Select(source => source.ScanSettings))
             {
@@ -25,11 +24,7 @@ namespace Notiify.Helpers
                 if (folderScanSettings != null)
                 {
                     var directoryWatcher = new DirectoryScanner(folderScanSettings);
-                    directoryWatcher.FileEvent += (sender, args) =>
-                    {
-                        // Events can be running in another thread.
-                        Application.Current.Dispatcher.Invoke(() => App.OnScannerEvent(directoryWatcher, args));
-                    };
+                    directoryWatcher.FileEvent += App.OnScannerEvent;
                     scanner = directoryWatcher;
                 }
                 if (scanner != null)
@@ -38,6 +33,24 @@ namespace Notiify.Helpers
                     scanner.Start();
                 }
             }
+        }
+
+        private static void DisposeScanners()
+        {
+            if (App.Scanners == null)
+            {
+                return;
+            }
+            foreach (var scanner in App.Scanners)
+            {
+                var directoryScanner = scanner as DirectoryScanner;
+                if (directoryScanner != null)
+                {
+                    directoryScanner.FileEvent -= App.OnScannerEvent;
+                    directoryScanner.Dispose();
+                }
+            }
+            App.Scanners.Clear();
         }
     }
 }

@@ -51,9 +51,16 @@ namespace Notiify
             e.Handled = true;
         }
 
-        public static void OnScannerEvent(object sender, IScannerEventArgs e)
+        private static void NotifyScannerEvent(object sender, IScannerEventArgs e)
         {
-            ScannerEvent?.Invoke(sender, e);
+            // Events can be running in another thread.
+            Current.Dispatcher.Invoke(() =>
+                ScannerEvent?.Invoke(sender, e));
+        }
+
+        public static void OnScannerEvent(object sender, DirectoryScannerEventArgs e)
+        {
+            NotifyScannerEvent(sender, e);
         }
     }
 }
