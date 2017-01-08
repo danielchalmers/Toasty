@@ -1,4 +1,5 @@
-﻿using System.IO;
+﻿using System.Collections.Generic;
+using System.IO;
 using FileInfo = Notiify.Classes.FileInfo;
 
 namespace Notiify.Helpers
@@ -23,6 +24,11 @@ namespace Notiify.Helpers
         public static string GetTextContent(this FileInfo fileInfo)
         {
             return File.ReadAllText(fileInfo.FullName);
+        }
+
+        public static IEnumerable<string> GetLinesContent(this FileInfo fileInfo)
+        {
+            return File.ReadAllLines(fileInfo.FullName);
         }
     }
 }

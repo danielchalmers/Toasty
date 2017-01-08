@@ -99,7 +99,8 @@ namespace Notiify.ViewModels
                 }
                 else
                 {
-                    new TextNotification(e.FileInfo.GetName(), e.FileInfo.GetTextContent(),
+                    var lines = e.FileInfo.GetLinesContent().Take(Settings.Default.MaxFileContentLines);
+                    new TextNotification(e.FileInfo.GetName(), string.Join(Environment.NewLine, lines),
                         e.FileInfo.LastWriteTimeUtc.ToLocalTime(), e).Add();
                 }
             }

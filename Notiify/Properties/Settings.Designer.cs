@@ -238,5 +238,17 @@ namespace Notiify.Properties {
                 this["MaxFileContentSize"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("10")]
+        public int MaxFileContentLines {
+            get {
+                return ((int)(this["MaxFileContentLines"]));
+            }
+            set {
+                this["MaxFileContentLines"] = value;
+            }
+        }
     }
 }

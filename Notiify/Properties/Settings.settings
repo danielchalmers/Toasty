@@ -58,5 +58,8 @@
     <Setting Name="MaxFileContentSize" Type="System.Int64" Scope="User">
       <Value Profile="(Default)">2097152</Value>
     </Setting>
+    <Setting Name="MaxFileContentLines" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">10</Value>
+    </Setting>
   </Settings>
 </SettingsFile>
