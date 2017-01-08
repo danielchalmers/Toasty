@@ -14,5 +14,15 @@ namespace Notiify.Helpers
         {
             return File.Exists(fileInfo.FullName);
         }
+
+        public static long GetSize(this FileInfo fileInfo)
+        {
+            return new System.IO.FileInfo(fileInfo.FullName).Length;
+        }
+
+        public static string GetTextContent(this FileInfo fileInfo)
+        {
+            return File.ReadAllText(fileInfo.FullName);
+        }
     }
 }

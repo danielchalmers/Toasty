@@ -89,10 +89,19 @@ namespace Notiify.ViewModels
 
         private void AddNotificationFromEventArgs(DirectoryScannerEventArgs e)
         {
-            if (e.FileInfo.IsImage())
+            var isContentAcceptable = e.FileInfo.GetSize() <= Settings.Default.MaxFileContentSize;
+            if (isContentAcceptable)
             {
-                new ImageNotification(e.FileInfo.GetName(), e.FileInfo.GetBitmap().ToByteArray(),
-                    e.FileInfo.LastWriteTimeUtc.ToLocalTime(), e).Add();
+                if (e.FileInfo.IsImage())
+                {
+                    new ImageNotification(e.FileInfo.GetName(), e.FileInfo.GetBitmap().ToByteArray(),
+                        e.FileInfo.LastWriteTimeUtc.ToLocalTime(), e).Add();
+                }
+                else
+                {
+                    new TextNotification(e.FileInfo.GetName(), e.FileInfo.GetTextContent(),
+                        e.FileInfo.LastWriteTimeUtc.ToLocalTime(), e).Add();
+                }
             }
             else
             {

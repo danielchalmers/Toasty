@@ -226,5 +226,17 @@ namespace Notiify.Properties {
                 this["Width"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("2097152")]
+        public long MaxFileContentSize {
+            get {
+                return ((long)(this["MaxFileContentSize"]));
+            }
+            set {
+                this["MaxFileContentSize"] = value;
+            }
+        }
     }
 }
