@@ -55,6 +55,7 @@ namespace Notiify.Helpers
         {
             var manageSourcesDialog = new ManageSourcesWindow();
             manageSourcesDialog.ShowDialog();
+            ScannerHelper.ReloadScanners();
         }
     }
 }
