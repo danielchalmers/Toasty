@@ -9,5 +9,10 @@ namespace Notiify.Helpers
         {
             return Path.GetFileName(fileInfo.FullName);
         }
+
+        public static bool Exists(this FileInfo fileInfo)
+        {
+            return File.Exists(fileInfo.FullName);
+        }
     }
 }

@@ -31,6 +31,10 @@ namespace Notiify.Helpers
 
         public static BitmapImage GetBitmap(this FileInfo fileInfo)
         {
+            if (!fileInfo.Exists())
+            {
+                return null;
+            }
             var bitmapImage = new BitmapImage();
             bitmapImage.BeginInit();
             bitmapImage.CacheOption = BitmapCacheOption.OnLoad;
@@ -42,6 +46,10 @@ namespace Notiify.Helpers
 
         public static byte[] ToByteArray(this BitmapImage image)
         {
+            if (image == null)
+            {
+                return null;
+            }
             var encoder = new JpegBitmapEncoder();
             encoder.Frames.Add(BitmapFrame.Create(image));
             using (var ms = new MemoryStream())
