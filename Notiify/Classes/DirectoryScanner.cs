@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Timers;
@@ -13,6 +14,7 @@ namespace Notiify.Classes
         private readonly FolderScanSettings _folderScanSettings;
         private readonly Timer _timer;
         private readonly object eventLock = new object();
+        private Dictionary<string, DateTime> _fileInfoCache;
         private FileSystemWatcher _fileSystemWatcher;
 
         public DirectoryScanner(FolderScanSettings folderScanSettings)
@@ -72,7 +74,8 @@ namespace Notiify.Classes
 
         private void OnFileSystemWatcherEvent(object sender, FileSystemEventArgs e)
         {
-            var eventData = new DirectoryScannerEventArgs(new FileInfo(e.FullPath), e.ChangeType);
+            var fileInfo = new FileInfo(e.FullPath);
+            var eventData = new DirectoryScannerEventArgs(fileInfo, e.ChangeType);
             OnDirectoryEvent(eventData);
         }
 
@@ -80,34 +83,45 @@ namespace Notiify.Classes
         {
             lock (eventLock)
             {
-                if (IsArgsDuplicatedInNotifications(e))
+                if (IsArgsDuplicated(e))
                 {
                     return;
                 }
+                UpdateFileInfoCache(e.FileInfo.FullName, e.FileInfo.LastWriteTimeUtc);
                 FileEvent?.Invoke(this, e);
             }
         }
 
-        private bool IsArgsDuplicatedInNotifications(DirectoryScannerEventArgs args)
+        private bool IsArgsDuplicated(DirectoryScannerEventArgs args)
         {
             if (args.ChangeTypes != WatcherChangeTypes.Changed)
             {
                 return false;
             }
             return
-                App.Notifications.ToList().Select(x => x.Notification.ScannerArgs)
-                    .OfType<DirectoryScannerEventArgs>()
-                    .Select(x => x.FileInfo)
-                    .Where(x => x.FullName == args.FileInfo.FullName)
+                _fileInfoCache
+                    .Where(x => x.Key == args.FileInfo.FullName)
                     .Any(
                         x =>
-                            DidFileChangeTooQuickly(x, args.FileInfo));
+                            DidFileChangeTooQuickly(x.Value, args.FileInfo));
         }
 
-        private bool DidFileChangeTooQuickly(FileInfo originalFileInfo, FileInfo newFileInfo)
+        private bool DidFileChangeTooQuickly(DateTime writeDateTime, FileInfo newFileInfo)
         {
-            var timeSpan = newFileInfo.LastWriteTimeUtc - originalFileInfo.LastWriteTimeUtc;
+            var timeSpan = newFileInfo.LastWriteTimeUtc - writeDateTime;
             return timeSpan < Settings.Default.DuplicateFileChangeTimeout;
+        }
+
+        private void UpdateFileInfoCache(string path, DateTime writeDateTime)
+        {
+            if (!_fileInfoCache.ContainsKey(path))
+            {
+                _fileInfoCache.Add(path, writeDateTime);
+            }
+            else
+            {
+                _fileInfoCache[path] = writeDateTime;
+            }
         }
 
         private void Timer_OnElapsed(object sender, ElapsedEventArgs e)
@@ -126,18 +140,25 @@ namespace Notiify.Classes
             lock (_fileCheckLock)
             {
                 var files = Directory.EnumerateFiles(_folderScanSettings.Path, _folderScanSettings.IncludeFilter,
-                    _folderScanSettings.Recursive ? SearchOption.AllDirectories : SearchOption.TopDirectoryOnly);
-                var notificationFileInfos = App.Notifications.ToList().Select(x => x.Notification.ScannerArgs)
-                    .OfType<DirectoryScannerEventArgs>()
-                    .Select(x => x.FileInfo).ToList();
-                foreach (var file in files.Select(path => new FileInfo(path)))
+                    _folderScanSettings.Recursive ? SearchOption.AllDirectories : SearchOption.TopDirectoryOnly)
+                    .Select(path => new FileInfo(path));
+                if (_fileInfoCache == null)
+                {
+                    _fileInfoCache = new Dictionary<string, DateTime>();
+                    foreach (var file in files)
+                    {
+                        UpdateFileInfoCache(file.FullName, file.LastWriteTimeUtc);
+                    }
+                    return;
+                }
+                foreach (var file in files)
                 {
                     var fileExists = false;
                     var fileChanged = true;
-                    foreach (var x in notificationFileInfos.Where(x => x.FullName == file.FullName))
+                    foreach (var x in _fileInfoCache.Where(x => x.Key == file.FullName))
                     {
                         fileExists = true;
-                        if (x.LastWriteTimeUtc == file.LastWriteTimeUtc)
+                        if (x.Value == file.LastWriteTimeUtc)
                         {
                             fileChanged = false;
                         }
