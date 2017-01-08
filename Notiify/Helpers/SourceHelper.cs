@@ -1,5 +1,6 @@
 ﻿using System.Windows;
 using Notiify.Classes;
+using Notiify.Properties;
 using Notiify.Views;
 
 namespace Notiify.Helpers
@@ -55,6 +56,8 @@ namespace Notiify.Helpers
         {
             var manageSourcesDialog = new ManageSourcesWindow();
             manageSourcesDialog.ShowDialog();
+            SourceDataHelper.SaveSourceData();
+            Settings.Default.Save();
             ScannerHelper.ReloadScanners();
         }
     }
