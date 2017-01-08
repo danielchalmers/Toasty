@@ -89,7 +89,7 @@ namespace Notiify.ViewModels
 
         private void AddNotificationFromEventArgs(DirectoryScannerEventArgs e)
         {
-            var isContentAcceptable = e.FileInfo.GetSize() <= Settings.Default.MaxFileContentSize;
+            var isContentAcceptable = e.FileInfo.Exists() && e.FileInfo.GetSize() <= Settings.Default.MaxFileContentSize;
             if (isContentAcceptable)
             {
                 if (e.FileInfo.IsImage())
