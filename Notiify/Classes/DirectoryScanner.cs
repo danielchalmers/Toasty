@@ -13,7 +13,6 @@ namespace Notiify.Classes
         private readonly object _fileCheckLock = new object();
         private readonly FolderScanSettings _folderScanSettings;
         private readonly Timer _timer;
-        private readonly object eventLock = new object();
         private Dictionary<string, DateTime> _fileInfoCache;
         private FileSystemWatcher _fileSystemWatcher;
 
@@ -81,15 +80,12 @@ namespace Notiify.Classes
 
         private void OnDirectoryEvent(DirectoryScannerEventArgs e)
         {
-            lock (eventLock)
+            if (IsArgsDuplicated(e))
             {
-                if (IsArgsDuplicated(e))
-                {
-                    return;
-                }
-                UpdateFileInfoCache(e.FileInfo.FullName, e.FileInfo.LastWriteTimeUtc);
-                FileEvent?.Invoke(this, e);
+                return;
             }
+            UpdateFileInfoCache(e.FileInfo.FullName, e.FileInfo.LastWriteTimeUtc);
+            FileEvent?.Invoke(this, e);
         }
 
         private bool IsArgsDuplicated(DirectoryScannerEventArgs args)

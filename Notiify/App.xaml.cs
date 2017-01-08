@@ -54,8 +54,7 @@ namespace Notiify
         private static void NotifyScannerEvent(object sender, IScannerEventArgs e)
         {
             // Events can be running in another thread.
-            Current.Dispatcher.Invoke(() =>
-                ScannerEvent?.Invoke(sender, e));
+            Current.Dispatcher.BeginInvoke(new Action(delegate { ScannerEvent?.Invoke(sender, e); }));
         }
 
         public static void OnScannerEvent(object sender, DirectoryScannerEventArgs e)
