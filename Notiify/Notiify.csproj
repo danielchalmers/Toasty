@@ -154,9 +154,10 @@
     <Compile Include="Helpers\SettingsHelper.cs" />
     <Compile Include="Interfaces\INotification.cs" />
     <Compile Include="Classes\TextNotification.cs" />
-    <Compile Include="ViewModels\NotificationViewModel.cs" />
-    <Compile Include="Views\NotificationView.xaml.cs">
-      <DependentUpon>NotificationView.xaml</DependentUpon>
+    <Compile Include="ViewModels\NotificationViewModelBase.cs" />
+    <Compile Include="ViewModels\TextNotificationViewModel.cs" />
+    <Compile Include="Views\NotificationShellView.xaml.cs">
+      <DependentUpon>NotificationShellView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Resources\TrayIconResources.xaml.cs">
       <DependentUpon>TrayIconResources.xaml</DependentUpon>
@@ -170,6 +171,9 @@
     <Compile Include="Views\Options.xaml.cs">
       <DependentUpon>Options.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\TextNotificationView.xaml.cs">
+      <DependentUpon>TextNotificationView.xaml</DependentUpon>
+    </Compile>
     <Page Include="Views\NotificationsWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -182,7 +186,7 @@
       <DependentUpon>NotificationsWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Page Include="Views\NotificationView.xaml">
+    <Page Include="Views\NotificationShellView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -199,6 +203,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\Options.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\TextNotificationView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

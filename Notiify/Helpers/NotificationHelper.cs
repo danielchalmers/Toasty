@@ -11,7 +11,12 @@ namespace Notiify.Helpers
     {
         public static void Add(this INotification notification, bool visible = true)
         {
-            var notificationViewModel = new NotificationViewModel(notification) {IsVisible = visible};
+            var notificationViewModel = GetNewNotificationViewModel(notification);
+            if (notificationViewModel == null)
+            {
+                return;
+            }
+            notificationViewModel.IsVisible = visible;
             notificationViewModel.Remove =
                 () => { NotificationViewModelHelper.HideNotification(notificationViewModel); };
             App.Notifications.Add(notificationViewModel);
@@ -37,6 +42,15 @@ namespace Notiify.Helpers
             {
                 Process.Start(launchPath);
             }
+        }
+
+        public static NotificationViewModelBase GetNewNotificationViewModel(INotification notification)
+        {
+            if (notification is TextNotification)
+            {
+                return new TextNotificationViewModel((TextNotification) notification);
+            }
+            return null;
         }
     }
 }

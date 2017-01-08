@@ -19,7 +19,7 @@ namespace Notiify
         }
 
         public static ObservableCollection<Source> Sources { get; set; }
-        public static ObservableCollection<NotificationViewModel> Notifications { get; set; }
+        public static ObservableCollection<NotificationViewModelBase> Notifications { get; set; }
 
         public static TaskbarIcon TrayIcon { get; private set; }
 

@@ -9,12 +9,12 @@ using Notiify.Properties;
 
 namespace Notiify.ViewModels
 {
-    public class NotificationViewModel : ViewModelBase
+    public class NotificationViewModelBase : ViewModelBase
     {
         private readonly DispatcherTimer _hideTimer;
         private bool _isVisible;
 
-        public NotificationViewModel(INotification notification)
+        public NotificationViewModelBase(INotification notification)
         {
             Notification = notification;
             Close = new RelayCommand(CloseExcecute);

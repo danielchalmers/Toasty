@@ -24,7 +24,7 @@ namespace Notiify.Helpers
 
         public static void LoadNotificationsData()
         {
-            App.Notifications = new ObservableCollection<NotificationViewModel>();
+            App.Notifications = new ObservableCollection<NotificationViewModelBase>();
             var notifications = JsonConvert.DeserializeObject<ObservableCollection<INotification>>(
                 Settings.Default.NotificationsData,
                 JsonSerializerSettings);

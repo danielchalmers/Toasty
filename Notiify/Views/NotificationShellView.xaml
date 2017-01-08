@@ -5,7 +5,15 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
              xmlns:command="http://www.galasoft.ch/mvvmlight"
+             xmlns:views="clr-namespace:Notiify.Views"
+             xmlns:classes="clr-namespace:Notiify.Classes"
+             xmlns:viewModels="clr-namespace:Notiify.ViewModels"
              mc:Ignorable="d">
+    <UserControl.Resources>
+        <DataTemplate x:Key="TextNotificationTemplate" DataType="{x:Type views:TextNotificationView}">
+            <views:TextNotificationView />
+        </DataTemplate>
+    </UserControl.Resources>
     <Border Margin="15"
             Background="White"
             RenderTransformOrigin="0.5,0.5"
@@ -69,10 +77,17 @@
                     </Style>
                 </Button.Style>
             </Button>
-            <TextBlock Grid.Column="0"
-                       Grid.ColumnSpan="3"
-                       Grid.Row="2"
-                       Text="{Binding Notification.Content}" />
+            <Grid Grid.Column="0"
+                  Grid.ColumnSpan="3"
+                  Grid.Row="2">
+                <ContentControl Content="{Binding}">
+                    <ContentControl.Resources>
+                        <DataTemplate DataType="{x:Type viewModels:TextNotificationViewModel}">
+                            <views:TextNotificationView />
+                        </DataTemplate>
+                    </ContentControl.Resources>
+                </ContentControl>
+            </Grid>
         </Grid>
     </Border>
 </UserControl>
