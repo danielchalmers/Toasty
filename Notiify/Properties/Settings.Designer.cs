@@ -214,5 +214,17 @@ namespace Notiify.Properties {
                 this["DuplicateFileChangeTimeout"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("300")]
+        public double Width {
+            get {
+                return ((double)(this["Width"]));
+            }
+            set {
+                this["Width"] = value;
+            }
+        }
     }
 }

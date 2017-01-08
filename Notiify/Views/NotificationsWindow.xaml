@@ -42,7 +42,7 @@
             <SolidColorBrush Opacity="0.1" Color="DimGray" />
         </Border.Background>
         <ScrollViewer VerticalScrollBarVisibility="Auto">
-            <StackPanel Width="300">
+            <StackPanel Width="{Binding Width, Source={x:Static properties:Settings.Default}, Mode=TwoWay}">
                 <ItemsControl ItemsSource="{x:Static local:App.Notifications}">
                     <ItemsControl.ItemTemplate>
                         <DataTemplate>

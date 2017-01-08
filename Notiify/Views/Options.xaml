@@ -30,6 +30,10 @@
                                          TargetProperties="DockPosition"
                                          DisplayName="Dock"
                                          DisplayOrder="0" />
+                <xctk:PropertyDefinition Category="  General"
+                                         TargetProperties="Width"
+                                         DisplayName="Width"
+                                         DisplayOrder="1" />
                 <xctk:PropertyDefinition Category=" Notifications"
                                          TargetProperties="NotificationDuration"
                                          DisplayName="Stay Duration"
