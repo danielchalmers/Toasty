@@ -2,18 +2,20 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Threading;
 using System.Timers;
 using Notiify.Interfaces;
 using Notiify.Properties;
+using Timer = System.Timers.Timer;
 
 namespace Notiify.Classes
 {
     public class DirectoryScanner : IScanner, IDisposable
     {
         private readonly object _fileCheckLock = new object();
+        private readonly Dictionary<string, DateTime> _fileInfoCache;
         private readonly FolderScanSettings _folderScanSettings;
         private readonly Timer _timer;
-        private readonly Dictionary<string, DateTime> _fileInfoCache;
         private FileSystemWatcher _fileSystemWatcher;
 
         public DirectoryScanner(FolderScanSettings folderScanSettings)
@@ -129,9 +131,24 @@ namespace Notiify.Classes
             InitialiseFileSystemWatcher();
             _fileSystemWatcher.EnableRaisingEvents = fileSystemWatcherEnableRaisingEvents;
 
-            var files = GetFiles().ToList();
-            InitializeFileInfoCache(files);
-            CheckForFiles(files);
+            var canEnter = Monitor.TryEnter(_fileCheckLock);
+            try
+            {
+                if (!canEnter)
+                {
+                    return;
+                }
+                var files = GetFiles().ToList();
+                InitializeFileInfoCache(files);
+                CheckForFiles(files);
+            }
+            finally
+            {
+                if (canEnter)
+                {
+                    Monitor.Exit(_fileCheckLock);
+                }
+            }
         }
 
         private IEnumerable<FileInfo> GetFiles()
@@ -152,28 +169,25 @@ namespace Notiify.Classes
 
         private void CheckForFiles(IEnumerable<FileInfo> files)
         {
-            lock (_fileCheckLock)
+            foreach (var file in files)
             {
-                foreach (var file in files)
+                var fileExists = false;
+                var fileChanged = true;
+                foreach (var x in _fileInfoCache.Where(x => x.Key == file.FullName))
                 {
-                    var fileExists = false;
-                    var fileChanged = true;
-                    foreach (var x in _fileInfoCache.Where(x => x.Key == file.FullName))
+                    fileExists = true;
+                    if (x.Value == file.LastWriteTimeUtc)
                     {
-                        fileExists = true;
-                        if (x.Value == file.LastWriteTimeUtc)
-                        {
-                            fileChanged = false;
-                        }
+                        fileChanged = false;
                     }
-                    if (fileExists && fileChanged)
-                    {
-                        OnDirectoryEvent(new DirectoryScannerEventArgs(file, WatcherChangeTypes.Changed));
-                    }
-                    if (!fileExists)
-                    {
-                        OnDirectoryEvent(new DirectoryScannerEventArgs(file, WatcherChangeTypes.Created));
-                    }
+                }
+                if (fileExists && fileChanged)
+                {
+                    OnDirectoryEvent(new DirectoryScannerEventArgs(file, WatcherChangeTypes.Changed));
+                }
+                if (!fileExists)
+                {
+                    OnDirectoryEvent(new DirectoryScannerEventArgs(file, WatcherChangeTypes.Created));
                 }
             }
         }
