@@ -49,10 +49,10 @@ namespace Notiify.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("15000")]
-        public double DirectoryWatcherResetInterval {
+        [global::System.Configuration.DefaultSettingValueAttribute("00:00:15")]
+        public global::System.TimeSpan DirectoryWatcherResetInterval {
             get {
-                return ((double)(this["DirectoryWatcherResetInterval"]));
+                return ((global::System.TimeSpan)(this["DirectoryWatcherResetInterval"]));
             }
             set {
                 this["DirectoryWatcherResetInterval"] = value;

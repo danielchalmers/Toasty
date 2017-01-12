@@ -22,7 +22,7 @@ namespace Notiify.Classes
         {
             _fileInfoCache = new Dictionary<string, DateTime>();
             _folderScanSettings = folderScanSettings;
-            _timer = new Timer {Interval = Settings.Default.DirectoryWatcherResetInterval};
+            _timer = new Timer {Interval = Settings.Default.DirectoryWatcherResetInterval.TotalMilliseconds};
             _timer.Elapsed += Timer_OnElapsed;
             InitializeFileInfoCache();
             InitialiseFileSystemWatcher();
