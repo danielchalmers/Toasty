@@ -85,8 +85,11 @@ namespace Notiify.ViewModels
 
         private void OnMouseUpExecute(MouseButtonEventArgs e)
         {
-            Dismiss();
-            Notification.Launch();
+            if (e.ChangedButton == MouseButton.Left)
+            {
+                Dismiss();
+                Notification.Launch();
+            }
         }
     }
 }
