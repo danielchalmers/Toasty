@@ -25,7 +25,7 @@ namespace Notiify.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("00:00:05")]
+        [global::System.Configuration.DefaultSettingValueAttribute("00:00:10")]
         public global::System.TimeSpan NotificationDuration {
             get {
                 return ((global::System.TimeSpan)(this["NotificationDuration"]));
