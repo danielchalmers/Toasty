@@ -203,15 +203,12 @@ namespace Notiify.Properties {
             }
         }
         
-        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("00:00:00.0500000")]
         public global::System.TimeSpan DuplicateFileChangeTimeout {
             get {
                 return ((global::System.TimeSpan)(this["DuplicateFileChangeTimeout"]));
-            }
-            set {
-                this["DuplicateFileChangeTimeout"] = value;
             }
         }
         
@@ -227,39 +224,30 @@ namespace Notiify.Properties {
             }
         }
         
-        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("2097152")]
         public long MaxFileContentSize {
             get {
                 return ((long)(this["MaxFileContentSize"]));
             }
-            set {
-                this["MaxFileContentSize"] = value;
-            }
         }
         
-        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("10")]
         public int MaxFileContentLines {
             get {
                 return ((int)(this["MaxFileContentLines"]));
             }
-            set {
-                this["MaxFileContentLines"] = value;
-            }
         }
         
-        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute(".txt|.text|.log|.cfg|.json|.xml|.ini|.inf|.properties")]
         public string FileContentExtensions {
             get {
                 return ((string)(this["FileContentExtensions"]));
-            }
-            set {
-                this["FileContentExtensions"] = value;
             }
         }
     }
