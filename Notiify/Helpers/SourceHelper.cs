@@ -1,5 +1,4 @@
-﻿using System.Windows;
-using Notiify.Classes;
+﻿using Notiify.Classes;
 using Notiify.Properties;
 using Notiify.Views;
 
@@ -33,12 +32,6 @@ namespace Notiify.Helpers
 
         public static void Remove(this Source source)
         {
-            if (Popup.Show(
-                $"Are you sure you want to remove \"{source.Name}\"?",
-                MessageBoxButton.YesNo, MessageBoxImage.Warning, MessageBoxResult.Yes) == MessageBoxResult.No)
-            {
-                return;
-            }
             App.Sources.Remove(source);
         }
 
@@ -59,6 +52,11 @@ namespace Notiify.Helpers
             SourceDataHelper.SaveSourceData();
             Settings.Default.Save();
             ScannerHelper.ReloadScanners();
+        }
+
+        public static int GetIndex(this Source source)
+        {
+            return App.Sources.IndexOf(source);
         }
     }
 }

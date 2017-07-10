@@ -1,4 +1,5 @@
-﻿using System.Windows.Input;
+﻿using System.Windows;
+using System.Windows.Input;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
 using Notiify.Classes;
@@ -55,8 +56,22 @@ namespace Notiify.ViewModels
 
         private void RemoveExecute()
         {
+            if (Popup.Show(
+                $"Are you sure you want to remove \"{SelectedSource.Name}\"?",
+                MessageBoxButton.YesNo, MessageBoxImage.Warning, MessageBoxResult.Yes) == MessageBoxResult.No)
+            {
+                return;
+            }
+
+            var selectedSourceIndex = SelectedSource.GetIndex();
+
             SelectedSource.Remove();
-            ResetSelection();
+
+            var priorIndex = selectedSourceIndex - 1;
+            if (priorIndex >= 0 && App.Sources.Count > priorIndex)
+            {
+                SelectedSource = App.Sources[priorIndex];
+            }
         }
 
         private void CollectionMouseDownExecute()
