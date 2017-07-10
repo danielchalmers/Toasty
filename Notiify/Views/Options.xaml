@@ -28,7 +28,7 @@
             <xctk:PropertyGrid.PropertyDefinitions>
                 <xctk:PropertyDefinition Category="  General"
                                          TargetProperties="DockPosition"
-                                         DisplayName="Dock"
+                                         DisplayName="Screen Dock"
                                          DisplayOrder="0" />
                 <xctk:PropertyDefinition Category="  General"
                                          TargetProperties="Width"
@@ -40,11 +40,11 @@
                                          DisplayOrder="0" />
                 <xctk:PropertyDefinition Category=" Notifications"
                                          TargetProperties="MaxNotifications"
-                                         DisplayName="Maximum Count"
+                                         DisplayName="Maximum History"
                                          DisplayOrder="1" />
                 <xctk:PropertyDefinition Category="Advanced"
                                          TargetProperties="DirectoryWatcherResetInterval"
-                                         DisplayName="Directory Scan Interval (ms)"
+                                         DisplayName="Force Scan Interval"
                                          DisplayOrder="0" />
             </xctk:PropertyGrid.PropertyDefinitions>
         </xctk:PropertyGrid>
