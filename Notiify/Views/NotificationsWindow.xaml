@@ -9,6 +9,7 @@
         xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
         xmlns:command="http://www.galasoft.ch/mvvmlight"
         xmlns:views="clr-namespace:Notiify.Views"
+        xmlns:converters="clr-namespace:Notiify.Converters"
         mc:Ignorable="d"
         DataContext="{Binding Notifications, Source={StaticResource ViewModelLocator}}"
         Title="{x:Static properties:Resources.AppName}"
@@ -26,9 +27,6 @@
         ResizeMode="NoResize"
         Topmost="True"
         ShowInTaskbar="False">
-    <Window.Resources>
-        <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" />
-    </Window.Resources>
     <Border CornerRadius="5">
         <i:Interaction.Triggers>
             <i:EventTrigger EventName="MouseEnter">
@@ -48,7 +46,7 @@
                     <DataTemplate>
                         <views:NotificationView
                             DataContext="{Binding}"
-                            Visibility="{Binding IsVisible, Converter={StaticResource BooleanToVisibilityConverter}}" />
+                            Visibility="{Binding IsVisible, Converter={converters:BooleanToVisibilityConverter}}" />
                     </DataTemplate>
                 </ItemsControl.ItemTemplate>
             </ItemsControl>

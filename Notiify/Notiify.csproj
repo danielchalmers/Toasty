@@ -108,6 +108,7 @@
     <Compile Include="Classes\FileInfo.cs" />
     <Compile Include="Classes\FolderScanSettings.cs" />
     <Compile Include="Classes\ImageNotification.cs" />
+    <Compile Include="Converters\BooleanToVisibilityConverter.cs" />
     <Compile Include="Helpers\AppHelper.cs" />
     <Compile Include="Helpers\FileInfoHelper.cs" />
     <Compile Include="Helpers\ImageHelper.cs" />
