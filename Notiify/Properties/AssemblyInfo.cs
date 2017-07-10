@@ -9,7 +9,7 @@ using System.Windows;
 [assembly: AssemblyTitle("Notiify")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("Daniel Chalmers Software")]
+[assembly: AssemblyCompany("Daniel Chalmers")]
 [assembly: AssemblyProduct("Notiify")]
 [assembly: AssemblyCopyright("© Daniel Chalmers 2017")]
 [assembly: AssemblyTrademark("")]
