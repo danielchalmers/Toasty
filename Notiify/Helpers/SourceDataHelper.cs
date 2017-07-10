@@ -14,16 +14,24 @@ namespace Notiify.Helpers
             MissingMemberHandling = MissingMemberHandling.Ignore
         };
 
+        private static string GetSerializedSources(ObservableCollection<Source> sources)
+        {
+            return JsonConvert.SerializeObject(sources, JsonSerializerSettings);
+        }
+
+        private static ObservableCollection<Source> GetDeserializedSources(string json)
+        {
+            return JsonConvert.DeserializeObject<ObservableCollection<Source>>(json, JsonSerializerSettings);
+        }
+
         public static void SaveSourceData()
         {
-            Settings.Default.SourceData = JsonConvert.SerializeObject(App.Sources, JsonSerializerSettings);
+            Settings.Default.SourceData = GetSerializedSources(App.Sources);
         }
 
         public static void LoadSourceData()
         {
-            App.Sources =
-                JsonConvert.DeserializeObject<ObservableCollection<Source>>(Settings.Default.SourceData,
-                    JsonSerializerSettings) ??
+            App.Sources = GetDeserializedSources(Settings.Default.SourceData) ??
                 new ObservableCollection<Source>();
         }
     }
