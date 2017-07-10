@@ -13,7 +13,6 @@ namespace Notiify.ViewModels
 
         public ManageSourcesViewModel()
         {
-            CollectionMouseDown = new RelayCommand(CollectionMouseDownExecute);
             NewFolder = new RelayCommand(NewFolderExecute);
             Clone = new RelayCommand(CloneExecute);
             MoveUp = new RelayCommand(MoveUpExecute);
@@ -27,7 +26,6 @@ namespace Notiify.ViewModels
             set { Set(ref _selectedSource, value); }
         }
 
-        public ICommand CollectionMouseDown { get; }
         public ICommand NewFolder { get; }
         public ICommand Clone { get; }
         public ICommand MoveUp { get; }
@@ -72,16 +70,6 @@ namespace Notiify.ViewModels
             {
                 SelectedSource = App.Sources[priorIndex];
             }
-        }
-
-        private void CollectionMouseDownExecute()
-        {
-            ResetSelection();
-        }
-
-        private void ResetSelection()
-        {
-            SelectedSource = null;
         }
     }
 }

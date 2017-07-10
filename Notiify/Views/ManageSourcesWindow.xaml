@@ -37,11 +37,6 @@
                      SelectedItem="{Binding SelectedSource}"
                      SelectedIndex="{Binding ManageSourcesSelectedIndex, Source={x:Static p:Settings.Default}, Mode=TwoWay}"
                      DisplayMemberPath="Name">
-                <i:Interaction.Triggers>
-                    <i:EventTrigger EventName="MouseDown">
-                        <command:EventToCommand Command="{Binding CollectionMouseDown}" />
-                    </i:EventTrigger>
-                </i:Interaction.Triggers>
             </ListBox>
             <StackPanel Grid.Column="2" VerticalAlignment="Center" Margin="0,0,15,-5">
                 <StackPanel.Resources>
