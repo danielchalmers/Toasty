@@ -19,9 +19,6 @@
     <Window.DataContext>
         <viewModels:ManageSourcesViewModel />
     </Window.DataContext>
-    <Window.Resources>
-        <converters:IsNotNullToBooleanConverter x:Key="IsNotNullToBooleanConverter" />
-    </Window.Resources>
     <Grid Margin="15">
         <Grid.RowDefinitions>
             <RowDefinition Height="*" />
@@ -55,7 +52,7 @@
                         <Setter Property="HorizontalAlignment" Value="Stretch" />
                         <Setter Property="VerticalAlignment" Value="Stretch" />
                         <Setter Property="IsEnabled"
-                                Value="{Binding SelectedSource, Converter={StaticResource IsNotNullToBooleanConverter}}" />
+                                Value="{Binding SelectedSource, Converter={converters:IsNotNullToBooleanConverter}}" />
                     </Style>
                 </StackPanel.Resources>
                 <Button Content="New Folder" Command="{Binding NewFolder}" IsEnabled="True" />

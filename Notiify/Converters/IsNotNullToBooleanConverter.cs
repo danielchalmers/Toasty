@@ -1,10 +1,11 @@
 ﻿using System;
 using System.Globalization;
 using System.Windows.Data;
+using System.Windows.Markup;
 
 namespace Notiify.Converters
 {
-    public class IsNotNullToBooleanConverter : IValueConverter
+    public class IsNotNullToBooleanConverter : MarkupExtension, IValueConverter
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
@@ -15,5 +16,11 @@ namespace Notiify.Converters
         {
             throw new NotImplementedException();
         }
+
+        public override object ProvideValue(IServiceProvider serviceProvider)
+        {
+            return this;
+        }
     }
+
 }
