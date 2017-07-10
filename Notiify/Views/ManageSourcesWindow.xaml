@@ -55,11 +55,11 @@
                                 Value="{Binding SelectedSource, Converter={converters:IsNotNullToBooleanConverter}}" />
                     </Style>
                 </StackPanel.Resources>
-                <Button Content="New Folder" Command="{Binding NewFolder}" IsEnabled="True" />
-                <Button Content="Clone" Command="{Binding Clone}" />
-                <Button Content="Up" Command="{Binding MoveUp}" />
-                <Button Content="Down" Command="{Binding MoveDown}" />
-                <Button Content="Remove" Command="{Binding Rename}" />
+                <Button Content="_New Folder" Command="{Binding NewFolder}" IsEnabled="True" />
+                <Button Content="_Clone" Command="{Binding Clone}" />
+                <Button Content="_Up" Command="{Binding MoveUp}" />
+                <Button Content="_Down" Command="{Binding MoveDown}" />
+                <Button Content="_Remove" Command="{Binding Rename}" />
             </StackPanel>
             <xctk:PropertyGrid Grid.Column="3"
                                SelectedObject="{Binding SelectedSource}"
