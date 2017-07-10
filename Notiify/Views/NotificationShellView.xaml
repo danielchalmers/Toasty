@@ -18,7 +18,8 @@
             Background="White"
             RenderTransformOrigin="0.5,0.5"
             CornerRadius="5"
-            Opacity="0">
+            Opacity="0"
+            Cursor="Hand">
         <i:Interaction.Triggers>
             <i:EventTrigger EventName="MouseUp">
                 <command:EventToCommand Command="{Binding OnMouseUp}"
