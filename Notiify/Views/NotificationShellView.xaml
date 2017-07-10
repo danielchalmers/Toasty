@@ -14,7 +14,7 @@
             <views:TextNotificationView />
         </DataTemplate>
     </UserControl.Resources>
-    <Border Margin="15"
+    <Border Margin="5"
             Background="White"
             RenderTransformOrigin="0.5,0.5"
             CornerRadius="5"
