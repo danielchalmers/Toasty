@@ -9,7 +9,7 @@ namespace Notiify.Classes
         {
             try
             {
-                return MessageBox.Show(text, Properties.Resources.AppName, button, image, defaultButton);
+                return MessageBox.Show(text, AssemblyInfo.Title, button, image, defaultButton);
             }
             catch
             {

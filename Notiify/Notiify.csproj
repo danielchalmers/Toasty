@@ -104,6 +104,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Classes\AssemblyInfo.cs" />
     <Compile Include="Classes\DirectoryScanner.cs" />
     <Compile Include="Classes\DirectoryScannerEventArgs.cs" />
     <Compile Include="Classes\FileInfo.cs" />

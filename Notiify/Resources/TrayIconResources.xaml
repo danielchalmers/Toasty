@@ -3,8 +3,9 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:local="clr-namespace:Notiify"
                     xmlns:tb="http://www.hardcodet.net/taskbar"
-                    xmlns:p="clr-namespace:Notiify.Properties">
-    <tb:TaskbarIcon x:Key="TrayIcon" IconSource="../Notiify.ico" ToolTipText="{x:Static p:Resources.AppName}"
+                    xmlns:p="clr-namespace:Notiify.Properties"
+                    xmlns:classes="clr-namespace:Notiify.Classes">
+    <tb:TaskbarIcon x:Key="TrayIcon" IconSource="../Notiify.ico" ToolTipText="{x:Static classes:AssemblyInfo.Title}"
                     TrayMouseDoubleClick="MenuItemShowNotifications_OnClick">
         <tb:TaskbarIcon.ContextMenu>
             <ContextMenu>
