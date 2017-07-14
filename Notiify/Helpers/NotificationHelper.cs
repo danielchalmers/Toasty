@@ -31,7 +31,7 @@ namespace Notiify.Helpers
             string launchPath = null;
             if (notification.ScannerArgs is DirectoryScannerEventArgs)
             {
-                var directoryScannerArgs = (DirectoryScannerEventArgs) notification.ScannerArgs;
+                var directoryScannerArgs = (DirectoryScannerEventArgs)notification.ScannerArgs;
                 if (File.Exists(directoryScannerArgs.FileInfo.FullName))
                 {
                     launchPath = directoryScannerArgs.FileInfo.FullName;
@@ -48,11 +48,11 @@ namespace Notiify.Helpers
         {
             if (notification is TextNotification)
             {
-                return new TextNotificationViewModel((TextNotification) notification);
+                return new TextNotificationViewModel((TextNotification)notification);
             }
             if (notification is ImageNotification)
             {
-                return new ImageNotificationViewModel((ImageNotification) notification);
+                return new ImageNotificationViewModel((ImageNotification)notification);
             }
             return null;
         }

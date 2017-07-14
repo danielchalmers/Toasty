@@ -74,7 +74,7 @@ namespace Notiify.ViewModels
         {
             if (e is DirectoryScannerEventArgs)
             {
-                DirectoryWatcher_OnEvent((DirectoryScannerEventArgs) e);
+                DirectoryWatcher_OnEvent((DirectoryScannerEventArgs)e);
             }
         }
 
@@ -124,6 +124,7 @@ namespace Notiify.ViewModels
             {
                 case DockPosition.Right:
                     return SystemParameters.WorkArea.Right - ActualWidth;
+
                 default:
                     return 0;
             }

@@ -22,5 +22,4 @@ namespace Notiify.Converters
             return this;
         }
     }
-
 }

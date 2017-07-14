@@ -26,13 +26,14 @@ namespace Notiify
         public static List<IScanner> Scanners { get; set; }
 
         public static TaskbarIcon TrayIcon { get; private set; }
+
         public static event EventHandler<IScannerEventArgs> ScannerEvent;
 
         protected override void OnStartup(StartupEventArgs e)
         {
             base.OnStartup(e);
             SettingsHelper.LoadSettings();
-            TrayIcon = (TaskbarIcon) Current.FindResource("TrayIcon");
+            TrayIcon = (TaskbarIcon)Current.FindResource("TrayIcon");
             ScannerHelper.ReloadScanners();
             AppHelper.LoadMainWindow();
             AppHelper.OpenManageSourcesIfEmpty();

@@ -19,7 +19,7 @@ namespace Notiify.ViewModels
             Notification = notification;
             Close = new RelayCommand(CloseExcecute);
             OnMouseUp = new RelayCommand<MouseButtonEventArgs>(OnMouseUpExecute);
-            _hideTimer = new DispatcherTimer {Interval = Settings.Default.NotificationDuration};
+            _hideTimer = new DispatcherTimer { Interval = Settings.Default.NotificationDuration };
             _hideTimer.Tick += HideTimer_OnTick;
 
             IsVisible = true;

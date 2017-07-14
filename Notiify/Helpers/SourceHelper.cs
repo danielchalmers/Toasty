@@ -13,7 +13,7 @@ namespace Notiify.Helpers
 
         private static Source New(SourceScanSettingsBase scanSettings)
         {
-            var newSource = new Source {ScanSettings = scanSettings};
+            var newSource = new Source { ScanSettings = scanSettings };
             Add(newSource);
             return newSource;
         }
@@ -25,7 +25,7 @@ namespace Notiify.Helpers
 
         public static Source NewClone(this Source source)
         {
-            var newCloneSource = (Source) source.Clone();
+            var newCloneSource = (Source)source.Clone();
             Add(newCloneSource);
             return newCloneSource;
         }
