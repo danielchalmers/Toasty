@@ -8,6 +8,7 @@ namespace Notiify.Helpers
 {
     public static class ImageHelper
     {
+        // https://msdn.microsoft.com/en-us/library/ee719654(v=VS.85).aspx#wpfc_codecs.
         private static readonly List<string> SupportedExtensions = new List<string>
         {
             ".bmp",
@@ -16,7 +17,9 @@ namespace Notiify.Helpers
             ".jpg",
             ".jpeg",
             ".png",
-            ".tiff"
+            ".tiff",
+            ".wmp",
+            ".dds"
         };
 
         private static bool IsImage(string extension)
