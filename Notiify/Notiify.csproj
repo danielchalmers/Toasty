@@ -111,6 +111,7 @@
     <Compile Include="Classes\FolderScanSettings.cs" />
     <Compile Include="Classes\ImageNotification.cs" />
     <Compile Include="Converters\BooleanToVisibilityConverter.cs" />
+    <Compile Include="Helpers\AboutHelper.cs" />
     <Compile Include="Helpers\AppHelper.cs" />
     <Compile Include="Helpers\FileInfoHelper.cs" />
     <Compile Include="Helpers\ImageHelper.cs" />
@@ -133,9 +134,13 @@
     <Compile Include="Helpers\SettingsHelper.cs" />
     <Compile Include="Interfaces\INotification.cs" />
     <Compile Include="Classes\TextNotification.cs" />
+    <Compile Include="ViewModels\AboutViewModel.cs" />
     <Compile Include="ViewModels\NotificationViewModelBase.cs" />
     <Compile Include="ViewModels\ImageNotificationViewModel.cs" />
     <Compile Include="ViewModels\TextNotificationViewModel.cs" />
+    <Compile Include="Views\About.xaml.cs">
+      <DependentUpon>About.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\NotificationShellView.xaml.cs">
       <DependentUpon>NotificationShellView.xaml</DependentUpon>
     </Compile>
@@ -157,6 +162,14 @@
     <Compile Include="Views\TextNotificationView.xaml.cs">
       <DependentUpon>TextNotificationView.xaml</DependentUpon>
     </Compile>
+    <Page Include="Styles\TextBoxStyles.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\About.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\NotificationsWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -242,7 +255,23 @@
   <ItemGroup>
     <Resource Include="Notiify.ico" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Content Include="Resources\Licenses\Common Service Locator.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Licenses\Extended WPF Toolkit.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Licenses\Json.NET.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Licenses\MVVM Light.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Licenses\NotifyIcon.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

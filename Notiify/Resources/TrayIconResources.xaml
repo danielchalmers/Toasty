@@ -18,6 +18,8 @@
                           Click="MenuItemManageSources_OnClick" />
                 <MenuItem Header="_Options"
                           Click="MenuItemOptions_OnClick" />
+                <MenuItem Header="_About"
+                          Click="MenuItemAbout_OnClick" />
                 <Separator />
                 <MenuItem Header="E_xit"
                           Click="MenuItemExit_OnClick" />

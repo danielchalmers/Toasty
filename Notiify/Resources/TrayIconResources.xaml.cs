@@ -43,5 +43,11 @@ namespace Notiify.Resources
                 notificationViewModel.Hide();
             }
         }
+
+        private void MenuItemAbout_OnClick(object sender, RoutedEventArgs e)
+        {
+            var aboutDialog = new About();
+            aboutDialog.ShowDialog();
+        }
     }
 }
