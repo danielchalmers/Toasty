@@ -6,6 +6,6 @@ namespace Notiify.Classes
     {
         private static Assembly _assembly { get; } = Assembly.GetExecutingAssembly();
 
-        public static string Title { get; } = _assembly.GetCustomAttribute<AssemblyTitleAttribute>()?.Title;
+        public static string Title { get; } = _assembly.GetCustomAttribute<AssemblyTitleAttribute>().Title;
     }
 }
