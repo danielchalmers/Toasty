@@ -1,0 +1,29 @@
+﻿<ResourceDictionary x:Class="Toasty.Resources.TrayIconResources"
+                    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:tb="http://www.hardcodet.net/taskbar"
+                    xmlns:classes="clr-namespace:Toasty.Classes">
+    <tb:TaskbarIcon x:Key="TrayIcon"
+                    IconSource="../Toasty.ico"
+                    ToolTipText="{x:Static classes:AssemblyInfo.Title}"
+                    TrayMouseDoubleClick="MenuItemShowToasts_OnClick">
+        <tb:TaskbarIcon.ContextMenu>
+            <ContextMenu>
+                <MenuItem Header="_Show Toasts"
+                          Click="MenuItemShowToasts_OnClick" />
+                <MenuItem Header="_Dismiss Toasts"
+                          Click="MenuItemHideToasts_OnClick" />
+                <Separator />
+                <MenuItem Header="_Manage Sources"
+                          Click="MenuItemManageSources_OnClick" />
+                <MenuItem Header="_Options"
+                          Click="MenuItemOptions_OnClick" />
+                <MenuItem Header="_About"
+                          Click="MenuItemAbout_OnClick" />
+                <Separator />
+                <MenuItem Header="E_xit"
+                          Click="MenuItemExit_OnClick" />
+            </ContextMenu>
+        </tb:TaskbarIcon.ContextMenu>
+    </tb:TaskbarIcon>
+</ResourceDictionary>
