@@ -1,48 +1,49 @@
 ﻿using System.Collections.Generic;
-using System.IO;
 using System.Linq;
-using System.Text;
 using Toasty.Classes;
 
 namespace Toasty.Helpers
 {
     public static class AboutHelper
     {
-        public static string AboutText
+        public static IReadOnlyList<Credit> Credits { get; } = new List<Credit>()
         {
-            get
-            {
-                var stringBuilder = new StringBuilder();
-                stringBuilder.AppendLine($"{AssemblyInfo.Title} {AssemblyInfo.Version}");
-                stringBuilder.AppendLine();
-                stringBuilder.AppendLine($"Icon is modified and originally by Google (design.google)");
+            new Credit(
+                "Material Design Icons",
+                "https://design.google",
+                "Google",
+                Properties.Resources.Material_Design_Icons_License,
+                true),
 
-                stringBuilder.AppendLine();
-                stringBuilder.AppendLine("Libraries:");
-                foreach (var library in Libraries
-                    .Select(x => $"{x.Key} ({x.Value})"))
-                {
-                    stringBuilder.AppendLine(library);
-                }
-                stringBuilder.AppendLine();
+            new Credit(
+                "Common Service Locator",
+                "https://github.com/unitycontainer/commonservicelocator",
+                "Microsoft",
+                Properties.Resources.Common_Service_Locator_License),
 
-                stringBuilder.Append(AssemblyInfo.Copyright);
-                return stringBuilder.ToString();
-            }
-        }
+            new Credit(
+                "Extended WPF Toolkit",
+                "https://github.com/xceedsoftware/wpftoolkit",
+                "Xceed",
+                Properties.Resources.Extended_WPF_Toolkit_License),
 
-        public static string LicensesDirectory { get; } = Path.Combine(
-            Path.GetDirectoryName(AssemblyInfo.Location),
-            "Resources",
-            "Licenses");
+            new Credit(
+                "WPF NotifyIcon",
+                "http://hardcodet.net/wpf-notifyicon",
+                "Philipp Sumi",
+                Properties.Resources.WPF_NotifyIcon_License),
 
-        private static Dictionary<string, string> Libraries { get; } = new Dictionary<string, string>
-        {
-            {"Common Service Locator", "commonservicelocator.codeplex.com"},
-            {"Extended WPF Toolkit", "wpftoolkit.codeplex.com"},
-            {"NotifyIcon", "hardcodet.net/projects/wpf-notifyicon"},
-            {"MVVM Light", "galasoft.ch/mvvm"},
-            {"Json.NET", "newtonsoft.com/json"}
-        };
+            new Credit(
+                "MVVM Light",
+                "http://galasoft.ch/mvvm",
+                "Laurent Bugnion (GalaSoft)",
+                Properties.Resources.MVVM_Light_License),
+
+            new Credit(
+                "Json.NET",
+                "http://newtonsoft.com/json",
+                "James Newton-King",
+                Properties.Resources.Json_NET_License)
+        }.OrderBy(x => x.Name).ToList();
     }
 }

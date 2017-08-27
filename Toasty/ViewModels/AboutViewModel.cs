@@ -3,7 +3,6 @@ using System.Windows.Input;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
 using Toasty.Classes;
-using Toasty.Helpers;
 
 namespace Toasty.ViewModels
 {
@@ -11,15 +10,15 @@ namespace Toasty.ViewModels
     {
         public AboutViewModel()
         {
-            ViewLicenses = new RelayCommand(ViewLicensesExecute);
+            OpenWebsite = new RelayCommand<string>(OpenWebsiteExecute);
         }
 
         public string Title { get; } = $"About {AssemblyInfo.Title}";
-        public ICommand ViewLicenses { get; }
+        public ICommand OpenWebsite { get; }
 
-        private void ViewLicensesExecute()
+        private void OpenWebsiteExecute(string hyperlink)
         {
-            Process.Start(AboutHelper.LicensesDirectory);
+            Process.Start(hyperlink);
         }
     }
 }

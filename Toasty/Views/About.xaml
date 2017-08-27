@@ -6,11 +6,12 @@
         xmlns:classes="clr-namespace:Toasty.Classes"
         xmlns:helpers="clr-namespace:Toasty.Helpers"
         xmlns:viewModels="clr-namespace:Toasty.ViewModels"
+        xmlns:converters="clr-namespace:Toasty.Converters"
         mc:Ignorable="d"
         Title="{Binding Title}"
         SizeToContent="WidthAndHeight"
         WindowStartupLocation="CenterScreen"
-        ResizeMode="CanMinimize">
+        ResizeMode="NoResize">
     <Window.DataContext>
         <viewModels:AboutViewModel />
     </Window.DataContext>
@@ -18,24 +19,81 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
             <RowDefinition Height="15" />
-            <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="15" />
+            <RowDefinition Height="Auto" />
             <RowDefinition Height="15" />
             <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
-        <TextBlock Grid.Row="0"
-                   Text="{x:Static classes:AssemblyInfo.Title}"
-                   FontSize="32" />
-        <TextBox Grid.Row="2"
-                 Text="{x:Static helpers:AboutHelper.AboutText}"
-                 Style="{StaticResource InfoTextBox}"
-                 VerticalAlignment="Center" />
-        <Button Grid.Row="4"
-                Content="_Licenses"
-                Command="{Binding ViewLicenses}"
-                Width="75"
-                Height="23"
-                HorizontalAlignment="Left" />
-        <Button Grid.Row="4"
+        <Grid Grid.Row="0"
+              Height="48">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="10" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+            <Image Grid.Column="0"
+                   Source="../Toasty.ico"
+                   Stretch="Uniform" />
+            <Viewbox Grid.Column="2"
+                     HorizontalAlignment="Left"
+                     VerticalAlignment="Center">
+                <TextBlock>
+                    <TextBlock.Text>
+                        <MultiBinding StringFormat="{}{0} {1}">
+                            <Binding Source="{x:Static classes:AssemblyInfo.Title}" />
+                            <Binding Source="{x:Static classes:AssemblyInfo.Version}" />
+                        </MultiBinding>
+                    </TextBlock.Text>
+                </TextBlock>
+            </Viewbox>
+        </Grid>
+        <TabControl Grid.Row="2"
+                    ItemsSource="{x:Static helpers:AboutHelper.Credits}"
+                    Width="500"
+                    Height="300">
+            <TabControl.ItemTemplate>
+                <DataTemplate>
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="{Binding Name}" />
+                        <TextBlock Text="*Modified"
+                                   Margin="5,0,0,0"
+                                   Visibility="{Binding IsModified, Converter={converters:BooleanToVisibilityConverter}, Mode=OneWay}" />
+                    </StackPanel>
+                </DataTemplate>
+            </TabControl.ItemTemplate>
+            <TabControl.ContentTemplate>
+                <DataTemplate>
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="5" />
+                            <RowDefinition Height="*" />
+                        </Grid.RowDefinitions>
+                        <StackPanel Grid.Row="0"
+                                    Orientation="Horizontal"
+                                    HorizontalAlignment="Center">
+                            <TextBlock Text="{Binding Author, Mode=OneWay}" />
+                            <TextBlock Text=" - " />
+                            <TextBlock>
+                                <Hyperlink Command="{Binding DataContext.OpenWebsite, RelativeSource={RelativeSource AncestorType={x:Type ItemsControl}}}"
+                                           CommandParameter="{Binding Website}">
+                                    <Run Text="{Binding Website, Mode=OneWay}" />
+                                </Hyperlink>
+                            </TextBlock>
+                        </StackPanel>
+                        <TextBox Grid.Row="2"
+                                 Style="{StaticResource InfoTextBox}"
+                                 Text="{Binding License, Mode=OneWay}"
+                                 HorizontalAlignment="Center"
+                                 VerticalAlignment="Center" />
+                    </Grid>
+                </DataTemplate>
+            </TabControl.ContentTemplate>
+        </TabControl>
+        <TextBlock Grid.Row="4"
+                   Text="{x:Static classes:AssemblyInfo.Copyright}" />
+        <Button Grid.Row="6"
                 Content="_OK"
                 Click="btnOK_OnClick"
                 IsDefault="True"
