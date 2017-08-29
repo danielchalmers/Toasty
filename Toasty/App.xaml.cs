@@ -49,7 +49,6 @@ namespace Toasty
         {
             Popup.Show($"An unhandled exception occurred:\n\n{e.Exception}",
                 MessageBoxButton.OK, MessageBoxImage.Error);
-            e.Handled = true;
         }
 
         private static void NotifyScannerEvent(object sender, IScannerEventArgs e)
