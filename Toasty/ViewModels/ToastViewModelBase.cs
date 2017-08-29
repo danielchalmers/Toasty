@@ -14,9 +14,9 @@ namespace Toasty.ViewModels
         private readonly DispatcherTimer _hideTimer;
         private bool _isVisible;
 
-        public ToastViewModelBase(IToast Toast)
+        public ToastViewModelBase(IToast toast)
         {
-            Toast = Toast;
+            Toast = toast;
             Close = new RelayCommand(CloseExcecute);
             OnMouseUp = new RelayCommand<MouseButtonEventArgs>(OnMouseUpExecute);
             _hideTimer = new DispatcherTimer { Interval = Settings.Default.ToastDuration };

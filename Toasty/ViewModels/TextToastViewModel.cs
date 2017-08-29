@@ -4,7 +4,7 @@ namespace Toasty.ViewModels
 {
     public class TextToastViewModel : ToastViewModelBase
     {
-        public TextToastViewModel(TextToast Toast) : base(Toast)
+        public TextToastViewModel(TextToast toast) : base(toast)
         {
         }
     }
