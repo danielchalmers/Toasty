@@ -54,7 +54,7 @@ namespace Toasty.ViewModels
 
         private void RemoveExecute()
         {
-            if (Popup.Show(
+            if (Alert.Show(
                 $"Are you sure you want to remove \"{SelectedSource.Name}\"?",
                 MessageBoxButton.YesNo, MessageBoxImage.Warning, MessageBoxResult.Yes) == MessageBoxResult.No)
             {
