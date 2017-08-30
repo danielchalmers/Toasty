@@ -22,8 +22,8 @@ namespace Toasty.ViewModels
 
         public Source SelectedSource
         {
-            get { return _selectedSource; }
-            set { Set(ref _selectedSource, value); }
+            get => _selectedSource;
+            set => Set(ref _selectedSource, value);
         }
 
         public ICommand NewFolder { get; }

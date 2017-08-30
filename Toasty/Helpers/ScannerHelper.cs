@@ -20,8 +20,7 @@ namespace Toasty.Helpers
             foreach (var scanSettings in App.Sources.Select(source => source.ScanSettings))
             {
                 IScanner scanner = null;
-                var folderScanSettings = scanSettings as FolderScanSettings;
-                if (folderScanSettings != null)
+                if (scanSettings is FolderScanSettings folderScanSettings)
                 {
                     var directoryWatcher = new DirectoryScanner(folderScanSettings);
                     directoryWatcher.FileEvent += App.OnScannerEvent;
@@ -43,8 +42,7 @@ namespace Toasty.Helpers
             }
             foreach (var scanner in App.Scanners)
             {
-                var directoryScanner = scanner as DirectoryScanner;
-                if (directoryScanner != null)
+                if (scanner is DirectoryScanner directoryScanner)
                 {
                     directoryScanner.FileEvent -= App.OnScannerEvent;
                     directoryScanner.Dispose();

@@ -36,7 +36,7 @@ namespace Toasty.ViewModels
 
         public double ActualWidth
         {
-            get { return _actualWidth; }
+            get => _actualWidth;
             set
             {
                 if (Set(ref _actualWidth, value))
@@ -48,7 +48,7 @@ namespace Toasty.ViewModels
 
         public double ActualHeight
         {
-            get { return _actualHeight; }
+            get => _actualHeight;
             set
             {
                 if (Set(ref _actualHeight, value))
@@ -60,14 +60,14 @@ namespace Toasty.ViewModels
 
         public double Left
         {
-            get { return _left; }
-            set { Set(ref _left, value); }
+            get => _left;
+            set => Set(ref _left, value);
         }
 
         public double Top
         {
-            get { return _top; }
-            set { Set(ref _top, value); }
+            get => _top;
+            set => Set(ref _top, value);
         }
 
         private void OnScannerEvent(object sender, IScannerEventArgs e)

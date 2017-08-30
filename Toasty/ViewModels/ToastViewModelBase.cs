@@ -32,7 +32,7 @@ namespace Toasty.ViewModels
 
         public bool IsVisible
         {
-            get { return _isVisible; }
+            get => _isVisible;
             set
             {
                 Set(ref _isVisible, value);
