@@ -22,11 +22,10 @@
             <RowDefinition Height="Auto" />
             <RowDefinition Height="15" />
             <RowDefinition Height="Auto" />
-            <RowDefinition Height="15" />
-            <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
         <Grid Grid.Row="0"
-              Height="48">
+              Height="64"
+              HorizontalAlignment="Center">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="Auto" />
                 <ColumnDefinition Width="10" />
@@ -35,18 +34,28 @@
             <Image Grid.Column="0"
                    Source="../Toasty.ico"
                    Stretch="Uniform" />
-            <Viewbox Grid.Column="2"
-                     HorizontalAlignment="Left"
-                     VerticalAlignment="Center">
-                <TextBlock>
-                    <TextBlock.Text>
-                        <MultiBinding StringFormat="{}{0} {1}">
-                            <Binding Source="{x:Static classes:AssemblyInfo.Title}" />
-                            <Binding Source="{x:Static classes:AssemblyInfo.Version}" />
-                        </MultiBinding>
-                    </TextBlock.Text>
-                </TextBlock>
-            </Viewbox>
+            <Grid Grid.Column="2"
+                  HorizontalAlignment="Left"
+                  VerticalAlignment="Center">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="3" />
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+                <Viewbox Grid.Row="0">
+                    <TextBlock>
+                        <TextBlock.Text>
+                            <MultiBinding StringFormat="{}{0} {1}">
+                                <Binding Source="{x:Static classes:AssemblyInfo.Title}" />
+                                <Binding Source="{x:Static classes:AssemblyInfo.Version}" />
+                            </MultiBinding>
+                        </TextBlock.Text>
+                    </TextBlock>
+                </Viewbox>
+                <TextBlock Grid.Row="2"
+                           Text="{x:Static classes:AssemblyInfo.Copyright}"
+                           HorizontalAlignment="Center" />
+            </Grid>
         </Grid>
         <TabControl Grid.Row="2"
                     ItemsSource="{x:Static helpers:AboutHelper.Credits}"
@@ -91,9 +100,7 @@
                 </DataTemplate>
             </TabControl.ContentTemplate>
         </TabControl>
-        <TextBlock Grid.Row="4"
-                   Text="{x:Static classes:AssemblyInfo.Copyright}" />
-        <Button Grid.Row="6"
+        <Button Grid.Row="4"
                 Content="_OK"
                 Click="btnOK_OnClick"
                 IsDefault="True"
