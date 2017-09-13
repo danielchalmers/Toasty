@@ -133,7 +133,6 @@
     <Compile Include="Helpers\ListHelper.cs" />
     <Compile Include="Helpers\SourceDataHelper.cs" />
     <Compile Include="Helpers\SourceHelper.cs" />
-    <Compile Include="Helpers\ObjectHelper.cs" />
     <Compile Include="Helpers\SettingsHelper.cs" />
     <Compile Include="Interfaces\IToast.cs" />
     <Compile Include="Classes\TextToast.cs" />
