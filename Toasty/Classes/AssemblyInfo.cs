@@ -9,6 +9,7 @@ namespace Toasty.Classes
         private static Assembly _assembly { get; } = Assembly.GetExecutingAssembly();
 
         public static string Title { get; } = _assembly.GetCustomAttribute<AssemblyTitleAttribute>().Title;
+        public static string Company { get; } = _assembly.GetCustomAttribute<AssemblyCompanyAttribute>().Company;
         public static string Copyright { get; } = _assembly.GetCustomAttribute<AssemblyCopyrightAttribute>().Copyright;
         public static string Location { get; } = _assembly.Location;
         public static string Directory { get; } = Path.GetDirectoryName(_assembly.Location);

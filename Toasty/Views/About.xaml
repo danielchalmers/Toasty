@@ -95,10 +95,6 @@
                 </ItemsControl.ItemTemplate>
             </ItemsControl>
         </ScrollViewer>
-        <TextBlock Grid.Row="4"
-                   HorizontalAlignment="Left"
-                   VerticalAlignment="Center"
-                   Text="{x:Static classes:AssemblyInfo.Copyright}" />
         <Button Grid.Row="4"
                 Content="_OK"
                 Click="btnOK_OnClick"

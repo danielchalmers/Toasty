@@ -19,6 +19,11 @@ namespace Toasty.ViewModels
         public static IReadOnlyList<Credit> Credits { get; } = new List<Credit>()
         {
             new Credit(
+                AssemblyInfo.Title,
+                Properties.Resources.Website,
+                AssemblyInfo.Company),
+
+            new Credit(
                 "Material Design Icons",
                 "https://design.google",
                 "Google"),

@@ -256,7 +256,11 @@
   <ItemGroup>
     <Resource Include="Toasty.ico" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <None Include="Resources\Licenses\Toasty.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
   <ItemGroup>
     <None Include="Resources\Licenses\Common Service Locator.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
