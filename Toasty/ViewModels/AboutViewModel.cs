@@ -1,7 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
-using System.Linq;
 using System.Windows.Input;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
@@ -48,7 +47,7 @@ namespace Toasty.ViewModels
                 "Json.NET",
                 "http://newtonsoft.com/json",
                 "James Newton-King")
-        }.OrderBy(x => x.Name).ToList();
+        };
 
         public ICommand OpenWebsite { get; }
         public ICommand OpenLicense { get; }
