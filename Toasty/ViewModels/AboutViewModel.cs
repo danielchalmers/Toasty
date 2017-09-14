@@ -56,7 +56,6 @@ namespace Toasty.ViewModels
         }.OrderBy(x => x.Name).ToList();
 
         public ICommand OpenWebsite { get; }
-        public string Title { get; } = $"About {AssemblyInfo.Title}";
 
         private void OpenWebsiteExecute(string hyperlink)
         {
