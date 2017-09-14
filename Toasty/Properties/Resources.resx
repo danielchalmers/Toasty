@@ -117,23 +117,4 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="Common_Service_Locator" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\resources\licenses\common service locator.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;Windows-1252</value>
-  </data>
-  <data name="Extended_WPF_Toolkit" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\resources\licenses\extended wpf toolkit.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;Windows-1252</value>
-  </data>
-  <data name="Json_NET" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\resources\licenses\json.net.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;Windows-1252</value>
-  </data>
-  <data name="Material_Design_Icons" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\resources\licenses\material design icons.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
-  </data>
-  <data name="MVVM_Light" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\resources\licenses\mvvm light.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;Windows-1252</value>
-  </data>
-  <data name="WPF_NotifyIcon" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\resources\licenses\wpf notifyicon.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
-  </data>
 </root>

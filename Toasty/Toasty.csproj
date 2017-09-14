@@ -258,22 +258,34 @@
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
-    <None Include="Resources\Licenses\Common Service Locator.txt" />
+    <None Include="Resources\Licenses\Common Service Locator.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\Licenses\Extended WPF Toolkit.txt" />
+    <None Include="Resources\Licenses\Extended WPF Toolkit.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\Licenses\Json.NET.txt" />
+    <None Include="Resources\Licenses\Json.NET.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\Licenses\Material Design Icons.txt" />
+    <None Include="Resources\Licenses\Material Design Icons.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\Licenses\MVVM Light.txt" />
+    <None Include="Resources\Licenses\MVVM Light.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\Licenses\WPF NotifyIcon.txt" />
+    <None Include="Resources\Licenses\WPF NotifyIcon.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

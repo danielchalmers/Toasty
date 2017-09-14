@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Diagnostics;
+using System.IO;
 using System.Linq;
 using System.Windows.Input;
 using GalaSoft.MvvmLight;
@@ -13,6 +14,7 @@ namespace Toasty.ViewModels
         public AboutViewModel()
         {
             OpenWebsite = new RelayCommand<string>(OpenWebsiteExecute);
+            OpenLicense = new RelayCommand<Credit>(OpenLicenseExecute);
         }
 
         public static IReadOnlyList<Credit> Credits { get; } = new List<Credit>()
@@ -20,46 +22,46 @@ namespace Toasty.ViewModels
             new Credit(
                 "Material Design Icons",
                 "https://design.google",
-                "Google",
-                Properties.Resources.Material_Design_Icons,
-                true),
+                "Google"),
 
             new Credit(
                 "Common Service Locator",
                 "https://github.com/unitycontainer/commonservicelocator",
-                "Microsoft",
-                Properties.Resources.Common_Service_Locator),
+                "Microsoft"),
 
             new Credit(
                 "Extended WPF Toolkit",
                 "https://github.com/xceedsoftware/wpftoolkit",
-                "Xceed",
-                Properties.Resources.Extended_WPF_Toolkit),
+                "Xceed"),
 
             new Credit(
                 "WPF NotifyIcon",
                 "http://hardcodet.net/wpf-notifyicon",
-                "Philipp Sumi",
-                Properties.Resources.WPF_NotifyIcon),
+                "Philipp Sumi"),
 
             new Credit(
                 "MVVM Light",
                 "http://galasoft.ch/mvvm",
-                "Laurent Bugnion (GalaSoft)",
-                Properties.Resources.MVVM_Light),
+                "GalaSoft"),
 
             new Credit(
                 "Json.NET",
                 "http://newtonsoft.com/json",
-                "James Newton-King",
-                Properties.Resources.Json_NET)
+                "James Newton-King")
         }.OrderBy(x => x.Name).ToList();
 
         public ICommand OpenWebsite { get; }
+        public ICommand OpenLicense { get; }
 
         private void OpenWebsiteExecute(string hyperlink)
         {
             Process.Start(hyperlink);
+        }
+
+        private void OpenLicenseExecute(Credit credit)
+        {
+            var licenseFilePath = Path.Combine(AssemblyInfo.Directory, "Resources", "Licenses", $"{credit.Name}.txt");
+            Process.Start(licenseFilePath);
         }
     }
 }
