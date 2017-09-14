@@ -114,7 +114,6 @@
     <Compile Include="Classes\FolderScanSettings.cs" />
     <Compile Include="Classes\ImageToast.cs" />
     <Compile Include="Converters\BooleanToVisibilityConverter.cs" />
-    <Compile Include="Helpers\AboutHelper.cs" />
     <Compile Include="Helpers\AppHelper.cs" />
     <Compile Include="Helpers\FileInfoHelper.cs" />
     <Compile Include="Helpers\ImageHelper.cs" />
@@ -259,22 +258,22 @@
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
-    <None Include="Resources\Licenses\Common Service Locator License.txt" />
+    <None Include="Resources\Licenses\Common Service Locator.txt" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\Licenses\Extended WPF Toolkit License.txt" />
+    <None Include="Resources\Licenses\Extended WPF Toolkit.txt" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\Licenses\Json.NET License.txt" />
+    <None Include="Resources\Licenses\Json.NET.txt" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\Licenses\Material Design Icons License.txt" />
+    <None Include="Resources\Licenses\Material Design Icons.txt" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\Licenses\MVVM Light License.txt" />
+    <None Include="Resources\Licenses\MVVM Light.txt" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\Licenses\WPF NotifyIcon License.txt" />
+    <None Include="Resources\Licenses\WPF NotifyIcon.txt" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

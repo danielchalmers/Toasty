@@ -73,9 +73,9 @@ namespace Toasty.Properties {
         ///
         ///A &quot;contributor&quot; is any person that distributes its contribution [rest of string was truncated]&quot;;.
         /// </summary>
-        public static string Common_Service_Locator_License {
+        public static string Common_Service_Locator {
             get {
-                return ResourceManager.GetString("Common_Service_Locator_License", resourceCulture);
+                return ResourceManager.GetString("Common_Service_Locator", resourceCulture);
             }
         }
         
@@ -92,9 +92,9 @@ namespace Toasty.Properties {
         ///
         ///A &quot;contributor&quot; is any person that distributes its contribution [rest of string was truncated]&quot;;.
         /// </summary>
-        public static string Extended_WPF_Toolkit_License {
+        public static string Extended_WPF_Toolkit {
             get {
-                return ResourceManager.GetString("Extended_WPF_Toolkit_License", resourceCulture);
+                return ResourceManager.GetString("Extended_WPF_Toolkit", resourceCulture);
             }
         }
         
@@ -112,9 +112,9 @@ namespace Toasty.Properties {
         ///
         ///The ab [rest of string was truncated]&quot;;.
         /// </summary>
-        public static string Json_NET_License {
+        public static string Json_NET {
             get {
-                return ResourceManager.GetString("Json_NET_License", resourceCulture);
+                return ResourceManager.GetString("Json_NET", resourceCulture);
             }
         }
         
@@ -133,9 +133,9 @@ namespace Toasty.Properties {
         ///      &quot;Licensor&quot; shall mean the copyright owner or entity authorized by
         ///      the copyright owner that is [rest of string was truncated]&quot;;.
         /// </summary>
-        public static string Material_Design_Icons_License {
+        public static string Material_Design_Icons {
             get {
-                return ResourceManager.GetString("Material_Design_Icons_License", resourceCulture);
+                return ResourceManager.GetString("Material_Design_Icons", resourceCulture);
             }
         }
         
@@ -148,9 +148,9 @@ namespace Toasty.Properties {
         ///
         ///The ab [rest of string was truncated]&quot;;.
         /// </summary>
-        public static string MVVM_Light_License {
+        public static string MVVM_Light {
             get {
-                return ResourceManager.GetString("MVVM_Light_License", resourceCulture);
+                return ResourceManager.GetString("MVVM_Light", resourceCulture);
             }
         }
         
@@ -168,9 +168,9 @@ namespace Toasty.Properties {
         ///Source Code can be modified to create derivative works.
         ///No claim [rest of string was truncated]&quot;;.
         /// </summary>
-        public static string WPF_NotifyIcon_License {
+        public static string WPF_NotifyIcon {
             get {
-                return ResourceManager.GetString("WPF_NotifyIcon_License", resourceCulture);
+                return ResourceManager.GetString("WPF_NotifyIcon", resourceCulture);
             }
         }
     }
