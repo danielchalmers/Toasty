@@ -97,6 +97,9 @@
     <Reference Include="WindowsBase" />
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
+    <Reference Include="WpfAboutView, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\WpfAboutView.1.0.0\lib\net452\WpfAboutView.dll</HintPath>
+    </Reference>
     <Reference Include="Xceed.Wpf.Toolkit, Version=3.1.0.0, Culture=neutral, PublicKeyToken=3e4669d2f30244f4, processorArchitecture=MSIL">
       <HintPath>..\packages\Extended.Wpf.Toolkit.3.1\lib\net40\Xceed.Wpf.Toolkit.dll</HintPath>
     </Reference>
@@ -135,7 +138,6 @@
     <Compile Include="Helpers\SettingsHelper.cs" />
     <Compile Include="Interfaces\IToast.cs" />
     <Compile Include="Classes\TextToast.cs" />
-    <Compile Include="ViewModels\AboutViewModel.cs" />
     <Compile Include="ViewModels\ToastViewModelBase.cs" />
     <Compile Include="ViewModels\ImageToastViewModel.cs" />
     <Compile Include="ViewModels\TextToastViewModel.cs" />
@@ -288,6 +290,11 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\Licenses\WPF NotifyIcon.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Licenses\WpfAboutView.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
   </ItemGroup>

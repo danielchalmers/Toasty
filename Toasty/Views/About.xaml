@@ -4,17 +4,11 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:classes="clr-namespace:Toasty.Classes"
-        xmlns:helpers="clr-namespace:Toasty.Helpers"
-        xmlns:viewModels="clr-namespace:Toasty.ViewModels"
-        xmlns:converters="clr-namespace:Toasty.Converters"
+        xmlns:av="clr-namespace:WpfAboutView;assembly=WpfAboutView"
         mc:Ignorable="d"
+        SizeToContent="WidthAndHeight"
         WindowStartupLocation="CenterScreen"
-        ResizeMode="NoResize"
-        Width="375"
-        Height="375">
-    <Window.DataContext>
-        <viewModels:AboutViewModel />
-    </Window.DataContext>
+        ResizeMode="NoResize">
     <Window.Title>
         <MultiBinding StringFormat="{}About {0}">
             <Binding Source="{x:Static classes:AssemblyInfo.Title}" />
@@ -22,80 +16,55 @@
     </Window.Title>
     <Grid Margin="15">
         <Grid.RowDefinitions>
-            <RowDefinition Height="Auto" />
-            <RowDefinition Height="15" />
             <RowDefinition Height="*" />
             <RowDefinition Height="15" />
             <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
-        <Grid Grid.Row="0"
-              Height="64"
-              HorizontalAlignment="Center">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="Auto" />
-                <ColumnDefinition Width="10" />
-                <ColumnDefinition Width="*" />
-            </Grid.ColumnDefinitions>
-            <Image Grid.Column="0"
-                   Source="../Toasty.ico"
-                   Stretch="Uniform" />
-            <Grid Grid.Column="2"
-                  HorizontalAlignment="Center"
-                  VerticalAlignment="Center">
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="*" />
-                    <RowDefinition Height="Auto" />
-                </Grid.RowDefinitions>
-                <Viewbox Grid.Row="0"
-                         HorizontalAlignment="Center">
-                    <TextBlock Text="{x:Static classes:AssemblyInfo.Title}"
-                               FontWeight="Medium" />
-                </Viewbox>
-                <TextBlock Grid.Row="1"
-                           HorizontalAlignment="Center"
-                           FontSize="14">
-                    <TextBlock.Text>
-                        <MultiBinding StringFormat="{}v{0}"
-                                      Mode="OneWay">
-                            <Binding Source="{x:Static classes:AssemblyInfo.Version}" />
-                        </MultiBinding>
-                    </TextBlock.Text>
-                </TextBlock>
-            </Grid>
-        </Grid>
-        <ScrollViewer Grid.Row="2"
-                      VerticalScrollBarVisibility="Hidden">
-            <ItemsControl ItemsSource="{Binding Credits}">
-                <ItemsControl.Template>
-                    <ControlTemplate>
-                        <UniformGrid IsItemsHost="True"
-                                     Columns="2"
-                                     HorizontalAlignment="Center" />
-                    </ControlTemplate>
-                </ItemsControl.Template>
-                <ItemsControl.ItemTemplate>
-                    <DataTemplate>
-                        <StackPanel Orientation="Vertical"
-                                    Margin="5">
-                            <TextBlock Text="{Binding Name}"
-                                       FontWeight="Bold" />
-                            <TextBlock Text="{Binding Author}" />
-                            <TextBlock>
-                            <Hyperlink Command="{Binding DataContext.OpenWebsite, RelativeSource={RelativeSource AncestorType={x:Type Window}}}"
-                                       CommandParameter="{Binding Website}">
-                                <Run Text="Website" />
-                            </Hyperlink><Run Text="," />
-                            <Hyperlink Command="{Binding DataContext.OpenLicense, RelativeSource={RelativeSource AncestorType={x:Type Window}}}"
-                                       CommandParameter="{Binding}">
-                                <Run Text="License" />
-                            </Hyperlink>
-                            </TextBlock>
-                        </StackPanel>
-                    </DataTemplate>
-                </ItemsControl.ItemTemplate>
-            </ItemsControl>
-        </ScrollViewer>
-        <Button Grid.Row="4"
+        <av:AboutView Grid.Row="0"
+                      AppIconSource="pack://application:,,,/Toasty.ico">
+            <av:AboutView.Credits>
+                <av:Credit Name="{x:Static classes:AssemblyInfo.Title}"
+                           Author="{x:Static classes:AssemblyInfo.Company}"
+                           Website="https://github.com/danielchalmers/Toasty"
+                           License="Resources\Licenses\Toasty.txt" />
+
+                <av:Credit Name="Material Design Icons"
+                           Author="Google"
+                           Website="https://design.google"
+                           License="Resources\Licenses\Material Design Icons.txt" />
+
+                <av:Credit Name="Common Service Locator"
+                           Author="Microsoft"
+                           Website="https://github.com/unitycontainer/commonservicelocator"
+                           License="Resources\Licenses\Common Service Locator.txt" />
+
+                <av:Credit Name="Extended WPF Toolkit"
+                           Author="Xceed"
+                           Website="https://github.com/xceedsoftware/wpftoolkit"
+                           License="Resources\Licenses\Extended WPF Toolkit.txt" />
+
+                <av:Credit Name="WPF NotifyIcon"
+                           Author="Philipp Sumi"
+                           Website="http://hardcodet.net/wpf-notifyicon"
+                           License="Resources\Licenses\WPF NotifyIcon.txt" />
+
+                <av:Credit Name="MVVM Light"
+                           Author="GalaSoft"
+                           Website="http://galasoft.ch/mvvm"
+                           License="Resources\Licenses\MVVM Light.txt" />
+
+                <av:Credit Name="Json.NET"
+                           Author="James Newton-King"
+                           Website="http://newtonsoft.com/json"
+                           License="Resources\Licenses\Json.NET.txt" />
+
+                <av:Credit Name="WpfAboutView"
+                           Author="Daniel Chalmers"
+                           Website="https://github.com/danielchalmers/WpfAboutView"
+                           License="Resources\Licenses\WpfAboutView.txt" />
+            </av:AboutView.Credits>
+        </av:AboutView>
+        <Button Grid.Row="2"
                 Content="_OK"
                 Click="btnOK_OnClick"
                 IsDefault="True"
