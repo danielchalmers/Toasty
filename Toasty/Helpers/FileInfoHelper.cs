@@ -1,6 +1,5 @@
 ﻿using System.Collections.Generic;
 using System.IO;
-using FileInfo = Toasty.Classes.FileInfo;
 
 namespace Toasty.Helpers
 {
@@ -18,7 +17,7 @@ namespace Toasty.Helpers
 
         public static long GetSize(this FileInfo fileInfo)
         {
-            return new System.IO.FileInfo(fileInfo.FullName).Length;
+            return new FileInfo(fileInfo.FullName).Length;
         }
 
         public static string GetTextContent(this FileInfo fileInfo)

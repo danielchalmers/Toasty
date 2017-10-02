@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Windows.Media.Imaging;
-using FileInfo = Toasty.Classes.FileInfo;
 
 namespace Toasty.Helpers
 {

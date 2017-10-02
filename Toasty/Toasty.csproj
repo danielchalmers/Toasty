@@ -112,7 +112,6 @@
     <Compile Include="Classes\Credit.cs" />
     <Compile Include="Classes\DirectoryScanner.cs" />
     <Compile Include="Classes\DirectoryScannerEventArgs.cs" />
-    <Compile Include="Classes\FileInfo.cs" />
     <Compile Include="Classes\FolderScanSettings.cs" />
     <Compile Include="Classes\ImageToast.cs" />
     <Compile Include="Converters\BooleanToVisibilityConverter.cs" />
