@@ -17,8 +17,6 @@ namespace Toasty.Helpers
                 return;
             }
             ToastViewModel.IsVisible = visible;
-            ToastViewModel.Remove =
-                () => { ToastViewModelHelper.HideToast(ToastViewModel); };
             App.Toasts.Add(ToastViewModel);
             while (Settings.Default.MaxToasts > 0 && App.Toasts.Count > Settings.Default.MaxToasts)
             {

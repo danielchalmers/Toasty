@@ -26,7 +26,6 @@ namespace Toasty.ViewModels
         }
 
         public IToast Toast { get; }
-        public Action Remove { get; set; }
         public ICommand Close { get; }
         public ICommand OnMouseUp { get; }
 
@@ -73,21 +72,16 @@ namespace Toasty.ViewModels
             IsVisible = true;
         }
 
-        private void Dismiss()
-        {
-            Remove?.Invoke();
-        }
-
         private void CloseExcecute()
         {
-            Dismiss();
+            Hide();
         }
 
         private void OnMouseUpExecute(MouseButtonEventArgs e)
         {
             if (e.ChangedButton == MouseButton.Left)
             {
-                Dismiss();
+                Hide();
                 Toast.Launch();
             }
         }

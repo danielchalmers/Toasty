@@ -121,7 +121,6 @@
     <Compile Include="Helpers\ImageHelper.cs" />
     <Compile Include="Helpers\ToastHelper.cs" />
     <Compile Include="Helpers\ToastsDataHelper.cs" />
-    <Compile Include="Helpers\ToastViewModelHelper.cs" />
     <Compile Include="Helpers\ScannerHelper.cs" />
     <Compile Include="Interfaces\IScannerEventArgs.cs" />
     <Compile Include="Interfaces\IScanner.cs" />
