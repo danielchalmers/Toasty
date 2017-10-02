@@ -12,7 +12,7 @@ namespace Toasty.Classes
         {
             return MessageBox.Show(
                 text,
-                AssemblyInfo.Title,
+                App.Title,
                 button,
                 image,
                 defaultButton);

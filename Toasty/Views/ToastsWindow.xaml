@@ -12,7 +12,7 @@
         xmlns:views="clr-namespace:Toasty.Views"
         mc:Ignorable="d"
         DataContext="{Binding Toasts, Source={StaticResource ViewModelLocator}}"
-        Title="{x:Static classes:AssemblyInfo.Title}"
+        Title="{x:Static local:App.Title}"
         classes:SizeObserver.Observe="True"
         classes:SizeObserver.ObservedWidth="{Binding ActualWidth, Mode=OneWayToSource}"
         classes:SizeObserver.ObservedHeight="{Binding ActualHeight, Mode=OneWayToSource}"
@@ -46,7 +46,7 @@
                 <ItemsControl.ItemTemplate>
                     <DataTemplate>
                         <views:ToastView DataContext="{Binding}"
-                                                Visibility="{Binding IsVisible, Converter={converters:BooleanToVisibilityConverter}}" />
+                                         Visibility="{Binding IsVisible, Converter={converters:BooleanToVisibilityConverter}}" />
                     </DataTemplate>
                 </ItemsControl.ItemTemplate>
             </ItemsControl>

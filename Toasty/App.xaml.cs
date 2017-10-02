@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Reflection;
 using System.Windows;
 using System.Windows.Threading;
 using Hardcodet.Wpf.TaskbarNotification;
@@ -20,6 +21,15 @@ namespace Toasty
         {
             Dispatcher.UnhandledException += OnDispatcherUnhandledException;
         }
+
+        public static Assembly Assembly { get; } = Assembly.GetExecutingAssembly();
+        public static string Company { get; } = Assembly.GetCompany();
+        public static string Copyright { get; } = Assembly.GetCopyright();
+        public static string Description { get; } = Assembly.GetDescription();
+        public static string Directory { get; } = Assembly.GetDirectory();
+        public static string Path { get; } = Assembly.GetPath();
+        public static string Title { get; } = Assembly.GetTitle();
+        public static Version Version { get; } = Assembly.GetVersion();
 
         public static ObservableCollection<Source> Sources { get; set; }
         public static ObservableCollection<ToastViewModelBase> Toasts { get; set; }

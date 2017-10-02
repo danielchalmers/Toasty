@@ -3,6 +3,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:toasty="clr-namespace:Toasty"
         xmlns:classes="clr-namespace:Toasty.Classes"
         xmlns:av="clr-namespace:WpfAboutView;assembly=WpfAboutView"
         mc:Ignorable="d"
@@ -11,7 +12,7 @@
         ResizeMode="NoResize">
     <Window.Title>
         <MultiBinding StringFormat="{}About {0}">
-            <Binding Source="{x:Static classes:AssemblyInfo.Title}" />
+            <Binding Source="{x:Static toasty:App.Title}" />
         </MultiBinding>
     </Window.Title>
     <Grid Margin="15">
@@ -23,8 +24,8 @@
         <av:AboutView Grid.Row="0"
                       AppIconSource="pack://application:,,,/Toasty.ico">
             <av:AboutView.Credits>
-                <av:Credit Name="{x:Static classes:AssemblyInfo.Title}"
-                           Author="{x:Static classes:AssemblyInfo.Company}"
+                <av:Credit Name="{x:Static toasty:App.Title}"
+                           Author="{x:Static toasty:App.Company}"
                            Website="https://github.com/danielchalmers/Toasty"
                            License="Resources\Licenses\Toasty.txt" />
 

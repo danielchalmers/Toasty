@@ -109,7 +109,6 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="Classes\AssemblyInfo.cs" />
     <Compile Include="Classes\Credit.cs" />
     <Compile Include="Classes\DirectoryScanner.cs" />
     <Compile Include="Classes\DirectoryScannerEventArgs.cs" />
@@ -118,6 +117,7 @@
     <Compile Include="Classes\ImageToast.cs" />
     <Compile Include="Converters\BooleanToVisibilityConverter.cs" />
     <Compile Include="Helpers\AppHelper.cs" />
+    <Compile Include="Helpers\AssemblyHelper.cs" />
     <Compile Include="Helpers\FileInfoHelper.cs" />
     <Compile Include="Helpers\ImageHelper.cs" />
     <Compile Include="Helpers\ToastHelper.cs" />
