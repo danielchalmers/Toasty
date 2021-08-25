@@ -2,19 +2,19 @@
 
 namespace Toasty.Views
 {
-    /// <summary>
-    /// Interaction logic for About.xaml
-    /// </summary>
-    public partial class About : Window
-    {
-        public About()
-        {
-            InitializeComponent();
-        }
+	/// <summary>
+	/// Interaction logic for About.xaml
+	/// </summary>
+	public partial class About : Window
+	{
+		public About()
+		{
+			InitializeComponent();
+		}
 
-        private void btnOK_OnClick(object sender, RoutedEventArgs e)
-        {
-            DialogResult = true;
-        }
-    }
+		private void btnOK_OnClick(object sender, RoutedEventArgs e)
+		{
+			DialogResult = true;
+		}
+	}
 }

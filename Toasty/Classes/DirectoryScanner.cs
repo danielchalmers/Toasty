@@ -10,192 +10,180 @@ using Timer = System.Timers.Timer;
 
 namespace Toasty.Classes
 {
-    public class DirectoryScanner : IScanner, IDisposable
-    {
-        private readonly object _fileCheckLock = new object();
-        private readonly Dictionary<string, DateTime> _fileInfoCache;
-        private readonly FolderScanSettings _folderScanSettings;
-        private readonly Timer _timer;
-        private FileSystemWatcher _fileSystemWatcher;
+	public class DirectoryScanner : IScanner, IDisposable
+	{
+		private readonly object _fileCheckLock = new();
+		private readonly Dictionary<string, DateTime> _fileInfoCache;
+		private readonly FolderScanSettings _folderScanSettings;
+		private readonly Timer _timer;
+		private FileSystemWatcher _fileSystemWatcher;
 
-        public DirectoryScanner(FolderScanSettings folderScanSettings)
-        {
-            _fileInfoCache = new Dictionary<string, DateTime>();
-            _folderScanSettings = folderScanSettings;
-            _timer = new Timer { Interval = Settings.Default.DirectoryWatcherResetInterval.TotalMilliseconds };
-            _timer.Elapsed += Timer_OnElapsed;
-            InitializeFileInfoCache();
-            InitialiseFileSystemWatcher();
-        }
+		public DirectoryScanner(FolderScanSettings folderScanSettings)
+		{
+			_fileInfoCache = new();
+			_folderScanSettings = folderScanSettings;
 
-        public void Dispose()
-        {
-            _timer?.Stop();
-            _timer?.Dispose();
-            DeinitialiseFileSystemWatcher();
-            _fileSystemWatcher?.Dispose();
-        }
+			_timer = new Timer { Interval = Settings.Default.DirectoryWatcherResetInterval.TotalMilliseconds };
+			_timer.Elapsed += Timer_OnElapsed;
 
-        public void Start()
-        {
-            _timer.Start();
-            _fileSystemWatcher.EnableRaisingEvents = false;
-        }
+			InitializeFileInfoCache();
+			InitialiseFileSystemWatcher();
+		}
 
-        public event EventHandler<DirectoryScannerEventArgs> FileEvent;
+		public event EventHandler<DirectoryScannerEventArgs> FileEvent;
 
-        public void SetSettings(FolderScanSettings folderScanSettings)
-        {
-            _fileSystemWatcher.Path = folderScanSettings.Path;
-            _fileSystemWatcher.IncludeSubdirectories = folderScanSettings.Recursive;
-            _fileSystemWatcher.Filter = folderScanSettings.IncludeFilter;
-        }
+		public void Dispose()
+		{
+			_timer?.Stop();
+			_timer?.Dispose();
+			DeinitialiseFileSystemWatcher();
+			_fileSystemWatcher?.Dispose();
+		}
 
-        private void InitialiseFileSystemWatcher()
-        {
-            _fileSystemWatcher = new FileSystemWatcher();
-            SetSettings(_folderScanSettings);
-            _fileSystemWatcher.Created += OnFileSystemWatcherEvent;
-            _fileSystemWatcher.Changed += OnFileSystemWatcherEvent;
-            _fileSystemWatcher.Deleted += OnFileSystemWatcherEvent;
-            _fileSystemWatcher.Renamed += OnFileSystemWatcherEvent;
-        }
+		public void Start()
+		{
+			_timer.Start();
+			_fileSystemWatcher.EnableRaisingEvents = false;
+		}
 
-        private void DeinitialiseFileSystemWatcher()
-        {
-            if (_fileSystemWatcher == null)
-            {
-                return;
-            }
-            _fileSystemWatcher.Created -= OnFileSystemWatcherEvent;
-            _fileSystemWatcher.Changed -= OnFileSystemWatcherEvent;
-            _fileSystemWatcher.Deleted -= OnFileSystemWatcherEvent;
-            _fileSystemWatcher.Renamed -= OnFileSystemWatcherEvent;
-            _fileSystemWatcher.Dispose();
-            _fileSystemWatcher = null;
-        }
+		public void SetSettings(FolderScanSettings folderScanSettings)
+		{
+			_fileSystemWatcher.Path = folderScanSettings.Path;
+			_fileSystemWatcher.IncludeSubdirectories = folderScanSettings.Recursive;
+			_fileSystemWatcher.Filter = folderScanSettings.IncludeFilter;
+		}
 
-        private void OnFileSystemWatcherEvent(object sender, FileSystemEventArgs e)
-        {
-            var fileInfo = new FileInfo(e.FullPath);
-            var eventData = new DirectoryScannerEventArgs(fileInfo, e.ChangeType);
-            OnDirectoryEvent(eventData);
-        }
+		private void InitialiseFileSystemWatcher()
+		{
+			_fileSystemWatcher = new();
+			SetSettings(_folderScanSettings);
 
-        private void OnDirectoryEvent(DirectoryScannerEventArgs e)
-        {
-            if (IsArgsDuplicated(e))
-            {
-                return;
-            }
-            UpdateFileInfoCache(e.FileInfo.FullName, e.FileInfo.LastWriteTimeUtc);
-            FileEvent?.Invoke(this, e);
-        }
+			_fileSystemWatcher.Created += OnFileSystemWatcherEvent;
+			_fileSystemWatcher.Changed += OnFileSystemWatcherEvent;
+			_fileSystemWatcher.Deleted += OnFileSystemWatcherEvent;
+			_fileSystemWatcher.Renamed += OnFileSystemWatcherEvent;
+		}
 
-        private bool IsArgsDuplicated(DirectoryScannerEventArgs args)
-        {
-            if (args.ChangeTypes != WatcherChangeTypes.Changed)
-            {
-                return false;
-            }
-            return
-                _fileInfoCache
-                    .Where(x => x.Key == args.FileInfo.FullName)
-                    .Any(
-                        x =>
-                            DidFileChangeTooQuickly(x.Value, args.FileInfo));
-        }
+		private void DeinitialiseFileSystemWatcher()
+		{
+			if (_fileSystemWatcher == null)
+				return;
 
-        private bool DidFileChangeTooQuickly(DateTime writeDateTime, FileInfo newFileInfo)
-        {
-            var timeSpan = newFileInfo.LastWriteTimeUtc - writeDateTime;
-            return timeSpan < Settings.Default.DuplicateFileChangeTimeout;
-        }
+			_fileSystemWatcher.Created -= OnFileSystemWatcherEvent;
+			_fileSystemWatcher.Changed -= OnFileSystemWatcherEvent;
+			_fileSystemWatcher.Deleted -= OnFileSystemWatcherEvent;
+			_fileSystemWatcher.Renamed -= OnFileSystemWatcherEvent;
 
-        private void UpdateFileInfoCache(string path, DateTime writeDateTime)
-        {
-            if (!_fileInfoCache.ContainsKey(path))
-            {
-                _fileInfoCache.Add(path, writeDateTime);
-            }
-            else
-            {
-                _fileInfoCache[path] = writeDateTime;
-            }
-        }
+			_fileSystemWatcher.Dispose();
+			_fileSystemWatcher = null;
+		}
 
-        private void Timer_OnElapsed(object sender, ElapsedEventArgs e)
-        {
-            // File system watcher can stop working after waking up from sleep, directory becomes unavailable, etc.
-            var fileSystemWatcherEnableRaisingEvents = _fileSystemWatcher.EnableRaisingEvents;
-            DeinitialiseFileSystemWatcher();
-            InitialiseFileSystemWatcher();
-            _fileSystemWatcher.EnableRaisingEvents = fileSystemWatcherEnableRaisingEvents;
+		private void OnFileSystemWatcherEvent(object sender, FileSystemEventArgs e)
+		{
+			var fileInfo = new FileInfo(e.FullPath);
+			var eventData = new DirectoryScannerEventArgs(fileInfo, e.ChangeType);
+			OnDirectoryEvent(eventData);
+		}
 
-            CheckFiles();
-        }
+		private void OnDirectoryEvent(DirectoryScannerEventArgs e)
+		{
+			if (IsArgsDuplicated(e))
+				return;
 
-        private IEnumerable<FileInfo> GetFiles()
-        {
-            return Directory.EnumerateFiles(_folderScanSettings.Path, _folderScanSettings.IncludeFilter,
-                _folderScanSettings.Recursive ? SearchOption.AllDirectories : SearchOption.TopDirectoryOnly)
-                .Select(path => new FileInfo(path));
-        }
+			UpdateFileInfoCache(e.FileInfo.FullName, e.FileInfo.LastWriteTimeUtc);
 
-        private void InitializeFileInfoCache()
-        {
-            var files = GetFiles();
-            _fileInfoCache.Clear();
-            foreach (var file in files)
-            {
-                UpdateFileInfoCache(file.FullName, file.LastWriteTimeUtc);
-            }
-        }
+			FileEvent?.Invoke(this, e);
+		}
 
-        private void CheckFiles()
-        {
-            var canEnter = Monitor.TryEnter(_fileCheckLock);
-            try
-            {
-                if (!canEnter)
-                {
-                    return;
-                }
-                CheckFilesInternal();
-            }
-            finally
-            {
-                if (canEnter)
-                {
-                    Monitor.Exit(_fileCheckLock);
-                }
-            }
-        }
+		private bool IsArgsDuplicated(DirectoryScannerEventArgs args)
+		{
+			if (args.ChangeTypes != WatcherChangeTypes.Changed)
+				return false;
 
-        private void CheckFilesInternal()
-        {
-            var files = GetFiles();
-            foreach (var file in files)
-            {
-                var fileExists = false;
-                var fileChanged = true;
-                foreach (var x in _fileInfoCache.Where(x => x.Key == file.FullName))
-                {
-                    fileExists = true;
-                    if (x.Value == file.LastWriteTimeUtc)
-                    {
-                        fileChanged = false;
-                    }
-                }
-                if (fileExists && fileChanged)
-                {
-                    OnDirectoryEvent(new DirectoryScannerEventArgs(file, WatcherChangeTypes.Changed));
-                }
-                if (!fileExists)
-                {
-                    OnDirectoryEvent(new DirectoryScannerEventArgs(file, WatcherChangeTypes.Created));
-                }
-            }
-        }
-    }
+			return _fileInfoCache
+				.Where(x => x.Key == args.FileInfo.FullName)
+				.Any(x => DidFileChangeTooQuickly(x.Value, args.FileInfo));
+		}
+
+		private bool DidFileChangeTooQuickly(DateTime writeDateTime, FileInfo newFileInfo) =>
+			newFileInfo.LastWriteTimeUtc - writeDateTime < Settings.Default.DuplicateFileChangeTimeout;
+
+		private void UpdateFileInfoCache(string path, DateTime writeDateTime)
+		{
+			if (!_fileInfoCache.ContainsKey(path))
+				_fileInfoCache.Add(path, writeDateTime);
+			else
+				_fileInfoCache[path] = writeDateTime;
+		}
+
+		private void Timer_OnElapsed(object sender, ElapsedEventArgs e)
+		{
+			// Watcher can stop working after waking up from sleep, directory becomes unavailable, etc.
+			var enableRaisingEvents = _fileSystemWatcher.EnableRaisingEvents;
+			DeinitialiseFileSystemWatcher();
+			InitialiseFileSystemWatcher();
+			_fileSystemWatcher.EnableRaisingEvents = enableRaisingEvents;
+
+			CheckFiles();
+		}
+
+		private IEnumerable<FileInfo> GetFiles()
+		{
+			return Directory.EnumerateFiles(
+				_folderScanSettings.Path,
+				_folderScanSettings.IncludeFilter,
+				_folderScanSettings.Recursive ? SearchOption.AllDirectories : SearchOption.TopDirectoryOnly)
+				.Select(path => new FileInfo(path));
+		}
+
+		private void InitializeFileInfoCache()
+		{
+			var files = GetFiles();
+			_fileInfoCache.Clear();
+
+			foreach (var file in files)
+				UpdateFileInfoCache(file.FullName, file.LastWriteTimeUtc);
+		}
+
+		private void CheckFiles()
+		{
+			void CheckFilesInternal()
+			{
+				var files = GetFiles();
+				foreach (var file in files)
+				{
+					var fileExists = false;
+					var fileChanged = true;
+
+					foreach (var info in _fileInfoCache.Where(x => x.Key == file.FullName))
+					{
+						fileExists = true;
+
+						if (info.Value == file.LastWriteTimeUtc)
+							fileChanged = false;
+					}
+
+					if (fileExists && fileChanged)
+						OnDirectoryEvent(new DirectoryScannerEventArgs(file, WatcherChangeTypes.Changed));
+
+					if (!fileExists)
+						OnDirectoryEvent(new DirectoryScannerEventArgs(file, WatcherChangeTypes.Created));
+				}
+			}
+
+			var canEnter = Monitor.TryEnter(_fileCheckLock);
+			try
+			{
+				if (!canEnter)
+					return;
+
+				CheckFilesInternal();
+			}
+			finally
+			{
+				if (canEnter)
+					Monitor.Exit(_fileCheckLock);
+			}
+		}
+	}
 }

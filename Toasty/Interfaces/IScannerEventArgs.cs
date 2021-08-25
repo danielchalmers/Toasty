@@ -1,6 +1,6 @@
 ﻿namespace Toasty.Interfaces
 {
-    public interface IScannerEventArgs
-    {
-    }
+	public interface IScannerEventArgs
+	{
+	}
 }

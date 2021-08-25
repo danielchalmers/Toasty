@@ -1,8 +1,8 @@
 ﻿namespace Toasty.Enumerations
 {
-    public enum DockPosition
-    {
-        Left,
-        Right
-    }
+	public enum DockPosition
+	{
+		Left,
+		Right,
+	}
 }

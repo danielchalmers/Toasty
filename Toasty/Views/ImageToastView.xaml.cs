@@ -2,14 +2,14 @@
 
 namespace Toasty.Views
 {
-    /// <summary>
-    ///     Interaction logic for ImageToastView.xaml
-    /// </summary>
-    public partial class ImageToastView : UserControl
-    {
-        public ImageToastView()
-        {
-            InitializeComponent();
-        }
-    }
+	/// <summary>
+	///     Interaction logic for ImageToastView.xaml
+	/// </summary>
+	public partial class ImageToastView : UserControl
+	{
+		public ImageToastView()
+		{
+			InitializeComponent();
+		}
+	}
 }
