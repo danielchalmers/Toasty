@@ -12,10 +12,9 @@
         MinWidth="350"
         MinHeight="400"
         WindowStartupLocation="CenterScreen">
-    <Grid Margin="15">
+    <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="*" />
-            <RowDefinition Height="15" />
             <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
         <xctk:PropertyGrid Grid.Row="0"
@@ -46,7 +45,8 @@
                                          DisplayOrder="0" />
             </xctk:PropertyGrid.PropertyDefinitions>
         </xctk:PropertyGrid>
-        <Grid Grid.Row="2"
+        <Grid Grid.Row="1"
+			  Margin="12"
               HorizontalAlignment="Right">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*" />
