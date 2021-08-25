@@ -43,7 +43,7 @@ namespace Toasty.Classes
 		public void Start()
 		{
 			_timer.Start();
-			_fileSystemWatcher.EnableRaisingEvents = false;
+			_fileSystemWatcher.EnableRaisingEvents = true;
 		}
 
 		public void SetSettings(FolderScanSettings folderScanSettings)
